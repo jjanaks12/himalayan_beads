@@ -1,6 +1,17 @@
+$breakpoints: (
+    'xs-phone': 320px,
+    'phone': 480px,
+    'tablet': 720px,
+    'desktop': 992px,
+    'widescreen': 1200px,
+    'largescreen': 1400px
+);
 
 @import "base/variables";
 @import "base/helpers";
+
+@import "vendors/include-media";
+
 @import "base/reset";
 
 @import "layouts/common";
