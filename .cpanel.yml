@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/himafpgr/public_html/wp-content/themes/
+    - /bin/cp * $DEPLOYPATH
