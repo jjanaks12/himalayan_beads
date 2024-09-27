@@ -35,7 +35,7 @@ export default async (app) => {
    * @see {@link https://bud.js.org/reference/bud.watch}
    */
   app
-    .setUrl('https://localhost:3000')
+    .setUrl('https://localhost:3000/en')
     .setProxyUrl('https://himalayan_beads.test')
     .watch(['resources/views', 'app'])
     .serve({
