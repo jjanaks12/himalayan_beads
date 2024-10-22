@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Image {
+  id   String @id @default(cuid())
+  name String
+
+  categories       CategoryOnImage[]
+  imageOnProductId String?
+
+  @@map("images")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  parent_id   String?
+  description String?
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  images      CategoryOnImage[]
+  successor   Category?         @relation("parentCategory", fields: [parent_id], references: [id])
+  predecessor Category[]        @relation("parentCategory")
+  products    Product[]
+
+  @@map("categories")
+}
+
+model CategoryOnImage {
+  id          String @id @default(cuid())
+  category_id String
+  image_id    String
+
+  category Category @relation(fields: [category_id], references: [id])
+  image    Image    @relation(fields: [image_id], references: [id])
+
+  @@map("category_on_image")
+}
+
+model Price {
+  id     String @id @default(cuid())
+  amount Int    @db.UnsignedInt
+
+  @@map("prices")
+}
+
+model Product {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String
+  description String?   @db.Text
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  category_id String
+
+  Category Category?        @relation(fields: [category_id], references: [id])
+  prices   PriceOnProduct[]
+  images   ImageOnProduct[]
+
+  @@map("products")
+}
+
+model ImageOnProduct {
+  id         String  @id @default(cuid())
+  product_id String?
+
+  Product Product? @relation(fields: [product_id], references: [id])
+
+  @@map("image_on_product")
+}
+
+model PriceOnProduct {
+  id         String @id @default(cuid())
+  price_id   String
+  product_id String
+
+  Product Product? @relation(fields: [product_id], references: [id])
+
+  @@map("price_on_product")
+}

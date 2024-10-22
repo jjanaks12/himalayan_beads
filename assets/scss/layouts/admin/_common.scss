@@ -1,0 +1,99 @@
+#admin {
+    background: $philippine-silver;
+    color: $black-olive;
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+}
+
+#sidebar {
+    background: $milky-white;
+    display: flex;
+    flex-direction: column;
+    flex: 220px 0 0;
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.sidebar__header {
+    padding: 20px;
+}
+
+.logo {
+    margin-bottom: 20px;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+#main {
+    flex-grow: 1;
+    padding: 40px;
+}
+
+.main__menu {
+    @extend %listreset;
+    flex-grow: 1;
+    background: $white;
+    margin-bottom: 20px;
+
+    a {
+        @include animate(background color);
+        @extend .icon-caret-r;
+        text-decoration: none;
+        color: $primary-light;
+        display: block;
+        padding: 11px 12px 9px;
+        border-bottom: 1px solid rgba($charcoal-black, 0.1);
+        position: relative;
+
+        &:hover {
+            background: $primary;
+            color: $milky-white;
+        }
+
+        &::before {
+            font: 9px/1 icomoon;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+        }
+    }
+
+    .router-link-exact-active {
+        background: $primary;
+        color: $milky-white;
+    }
+
+    .text {
+        text-transform: uppercase;
+        color: $philippine-silver;
+        display: block;
+        padding: 20px 12px 0;
+    }
+}
+
+.menu__link {
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    padding: 11px 12px 9px;
+}
+
+.form__group {
+    margin-bottom: $grid-gutter-width;
+
+    .input--error {
+        color: #f00;
+        font-size: 80%;
+        font-weight: 300;
+        display: inline-block;
+        vertical-align: top;
+        padding: 5px 0 0 12px;
+    }
+}

@@ -1,0 +1,65 @@
+@use 'sass:color';
+
+.datatable {
+    &__section {
+        background: $milky-white;
+        padding: 20px;
+        border-radius: 4px;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid $white;
+
+        &__holder {
+            flex-grow: 1;
+
+            h1 {
+                font-size: 32px;
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__body {
+        table {
+            width: 100%;
+            border-spacing: 0;
+
+            th {
+                color: rgba($charcoal-black, 0.3);
+                font-weight: 500;
+            }
+
+            th,
+            td {
+                padding: 5px;
+                border-bottom: 1px solid rgba($charcoal-black, 0.1);
+            }
+
+            td {
+                .btn+.btn {
+                    margin-left: 5px;
+                }
+            }
+
+            tr:last-child td {
+                border-bottom: none;
+            }
+
+            .sn {
+                width: 40px;
+                color: $philippine-silver;
+            }
+        }
+
+        .subtable {
+            background: color.adjust($milky-white, $lightness: -5%);
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    }
+}

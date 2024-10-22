@@ -1,0 +1,74 @@
+@use 'sass:math';
+
+.container {
+    max-width: $base-max-width;
+    margin: 0 auto;
+    padding: 0 math.div($grid-gutter-width, 2);
+
+    &--lg {
+        max-width: $max-width-lg;
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 math.div(-$grid-gutter-width, 2);
+
+    &--5--col--tablet .col {
+        width: 100%;
+        flex-grow: 1;
+        padding: 0 math.div($grid-gutter-width, 2);
+
+        @include media(">=tablet") {
+            max-width: 20%;
+            flex: 20% 0 0;
+        }
+    }
+
+    &--3--col--tablet .col {
+        width: 100%;
+        flex-grow: 1;
+        padding: 0 math.div($grid-gutter-width, 2);
+
+        @include media(">=tablet") {
+            max-width: 33.33%;
+            flex: 33.33% 0 0;
+        }
+    }
+
+    &--2--col--tablet .col {
+        width: 100%;
+        flex-grow: 1;
+        padding: 0 math.div($grid-gutter-width, 2);
+
+        @include media(">=tablet") {
+            max-width: 50%;
+            flex: 50% 0 0;
+        }
+    }
+}
+
+@for $i from 1 through ($no-of-column-in-grid) {
+    .col-#{$i} {
+        flex-basis: math.div(100%, math.div($no-of-column-in-grid, $i));
+        max-width: math.div(100%, math.div($no-of-column-in-grid, $i));
+        flex-grow: 1;
+        padding: 0 math.div($grid-gutter-width, 2);
+    }
+}
+
+@each $screen, $breakpoint in $breakpoints {
+    @for $i from 1 through ($no-of-column-in-grid) {
+        .col-#{$screen}-#{$i} {
+            width: 100%;
+            flex-grow: 1;
+            padding: 0 math.div($grid-gutter-width, 2);
+
+            @include media(">=#{$screen}") {
+                flex-basis: math.div(100%, math.div($no-of-column-in-grid, $i));
+                max-width: math.div(100%, math.div($no-of-column-in-grid, $i));
+            }
+        }
+    }
+}

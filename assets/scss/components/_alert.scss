@@ -1,0 +1,60 @@
+.alert {
+    @include animate(opacity visiblity);
+    background: rgba($charcoal-black, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    z-index: 9;
+    opacity: 0;
+    visibility: hidden;
+
+    &.alert--show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__holder {
+        background: $milky-white;
+        width: 100%;
+        text-align: center;
+        max-width: 440px;
+        padding: 20px;
+        border-radius: 4px;
+        position: relative;
+
+        .title {
+            font-size: 150%;
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: block;
+        }
+    }
+
+    &__close {
+        background: $primary;
+        color: $milky-white;
+        text-decoration: none;
+        width: 36px;
+        aspect-ratio: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%) rotateZ(45deg);
+    }
+
+    &__action {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+
+        .btn {
+            width: 120px;
+        }
+    }
+}

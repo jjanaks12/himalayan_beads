@@ -1,0 +1,32 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.5.4",
+    "@prisma/client": "^5.20.0",
+    "moment": "^2.30.1",
+    "nuxt": "^3.13.0",
+    "pinia": "^2.2.2",
+    "prisma": "^5.20.0",
+    "unstorage": "^1.12.0",
+    "vee-validate": "^4.13.2",
+    "vue": "latest",
+    "vue-router": "latest",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "sass": "^1.79.4"
+  },
+  "prisma": {
+    "seed": "npx tsx prisma/seed.ts",
+    "schema": "prisma/schema.prisma"
+  }
+}

@@ -1,0 +1,38 @@
+// Colors
+$black: #444;
+$black-olive: #403936;
+$charcoal-black: #000;
+$smoky-black: #100804;
+$dark-gunmetal: #0e2332;
+$white: #f7f9fa;
+$philippine-silver: #b7b5b4;
+$milky-white: #fff;
+
+$base-bg: $smoky-black;
+$base-text: $philippine-silver;
+
+$primary: #A0522D;
+$primary-dark: #804224;
+$primary-light: #B37557;
+$warning: #faad19;
+$success: #75D16D;
+$info: $primary-light;
+$danger: #faad19;
+
+// Fonts
+$base-rem-size: 16px;
+
+$base-font-size: 15px;
+$base-line-height: 1.3;
+
+$sans-serif: Arial, Helvetica, sans-serif;
+$ek-mukta: "EK Mukta", $sans-serif;
+$base-font-family: $ek-mukta;
+
+// Container
+$base-min-width: 375px;
+$base-max-width: 1280px;
+$base-max-width: 1165px;
+$max-width-lg: 1265px;
+$grid-gutter-width: 16px;
+$no-of-column-in-grid: 12;

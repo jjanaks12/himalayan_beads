@@ -1,0 +1,238 @@
+#footer {
+    background: $smoky-black;
+    color: $philippine-silver;
+    overflow: hidden;
+}
+
+.footer {
+    &__bar {
+        padding: 15px 0;
+        position: relative;
+        
+        @include media('>=tablet') {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &::before {
+            background: $black-olive;
+            content: '';
+            height: 1px;
+            position: absolute;
+            right: -999px;
+            bottom: 0;
+            left: -999px;
+        }
+
+        .dropdown {
+            &__opener {
+                color: #f8f8f8;
+                display: inline-block;
+                vertical-align: top;
+                padding: 3px 25px 2px 8px;
+                border: 1px solid $black-olive;
+                border-radius: 0;
+
+                &:hover {
+                    color: $black-olive;
+
+                    &::before {
+                        color: $black-olive;
+                    }
+                }
+
+                &::before {
+                    color: #f8f8f8;
+                }
+
+                img {
+                    margin-right: 9px;
+                }
+            }
+
+            &__menu {
+                right: auto;
+                left: 0;
+
+                &::before {
+                    right: auto;
+                    left: 10px;
+                }
+            }
+
+            &.language {
+                margin: 0;
+            }
+        }
+    }
+
+    &__links {
+        @extend %listreset;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        padding-top: 16px;
+
+        @include media('>=tablet') {
+            flex-wrap: nowrap;
+            padding-top: 0;
+        }
+
+        li {
+            flex-grow: 1;
+        }
+
+        a {
+            background: #FBB530;
+            color: $smoky-black;
+            text-decoration: none;
+            display: block;
+            padding: 3px 8px;
+        }
+    }
+
+    &__navigation {
+        padding: 40px 0;
+        
+        @include media('>=tablet') {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .newsletter {
+            max-width: 339px;
+
+            h3 {
+                text-transform: uppercase;
+                margin-bottom: 40px;
+            }
+
+            a {
+                @include animate(color);
+                color: $primary;
+                font-weight: 700;
+                outline: none;
+
+                &:focus,
+                &:hover {
+                    color: $success;
+                }
+            }
+        }
+
+        .contact__info {
+            max-width: 256px;
+
+            h3 {
+                text-transform: uppercase;
+                margin-bottom: 40px;
+            }
+
+            a {
+                @include animate(color);
+                color: $philippine-silver;
+                font-weight: 700;
+                outline: none;
+
+                &:focus,
+                &:hover {
+                    color: $success;
+                }
+            }
+
+            [href^="mailto:"] {
+                color: $primary;
+
+                &:focus,
+                &:hover {
+                    color: $success;
+                }
+            }
+
+            address {
+                font-style: normal;
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__block {
+        flex-shrink: 0;
+        margin-bottom: 60px;
+
+        @include media('>=tablet') {
+            margin-bottom: 0;
+        }
+
+        .logo {
+            margin-bottom: 16px;
+        }
+    }
+
+    &__nav {
+        @include media('>=tablet') {
+            display: flex;
+            gap: 32px;
+        }
+
+        ul {
+            @extend %listreset;
+            flex-shrink: 0;
+            margin-bottom: 32px;
+
+            @include media('>=tablet') {
+                margin-bottom: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        a {
+            @include animate(color);
+            color: $philippine-silver;
+            text-decoration: none;
+
+            &:hover {
+                color: $primary;
+            }
+        }
+    }
+
+    &__note {
+        color: #58524F;
+        padding-bottom: 30px;
+        
+        @include media('>=tablet') {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .holder {
+            text-align: right;
+        }
+
+        .copyright {
+            display: block;
+            margin-bottom: 10px;
+
+            @include media('>=tablet') {
+                margin-bottom: 0;
+            }
+        }
+
+        .logo__list {
+            margin-bottom: 16px;
+        }
+
+        .created_by {
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+        }
+    }
+}
