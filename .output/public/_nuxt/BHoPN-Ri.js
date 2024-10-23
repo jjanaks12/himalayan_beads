@@ -1,0 +1,2 @@
+import a from"./l_MRkhci.js";import{f as o,y as t,o as s,c as n,b as d,a as i,j as r}from"./D2fBRXFn.js";import"./C6abNJRz.js";import"./CsWDYMPH.js";const m={id:"admin",class:"admin--layout"},c={id:"main"},b=o({__name:"index",setup(p){return t(()=>{document.body.classList.add("admin--layout")}),(e,l)=>(s(),n("div",m,[d(a),i("main",c,[r(e.$slots,"default")])]))}});export{b as default};
+//# sourceMappingURL=BHoPN-Ri.js.map

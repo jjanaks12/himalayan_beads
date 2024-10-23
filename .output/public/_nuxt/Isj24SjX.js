@@ -1,0 +1,2 @@
+import{_ as s}from"./C6abNJRz.js";import{f as r,o as d,c as i,a as l,b as e,w as n,d as a}from"./D2fBRXFn.js";const f=r({__name:"login",setup(p){return(u,t)=>{const o=s;return d(),i("div",null,[t[2]||(t[2]=l("h1",null,"Login",-1)),e(o,{to:"/register"},{default:n(()=>t[0]||(t[0]=[a("signup")])),_:1}),e(o,{to:"/dashboard"},{default:n(()=>t[1]||(t[1]=[a("Dashboard")])),_:1})])}}});export{f as default};
+//# sourceMappingURL=Isj24SjX.js.map

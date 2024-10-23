@@ -1,0 +1,2 @@
+import{e as c,r as s,f as r,y as a}from"./D2fBRXFn.js";import{u}from"./CZcCm6qT.js";const n=c("product",()=>{const e=s([]);return{fetchProduct:async()=>{const t=await $fetch("/api/product");t.status=="success"&&(e.value=t.data)}}}),i=r({__name:"product",setup(e){u({title:"Products :: Himalayan Beads"});const{fetchProduct:o}=n();return a(()=>{o()}),(t,d)=>null}});export{i as default};
+//# sourceMappingURL=CwKRucaz.js.map
