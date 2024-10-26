@@ -13,7 +13,8 @@
   })
 
   definePageMeta({
-    layout: 'admin'
+    layout: 'admin',
+    middleware: 'auth'
   })
 
   const { categoryList } = storeToRefs(useProductCategoryStore())
@@ -72,7 +73,7 @@
         <thead>
           <tr>
             <th></th>
-            <th>Name</th>
+            <th class="text--left">Name</th>
             <th>Created at</th>
             <th class="text--right">Action</th>
           </tr>
@@ -81,9 +82,18 @@
           <template v-for="(category, index) in categoryList" :key="category.id">
             <tr>
               <td class="sn">{{ index + 1 }}</td>
-              <td class="text--center">{{ category.name }}</td>
-              <td class="text--center">{{ formatDate(category.createdAt) }}</td>
-              <td class="text--right">
+              <td>
+                <div class="wrap">
+                  <figure class="image" v-if="category.image">
+                    <img :src="category.image?.url || ''" :alt="category.name">
+                  </figure>
+                  <div class="holder">
+                    <strong class="title">{{ category.name }}</strong>
+                  </div>
+                </div>
+              </td>
+              <td class="text--center nowrap">{{ formatDate(category.createdAt) }}</td>
+              <td class="text--right nowrap">
                 <a class="btn btn--xs btn__info" href="#" @click.prevent="editCategory = category">
                   <span class="prepend-icon icon-edit"></span>
                   Edit

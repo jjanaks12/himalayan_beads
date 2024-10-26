@@ -1,0 +1,15 @@
+.simple--layout {
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#simple {
+    background: $philippine-silver;
+    color: $black-olive;
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+}

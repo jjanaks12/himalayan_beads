@@ -4,6 +4,7 @@
     &__section {
         background: $milky-white;
         padding: 20px;
+        max-width: 992px;
         border-radius: 4px;
     }
 
@@ -53,6 +54,50 @@
             .sn {
                 width: 40px;
                 color: $philippine-silver;
+            }
+
+            .title {
+                color: $dark-gunmetal;
+                font-size: 1.1rem;
+                display: block;
+
+                &[href] {
+                    @include animate(color);
+                    text-decoration: none;
+
+                    &:hover {
+                        color: $primary;
+                    }
+                }
+            }
+
+            .subtitle {
+                font-style: normal;
+                display: block;
+                opacity: 0.5;
+            }
+
+            .wrap {
+                display: flex;
+            }
+
+            .image {
+                flex: 50px 0 0;
+                aspect-ratio: 1;
+                padding: 5px;
+                margin: 0 10px 0 0;
+                border: 1px solid $philippine-silver;
+                border-radius: 5px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+
+            .holder {
+                flex-grow: 1;
             }
         }
 

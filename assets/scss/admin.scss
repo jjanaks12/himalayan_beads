@@ -21,11 +21,17 @@ $breakpoints: (
     @import "layouts/admin/common";
 }
 
+.simple--layout {
+    @import "layouts/simple/common";
+}
+
 @import "components/button";
 @import "components/dropdown";
 @import "components/modal";
 @import "components/datatable";
+@import "components/content";
 @import "components/alert";
 @import "components/custom-input";
+@import "components/editor";
 
 @import "pages/dashbboard";

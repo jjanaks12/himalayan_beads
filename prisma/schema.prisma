@@ -14,10 +14,12 @@ datasource db {
 }
 
 model Image {
-  id   String @id @default(cuid())
+  id   String  @id @default(cuid())
   name String
+  url  String?
 
-  categories       CategoryOnImage[]
+  category         Category?
+  products         ImageOnProduct[]
   imageOnProductId String?
 
   @@map("images")
@@ -27,28 +29,18 @@ model Category {
   id          String    @id @default(cuid())
   name        String
   parent_id   String?
+  image_id    String?   @unique
   description String?
   deletedAt   DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  images      CategoryOnImage[]
-  successor   Category?         @relation("parentCategory", fields: [parent_id], references: [id])
-  predecessor Category[]        @relation("parentCategory")
+  image       Image?     @relation(fields: [image_id], references: [id])
+  successor   Category?  @relation("parentCategory", fields: [parent_id], references: [id])
+  predecessor Category[] @relation("parentCategory")
   products    Product[]
 
   @@map("categories")
-}
-
-model CategoryOnImage {
-  id          String @id @default(cuid())
-  category_id String
-  image_id    String
-
-  category Category @relation(fields: [category_id], references: [id])
-  image    Image    @relation(fields: [image_id], references: [id])
-
-  @@map("category_on_image")
 }
 
 model Price {
@@ -61,16 +53,16 @@ model Price {
 model Product {
   id          String    @id @default(cuid())
   name        String
-  slug        String
   description String?   @db.Text
   deletedAt   DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   category_id String
 
-  Category Category?        @relation(fields: [category_id], references: [id])
+  category Category?        @relation(fields: [category_id], references: [id])
   prices   PriceOnProduct[]
   images   ImageOnProduct[]
+  stock    Stock?
 
   @@map("products")
 }
@@ -78,8 +70,11 @@ model Product {
 model ImageOnProduct {
   id         String  @id @default(cuid())
   product_id String?
+  image_id   String?
+  featured   Boolean @default(false)
 
-  Product Product? @relation(fields: [product_id], references: [id])
+  products Product? @relation(fields: [product_id], references: [id])
+  images   Image?   @relation(fields: [image_id], references: [id])
 
   @@map("image_on_product")
 }
@@ -92,4 +87,71 @@ model PriceOnProduct {
   Product Product? @relation(fields: [product_id], references: [id])
 
   @@map("price_on_product")
+}
+
+model Stock {
+  id         String  @id @default(cuid())
+  quantity   Int
+  product_id String  @unique
+  product    Product @relation(fields: [product_id], references: [id])
+
+  @@map("stocks")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  emailVerified DateTime?
+  deletedAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  Session       Session[]
+  Authenticator Authenticator[]
+
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user          User            @relation(fields: [userId], references: [id])
+  Authenticator Authenticator[]
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Session   Session? @relation(fields: [sessionId], references: [id])
+  sessionId String?
+
+  @@id([userId, credentialID])
+  @@map("authenticators")
 }

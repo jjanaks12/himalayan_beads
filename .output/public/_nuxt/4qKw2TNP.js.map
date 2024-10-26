@@ -1,0 +1,1 @@
+{"version":3,"file":"4qKw2TNP.js","sources":["../../../../layouts/simple.vue"],"sourcesContent":["<script lang=\"ts\" setup>\n</script>\n\n<template>\n  <div>\n    <slot />\n  </div>\n</template>"],"names":["_cache","_openBlock","_createElementBlock"],"mappings":"+EAMQA,EAAA,QADIC,EAAA,EAAAC,EAAA,MAAA,KAAA"}

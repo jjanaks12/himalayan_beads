@@ -1,0 +1,2 @@
+import{_ as a}from"./DWCHefLH.js";import{e as s,o as d,c as i,a as l,b as o,w as n,d as r}from"./Cmvx1_hi.js";const f=s({__name:"register",setup(_){return(m,e)=>{const t=a;return d(),i("div",null,[e[2]||(e[2]=l("h1",null,"register",-1)),o(t,{to:"/login"},{default:n(()=>e[0]||(e[0]=[r("Login")])),_:1}),o(t,{to:"/dashboard"},{default:n(()=>e[1]||(e[1]=[r("Dashboard")])),_:1})])}}});export{f as default};
+//# sourceMappingURL=BjUhfC5A.js.map

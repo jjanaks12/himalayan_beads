@@ -21,6 +21,13 @@
         text-align: left;
 
         &__item {
+            margin-bottom: 5px;
+            position: relative;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
             a {
                 @include animate(background);
                 width: 35px;
@@ -42,6 +49,12 @@
                 }
             }
 
+            img {
+                width: 60px;
+                aspect-ratio: 1;
+                object-fit: contain;
+                border: 1px solid $primary;
+            }
         }
     }
 }

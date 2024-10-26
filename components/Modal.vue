@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+  import { debounce } from '~/lib/helper/debounce'
+
   const emit = defineEmits(['modal:close'])
 
   const modal = ref()
@@ -12,16 +14,15 @@
     emit('modal:close')
   }
 
-  const clickOnOutside = (event: Event) => {
+  const clickOnOutside = (event: Event) => debounce(() => {
     if (isActive.value) {
-      
+
       if (!modal.value.contains(event.target)) {
         event.preventDefault()
-        event.stopPropagation()
         closeModal()
       }
     }
-  }
+  })
 
   watch(isActive, () => {
     if (isActive.value)

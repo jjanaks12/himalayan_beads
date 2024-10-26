@@ -63,6 +63,16 @@ h3,
     font-size: 18px;
 }
 
+h4,
+.h4 {
+    font-size: 16px;
+}
+
+h5,
+.h5 {
+    font-size: 15px;
+}
+
 h6,
 .h6 {
     font-size: 15px;
@@ -70,6 +80,7 @@ h6,
 
 [type=email],
 [type=search],
+[type=password],
 [type=text],
 textarea,
 select {
@@ -118,4 +129,8 @@ textarea {
 
 .no--spacing {
     padding: 0 !important;
+}
+
+.nowrap {
+    white-space: nowrap !important;
 }

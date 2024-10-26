@@ -15,9 +15,9 @@
   const emit = defineEmits(['update-form'])
   const { saveCategory } = useProductCategoryStore()
   const { categoryList } = storeToRefs(useProductCategoryStore())
+  const { files, handleFileInput } = useFileStorage()
 
   const form = ref()
-  const files = ref([])
   const isLoading = ref(false)
 
   const submitHandler = (values: any, { resetForm }: SubmissionContext) => {
@@ -41,6 +41,7 @@
       form.value?.setFieldValue('name', props.category.name)
       form.value?.setFieldValue('description', props.category.description || '')
       form.value?.setFieldValue('parent_category', props.category.parent_id || '')
+      files.value = []
     }
   }
 
@@ -67,7 +68,24 @@
       </Field>
       <ErrorMessage class="input--error" name="description" />
     </div>
-    <FileUpload name="file" label="Category Image" v-model:files="files" />
+    <div class="form__group">
+      <label class="custom__file">
+        <input type="file" @change="handleFileInput" name="file" multiple accept="image/*" />
+        <div class="custom__file__text">
+          <ol class="custom__file__list">
+            <template v-if="files.length > 0">
+              <li class="custom__file__list__item" v-for="(file, index) in files">
+                <img :src="file.content" :alt="file.name">
+                <a href="#" @click.prevent="files.splice(index, 1)"><span class="icon-add"></span></a>
+              </li>
+            </template>
+            <span class="custom__file__list__item" v-else>
+              <strong>Select a file</strong>
+            </span>
+          </ol>
+        </div>
+      </label>
+    </div>
     <div class="form__group">
       <label for="cf__parent_category">Parent category</label>
       <Field name="parent_category" v-slot="{ field }">

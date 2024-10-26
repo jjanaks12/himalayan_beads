@@ -1,0 +1,2 @@
+import o from"./CcfwBx53.js";import{e as a,l as t,o as s,c as n,b as d,a as i,J as r}from"./Cmvx1_hi.js";import"./BOC28L7J.js";import"./DWCHefLH.js";import"./zSJUFyr1.js";const m={id:"admin",class:"admin--layout"},c={id:"main"},y=a({__name:"index",setup(p){return t(()=>{document.body.classList.add("admin--layout")}),(e,l)=>(s(),n("div",m,[d(o),i("main",c,[r(e.$slots,"default")])]))}});export{y as default};
+//# sourceMappingURL=CMDDBwCx.js.map

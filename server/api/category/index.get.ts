@@ -14,7 +14,8 @@ export default defineEventHandler(async (event) => {
       parent_id: null
     },
     include: {
-      predecessor: true
+      predecessor: true,
+      image: true
     }
   })
     .then((data) => {

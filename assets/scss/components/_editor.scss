@@ -1,0 +1,81 @@
+.editor {
+  position: relative;
+
+  &__menu {
+    background: $white;
+    display: flex;
+    gap: 5px;
+    margin: 0 10px;
+    padding: 10px 5px;
+    border-radius: 5px;
+    position: sticky;
+    top: 20px;
+    z-index: 1;
+
+    &__group {
+      display: flex;
+      gap: 5;
+      padding: 0 5px;
+      position: relative;
+
+      &::before {
+        content: '';
+        height: 50%;
+        border-left: 1px solid $philippine-silver;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+      }
+
+      &:first-child::before {
+        display: none;
+      }
+    }
+
+    button {
+      background: none;
+      width: 30px;
+      aspect-ratio: 1;
+      color: $philippine-silver;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .is-active {
+      background: rgba($charcoal-black, 0.1);
+      color: $dark-gunmetal;
+    }
+  }
+
+  &__content {
+    padding: 10px;
+    border: 1px solid $philippine-silver;
+    border-radius: 5px;
+
+    .ProseMirror {
+      min-height: 200px;
+
+      &-focused {
+        outline: none;
+      }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: 2rem;
+    }
+
+    blockquote {
+      margin: 2rem 0;
+      padding-left: 10px;
+      border-left: 3px solid $primary;
+    }
+  }
+}

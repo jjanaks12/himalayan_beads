@@ -1,2 +1,0 @@
-import{_ as a}from"./C6abNJRz.js";import{f as s,o as d,c as i,a as l,b as o,w as n,d as r}from"./D2fBRXFn.js";const f=s({__name:"register",setup(_){return(m,t)=>{const e=a;return d(),i("div",null,[t[2]||(t[2]=l("h1",null,"register",-1)),o(e,{to:"/login"},{default:n(()=>t[0]||(t[0]=[r("Login")])),_:1}),o(e,{to:"/dashboard"},{default:n(()=>t[1]||(t[1]=[r("Dashboard")])),_:1})])}}});export{f as default};
-//# sourceMappingURL=DVXwizLE.js.map

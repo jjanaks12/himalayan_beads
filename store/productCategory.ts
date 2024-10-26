@@ -2,7 +2,10 @@ import { Prisma, type Category } from '@prisma/client'
 import { defineStore } from 'pinia'
 
 const categoryWithPredecessor = Prisma.validator<Prisma.CategoryDefaultArgs>()({
-  include: { predecessor: true }
+  include: {
+    predecessor: true,
+    image: true
+  }
 })
 type CategoryWithPredecessor = Prisma.CategoryGetPayload<typeof categoryWithPredecessor>
 

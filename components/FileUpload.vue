@@ -10,27 +10,17 @@
     const fileList = defineModel<UploadingFile[]>('files', {
         default: []
     })
+    const emit = defineEmits(['input'])
 
     const handleFileChange = (e: Event) => {
+        emit('input', e)
         const files = (e.target as HTMLInputElement).files
 
         if (files)
             Array.prototype.forEach.call(files, async (file) => {
-                fileList.value.push(await getBase64(file))
+                fileList.value.push(file)
             })
     }
-
-    const getBase64 = (file: File): Promise<UploadingFile> => new Promise((resolve) => {
-        let dataURL: string = ''
-        let reader = new FileReader()
-
-        reader.readAsDataURL(file)
-
-        reader.onload = () => {
-            dataURL = reader.result as string
-            resolve({ name: file.name, dataURL })
-        }
-    })
 
     const removeFile = (index: number) => {
         fileList.value.splice(index, 1)
