@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { Form, Field, ErrorMessage } from 'vee-validate'
-    import { loginSchema } from '~/lib/schema/login.schema'
+    import { loginSchema } from '~/lib/schema/account.schema'
 
     definePageMeta({
         layout: 'simple',
@@ -11,8 +11,31 @@
         }
     })
 
+    const router = useRouter()
+    const route = useRoute()
+    const isLoading = ref(false)
+    const { signIn } = useAuth()
+
     const formSubmit = (values: any) => {
-        console.log(values)
+        isLoading.value = true
+
+        signIn('credentials', {
+            ...values,
+            redirect: false,
+            callbackUrl: '/dashboard'
+        })
+            .then(({ ok }: any) => {
+                console.log(route.query.callbackUrl as string);
+                
+                if (ok)
+                    if (route.query.callbackUrl)
+                        router.push(route.query.callbackUrl as string)
+                    else
+                        router.push('/dashboard')
+            })
+            .finally(() => {
+                isLoading.value = false
+            })
     }
 </script>
 
@@ -21,25 +44,28 @@
         <div class="account__body">
             <Brand />
             <Form class="account__form" id="login-form" @submit="formSubmit" :validationSchema="loginSchema">
-                <h1>Login</h1>
+                <div class="account__form__text">
+                    <h1 class="h2">Login</h1>
+                    <p>Welcome back!!</p>
+                </div>
                 <div class="form__group">
                     <label for="lf__email">Email</label>
                     <Field type="email" name="email" id="lf__email" />
-                    <ErrorMessage name="email" />
+                    <ErrorMessage class="input--error" name="email" />
                 </div>
                 <div class="form__group">
                     <label for="lf__password">Password</label>
                     <Field type="password" name="password" id="lf__password" />
-                    <ErrorMessage name="password" />
+                    <ErrorMessage class="input--error" name="password" />
                 </div>
                 <div class="text--right">
-                    <button type="submit" class="btn btn__primary">Sign in</button>
-                </div>
-                <div class="account__meta">
-                    <p>Has no account? <NuxtLink to="/register">signup</NuxtLink>
-                    </p>
+                    <button type="submit" :class="{ 'btn btn__primary': true, 'loading': isLoading }">Sign in</button>
                 </div>
             </Form>
+            <div class="account__meta">
+                <p>Has no account? <NuxtLink to="/register">signup</NuxtLink>
+                </p>
+            </div>
         </div>
     </section>
 </template>

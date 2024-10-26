@@ -249,7 +249,7 @@
 
     .greetings {
         color: $milky-white;
-        font-weight: 500;
+        font-weight: 300;
         font-size: 120%;
         display: block;
         position: absolute;
@@ -258,6 +258,12 @@
 
         @include media('>=desktop') {
             position: static;
+        }
+
+        span {
+            font-weight: 700;
+            font-size: 200%;
+            display: block;
         }
     }
 

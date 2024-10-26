@@ -1,11 +1,19 @@
+<script lang="ts" setup>
+  const { status } = useAuth()
+
+  const route = useRoute()
+
+  const homeURL = computed(() => status.value == 'unauthenticated'
+    ? '/'
+    : route.meta.layout == 'default'
+      ? '/'
+      : '/dashboard')
+</script>
+
 <template>
   <div class="logo">
-    <a href="#">
+    <nuxt-link :to="homeURL">
       <img src="/images/logo.svg" alt="Himalayan Beads">
-    </a>
+    </nuxt-link>
   </div>
 </template>
-
-<script lang="ts" setup>
-
-</script>

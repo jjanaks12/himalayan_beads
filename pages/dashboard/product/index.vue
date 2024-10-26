@@ -12,7 +12,8 @@
     })
 
     definePageMeta({
-        layout: 'admin'
+        layout: 'admin',
+        middleware: 'auth'
     })
 
     const { fetchProduct } = useProductStore()

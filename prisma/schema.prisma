@@ -102,6 +102,8 @@ model User {
   id            String    @id @default(cuid())
   email         String    @unique
   name          String?
+  password      String
+  role_id       String?
   emailVerified DateTime?
   deletedAt     DateTime?
   createdAt     DateTime  @default(now())
@@ -109,6 +111,7 @@ model User {
 
   Session       Session[]
   Authenticator Authenticator[]
+  role          Role?           @relation(fields: [role_id], references: [id])
 
   @@map("users")
 }
@@ -154,4 +157,35 @@ model Authenticator {
 
   @@id([userId, credentialID])
   @@map("authenticators")
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  publish     Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  permissions PermissionOnRole[]
+  users       User[]
+}
+
+model Permission {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  roles PermissionOnRole[]
+}
+
+model PermissionOnRole {
+  id            String @id @default(cuid())
+  permission_id String
+  role_id       String
+
+  permission Permission @relation(fields: [permission_id], references: [id], onDelete: Cascade)
+  role       Role       @relation(fields: [role_id], references: [id], onDelete: Cascade)
 }

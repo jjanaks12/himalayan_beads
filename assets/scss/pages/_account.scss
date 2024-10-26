@@ -1,0 +1,65 @@
+.account {
+  &__section {
+    max-width: 480px;
+    width: 100%;
+
+    .logo {
+      max-width: 220px;
+      margin: 0 auto 25px;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  &__form {
+    background: $milky-white;
+    padding: 20px;
+    border-radius: 20px;
+
+    .form__group {
+      margin-bottom: $grid-gutter-width;
+
+      label {
+        margin-left: 20px;
+      }
+
+      .input--error {
+        color: #f00;
+        font-size: 80%;
+        font-weight: 300;
+        display: inline-block;
+        vertical-align: top;
+        padding: 5px 0 0 12px;
+      }
+    }
+
+    &__text {
+      color: $philippine-silver;
+      text-align: center;
+      margin-bottom: 2rem;
+
+      h1 {
+        color: $dark-gunmetal;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  &__meta {
+    text-align: center;
+    padding-top: 5px;
+
+    a {
+      @include animate(color);
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+}
