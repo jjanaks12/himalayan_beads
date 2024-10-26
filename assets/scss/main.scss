@@ -17,16 +17,22 @@ $breakpoints: (
 @import "base/reset";
 @import "base/grid";
 
-.default--layout {
-    @import "layouts/default/common";
-    @import "layouts/default/header";
-    @import "layouts/default/footer";
-}
+@import "layouts/common";
+@import "layouts/header";
+@import "layouts/footer";
 
 @import "components/button";
 @import "components/dropdown";
+@import "components/datatable";
+@import "components/modal";
+@import "components/content";
 @import "components/products";
 @import "components/post";
+@import "components/alert";
+@import "components/custom-input";
 @import "components/accordion";
+@import "components/editor";
 
 @import "pages/home";
+@import "pages/dashbboard";
+@import "pages/account";

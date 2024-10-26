@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   sourcemap: true,
 
-  css: ['/public/style.css'],
+  css: ['/public/style.css', '@/assets/scss/main.scss'],
 
   modules: [
     '@pinia/nuxt',

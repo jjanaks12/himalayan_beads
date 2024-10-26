@@ -9,12 +9,8 @@
 <template>
     <div id="admin" class="admin--layout">
         <AppSidebar />
-        <main id="main">
+        <main id="admin-main">
             <slot />
         </main>
     </div>
 </template>
-
-<style lang="scss">
-    @import url('@/assets/scss/admin.scss');
-</style>

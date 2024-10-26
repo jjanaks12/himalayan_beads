@@ -1,5 +1,6 @@
 <script lang="ts" setup>
   import Underline from '@tiptap/extension-underline'
+  import HorizontalRule from '@tiptap/extension-horizontal-rule'
 
   interface TiptapEditorProps {
     modelValue: string
@@ -10,7 +11,7 @@
 
   const editor = useEditor({
     content: props.modelValue,
-    extensions: [TipTapDocument, TipTapParagraph, TipTapText, TipTapBold, TipTapItalic, TipTapStrike, TipTapBlockquote, TipTapBulletList, TipTapHeading, TipTapListItem, TipTapHistory, TipTapOrderedList, Underline],
+    extensions: [TipTapDocument, TipTapParagraph, TipTapText, TipTapBold, TipTapItalic, TipTapStrike, TipTapBlockquote, TipTapBulletList, TipTapHeading, TipTapListItem, TipTapHistory, TipTapOrderedList, Underline, HorizontalRule],
     onUpdate: ({ editor }) => {
       emit('update:modelValue', editor.getHTML())
     }
@@ -59,7 +60,7 @@
         </button>
         <button @click="editor.chain().focus().setParagraph().run()"
           :class="{ 'is-active': editor.isActive('paragraph') }">
-          <MdiIcon icon="mdiFormatSection" />
+          <MdiIcon icon="mdiFormatParagraph" />
         </button>
       </div>
       <div class="editor__menu__group">
