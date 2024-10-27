@@ -5,9 +5,9 @@
 
   const homeURL = computed(() => status.value == 'unauthenticated'
     ? '/'
-    : route.meta.layout == 'default'
-      ? '/'
-      : '/dashboard')
+    : route.meta.layout == 'admin'
+      ? '/dashboard'
+      : '/')
 </script>
 
 <template>

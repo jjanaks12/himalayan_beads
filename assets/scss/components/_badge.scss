@@ -1,0 +1,12 @@
+.badge {
+    font-size: 80%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0.0625rem 0.5rem;
+    border-radius: 0.125rem;
+
+    &--info {
+        background: $white;
+        color: $philippine-silver;
+    }
+}

@@ -21,6 +21,7 @@
 
     &__caption {
         font-size: 18px;
+        height: calc(100vh - 80px);
         display: flex;
         justify-content: center;
         align-items: center;

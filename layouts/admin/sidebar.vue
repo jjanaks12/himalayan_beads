@@ -39,7 +39,7 @@
     <aside id="admin-sidebar">
         <div class="sidebar__header">
             <Brand />
-            <NuxtLink class="menu__link" to="/" target="_blank">
+            <NuxtLink class="menu__link" to="/">
                 <MdiIcon icon="mdiOpenInNew" />
                 To site
             </NuxtLink>
