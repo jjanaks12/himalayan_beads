@@ -1,0 +1,2 @@
+import{_ as e}from"./Bvg9dY0G.js";import a from"./DTfq2h-Q.js";import{e as r,x as s,o as p,c as m,b as o,M as n}from"./CwxkVYrh.js";import"./Dieuq_5Q.js";import"./CuQfvP-j.js";import"./T-wU9EK5.js";import"./Bj4qIkiZ.js";import"./Dk0vT3jj.js";const d={id:"wrapper",class:"default--layout"},k=r({__name:"index",setup(i){return s(()=>{document.body.classList.add("default--layout")}),(t,c)=>(p(),m("div",d,[o(e),n(t.$slots,"default"),o(a)]))}});export{k as default};
+//# sourceMappingURL=DZNEZrUN.js.map

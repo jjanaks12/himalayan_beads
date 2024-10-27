@@ -1,2 +1,0 @@
-import{_ as t}from"./D-9VQVeO.js";import a from"./B7xWDM7u.js";import{e as r,l as s,o as n,c as p,b as o,J as d}from"./Cmvx1_hi.js";import"./DWCHefLH.js";import"./DnL7uU1F.js";import"./zSJUFyr1.js";import"./COdrnaWk.js";const m={id:"wrapper",class:"default--layout"},k=r({__name:"index",setup(i){return s(()=>{document.body.classList.add("default--layout")}),(e,c)=>(n(),p("div",m,[o(t),d(e.$slots,"default"),o(a)]))}});export{k as default};
-//# sourceMappingURL=Bk6RZ0Zl.js.map
