@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-  import type { Product } from '@prisma/client'
+  import type { FullProduct, ProductWithImage } from '~/store/product'
   import TiptapEditor from '~/components/TiptapEditor.vue'
+  import ImageBlock from './_component/imageBlock.vue'
 
   useHead({
     title: 'Products :: Himalayan Beads'
@@ -13,7 +14,7 @@
 
   const route = useRoute()
 
-  const product = ref<Product>()
+  const product = ref<FullProduct>()
   const productDescription = ref('')
 
   onBeforeMount(() => {
@@ -39,6 +40,10 @@
       </div>
     </header>
     <div class="content__body">
+      <h2>Images</h2>
+      <ImageBlock v-if="product" :id="product.id" :images="(product.images as ProductWithImage[])" />
+      <h2>Rates</h2>
+      <h2>Product description</h2>
       <TiptapEditor v-model="productDescription" />
     </div>
   </section>

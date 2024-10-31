@@ -12,7 +12,11 @@ export default defineEventHandler((event) => new Promise(async (resolve, reject)
     where: { id },
     include: {
       prices: true,
-      images: true,
+      images: {
+        include: {
+          images: true
+        }
+      },
       category: true,
       stock: true
     }

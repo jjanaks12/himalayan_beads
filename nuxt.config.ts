@@ -10,10 +10,11 @@ export default defineNuxtConfig({
 
   modules: [
     '@pinia/nuxt',
+    '@sidebase/nuxt-auth',
     'nuxt-file-storage',
     'nuxt-tiptap-editor',
     'nuxt-mdi',
-    '@sidebase/nuxt-auth',
+    'shadcn-nuxt'
   ],
 
   runtimeConfig: {
@@ -41,6 +42,10 @@ export default defineNuxtConfig({
       type: 'authjs'
     },
     globalAppMiddleware: false
+  },
+
+  shadcn: {
+    componentDir: './components/ui'
   },
 
   vite: {

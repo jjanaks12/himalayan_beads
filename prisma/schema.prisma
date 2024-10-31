@@ -168,6 +168,7 @@ model Role {
   name        String
   description String?  @db.Text
   publish     Boolean
+  deletedAt   DateTime @default(now())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

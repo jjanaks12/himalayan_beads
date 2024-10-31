@@ -5,11 +5,20 @@ const fullProduct = Prisma.validator<Prisma.ProductDefaultArgs>()({
   include: {
     category: true,
     prices: true,
-    images: true,
+    images: {
+      include: {
+        images: true
+      }
+    },
     stock: true
   }
 })
-type FullProduct = Prisma.ProductGetPayload<typeof fullProduct>
+export type FullProduct = Prisma.ProductGetPayload<typeof fullProduct>
+
+const productWithImage = Prisma.validator<Prisma.ImageOnProductDefaultArgs>()({
+  include: { images: true }
+})
+export type ProductWithImage = Prisma.ImageOnProductGetPayload<typeof productWithImage>
 
 export const useProductStore = defineStore('product', () => {
   const productList = ref<FullProduct[]>([])

@@ -34,7 +34,8 @@
     "@tiptap/extension-underline": "^2.9.1",
     "@types/bcrypt": "^5.0.2",
     "nuxt-file-storage": "^0.2.8",
-    "sass": "^1.79.4"
+    "sass": "^1.79.4",
+    "shadcn-nuxt": "^0.10.4"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts",

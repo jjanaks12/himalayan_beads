@@ -3,6 +3,7 @@
 
     import { useProductStore } from '@/store/product'
     import { formatDate } from '~/lib/filter'
+    import ProductItem from './_component/Item.vue'
 
     import ProductForm from '@/components/product/form.vue'
     import Alert from '~/components/Alert.vue'
@@ -79,16 +80,7 @@
                     <tr v-for="(product, index) in productList" :key="product.id">
                         <td class="sn">{{ index + 1 }}</td>
                         <td>
-                            <div class="wrap">
-                                <figure class="image">
-                                    <img src="" :alt="product.name">
-                                </figure>
-                                <div class="holder">
-                                    <NuxtLink :to="'/dashboard/product/' + product.id" class="title">{{ product.name }}
-                                    </NuxtLink>
-                                    <em class="subtitle">{{ product.category?.name }}</em>
-                                </div>
-                            </div>
+                            <product-item :product="product" />
                         </td>
                         <td class="text--center">{{ formatDate(product.createdAt) }}</td>
                         <td class="text--right">
