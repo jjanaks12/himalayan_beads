@@ -165,3 +165,36 @@
         color: $primary;
     }
 }
+
+.confirm__dialog {
+    text-align: center;
+    padding: 2rem 0;
+
+    h2 {
+        color: $dark-gunmetal;
+    }
+
+    .icon__holder {
+        color: $dark-gunmetal;
+        margin-bottom: 3rem;
+
+        svg {
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+
+    .text__holder {
+        margin-bottom: 2rem;
+    }
+
+    &__action {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+
+        .btn {
+            min-width: 120px;
+        }
+    }
+}

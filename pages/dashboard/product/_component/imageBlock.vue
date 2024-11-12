@@ -12,9 +12,12 @@
     const { files, handleFileInput } = useFileStorage()
 
     const isLoading = ref(false)
-    const showModal = ref(false)
-    const deleteImageID = ref<string|null>(null)
+    const showViewModal = ref(false)
     const viewImage = ref<string | null>(null)
+
+    const deleteImageID = ref<string | null>(null)
+    const showDeleteConfirm = ref(false)
+
     const loading = ref<{ [propsName: string]: boolean }>({})
 
     const saveImages = () => {
@@ -36,22 +39,25 @@
             })
     }
 
-    const deleteImage = async (id: string) => {
-        loading.value[id] = true
+    const deleteImage = async () => {
+        if (deleteImageID.value) {
+            loading.value[deleteImageID.value] = true
 
-        await $fetch(`/api/product/${props.id}/images/${id}`, {
-            method: 'delete'
-        })
-            .then((a) => {
-                console.log(a);
-
-                if (a.status == 'success') {
-                    emit('update')
-                }
+            await $fetch(`/api/product/${props.id}/images/${deleteImageID.value}`, {
+                method: 'delete'
             })
-            .finally(() => {
-                loading.value[id] = false
-            })
+                .then((a) => {
+                    if (a.status == 'success') {
+                        emit('update')
+                    }
+                })
+                .finally(() => {
+                    if (deleteImageID.value) {
+                        loading.value[deleteImageID.value] = false
+                        deleteImageID.value = null
+                    }
+                })
+        }
     }
 
     const setAsFeatured = async (id: string) => {
@@ -71,7 +77,11 @@
     }
 
     watch(viewImage, () => {
-        showModal.value = viewImage.value != null
+        showViewModal.value = viewImage.value != null
+    })
+
+    watch(deleteImageID, () => {
+        showDeleteConfirm.value = deleteImageID.value != null
     })
 </script>
 
@@ -118,7 +128,7 @@
                             </a>
                         </template>
                         <li>
-                            <a href="#" @click.prevent="deleteImage(image.id)">
+                            <a href="#" @click.prevent="deleteImageID = image.id">
                                 Delete
                                 <MdiIcon icon="mdiTrashCan" />
                             </a>
@@ -139,11 +149,15 @@
                 </div>
             </figure>
         </div>
-        <Modal :show="showModal" size="xl" @modal:close="viewImage = null">
+        <Modal :show="showViewModal" size="xl" @modal:close="viewImage = null">
             <div class="image__holder" v-if="viewImage">
                 <img :src="viewImage" alt="image description">
             </div>
         </Modal>
+
+        <Confirm :show="showDeleteConfirm" title="Are you sure you want to delete?"
+            text="Once you delete this image you cannot go back." @confirmed="deleteImage"
+            @canceled="deleteImageID = null" cancel-text="No, not now" confirm-text="Yes, delete it" />
     </div>
 </template>
 
