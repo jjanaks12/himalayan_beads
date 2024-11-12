@@ -13,8 +13,7 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth',
     'nuxt-file-storage',
     'nuxt-tiptap-editor',
-    'nuxt-mdi',
-    'shadcn-nuxt'
+    'nuxt-mdi'
   ],
 
   runtimeConfig: {
@@ -42,10 +41,6 @@ export default defineNuxtConfig({
       type: 'authjs'
     },
     globalAppMiddleware: false
-  },
-
-  shadcn: {
-    componentDir: './components/ui'
   },
 
   vite: {

@@ -1,6 +1,6 @@
 type APISuccess<T> = {
     status: 'success',
-    data: T
+    data: T | string
 }
 
 type APIError = {

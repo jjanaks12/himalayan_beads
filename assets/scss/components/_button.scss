@@ -1,3 +1,23 @@
+.loading {
+    pointer-events: none;
+    opacity: 0.5;
+
+    &::before {
+        width: 20px;
+        height: 20px;
+        aspect-ratio: 1;
+        content: '';
+        animation: spin 1s ease-in-out infinite;
+        border-style: solid;
+        border-width: 3px;
+        border-color: transparent $charcoal-black;
+        border-radius: 50%;
+        display: inline-block;
+        vertical-align: middle;
+        margin: -5px 10px 0 0;
+    }
+}
+
 .btn {
     @include animate(background color border-color);
     text-decoration: none;
@@ -12,25 +32,6 @@
     border-radius: 4px;
     cursor: pointer;
     outline: none;
-
-    &.loading {
-        pointer-events: none;
-        opacity: 0.5;
-
-        &::before {
-            width: 20px;
-            height: 20px;
-            content: '';
-            animation: spin 1s ease-in-out infinite;
-            border-style: solid;
-            border-width: 3px;
-            border-color: transparent $charcoal-black;
-            border-radius: 50%;
-            display: inline-block;
-            vertical-align: middle;
-            margin: -5px 10px 0 0;
-        }
-    }
 
     [class^="icon"],
     [class*="icon"] {

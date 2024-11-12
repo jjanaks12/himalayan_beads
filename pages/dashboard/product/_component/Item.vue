@@ -25,8 +25,8 @@
             <img :src="featuredProduct" :alt="(product.name as string)">
         </figure>
         <div class="holder">
-            <NuxtLink :to="'/dashboard/product/' + product.id" class="title">{{ product.name }}
-            </NuxtLink>
+            <Copy class="id" :copy-text="product.id">{{ product.id }}</Copy>
+            <NuxtLink :to="'/dashboard/product/' + product.id" class="title">{{ product.name }}</NuxtLink>
             <em class="subtitle">{{ product.category?.name }}</em>
         </div>
     </div>

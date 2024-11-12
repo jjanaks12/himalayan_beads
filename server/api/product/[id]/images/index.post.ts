@@ -14,14 +14,12 @@ export default defineEventHandler(async (event) => {
       body: { files }
     })
 
-    await prisma.product.update({
-      where: { id: product_id },
+    images.map(async (image) => await prisma.imageOnProduct.create({
       data: {
-        images: {
-          connect: images.map((image: Image) => ({ id: image.id }))
-        }
+        product_id: product_id,
+        image_id: image.id
       }
-    })
+    }))
 
     return { status: "success", data: product }
   } else

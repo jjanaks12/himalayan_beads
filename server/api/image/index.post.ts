@@ -3,7 +3,7 @@ import { Image, PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 export default defineEventHandler(async (event) => {
   const { files } = await readBody<{ files: File[] }>(event)
-  const data: any = []
+  const data: Image[] = []
 
   for (const file of files) {
     const name = await storeFileLocally(file, 8)

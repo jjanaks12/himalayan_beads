@@ -17,12 +17,17 @@
   const product = ref<FullProduct>()
   const productDescription = ref('')
 
-  onBeforeMount(() => {
+  const fetchProductDetail = () => {
     $fetch('/api/product/' + route.params.id)
       .then((data: any) => {
         if (data.status == 'success')
           product.value = data.data
       })
+
+  }
+
+  onBeforeMount(() => {
+    fetchProductDetail()
   })
 </script>
 
@@ -41,7 +46,8 @@
     </header>
     <div class="content__body">
       <h2>Images</h2>
-      <ImageBlock v-if="product" :id="product.id" :images="(product.images as ProductWithImage[])" />
+      <ImageBlock v-if="product" :id="product.id" :images="(product.images as ProductWithImage[])"
+        @update="fetchProductDetail" />
       <h2>Rates</h2>
       <h2>Product description</h2>
       <TiptapEditor v-model="productDescription" />

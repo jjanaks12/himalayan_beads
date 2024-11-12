@@ -54,8 +54,10 @@
 }
 
 #admin-main {
+    max-height: 100vh;
     flex-grow: 1;
     padding: 40px;
+    overflow-y: scroll;
 }
 
 .language {
@@ -142,5 +144,24 @@
         &:last-child {
             margin-bottom: 0;
         }
+    }
+}
+
+.copy {
+    svg {
+        width: auto;
+        height: auto;
+        display: inline-block;
+        vertical-align: middle;
+        margin: -3px 0 0 5px;
+    }
+
+    &__btn {
+        color: currentColor;
+        text-decoration: none;
+    }
+
+    &__text {
+        color: $primary;
     }
 }

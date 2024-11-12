@@ -1,5 +1,6 @@
 .custom__file {
     display: block;
+    cursor: pointer;
 
     input {
         opacity: 0;
@@ -11,8 +12,12 @@
         text-align: center;
         display: block;
         padding: 8px 15px;
-        border: 1px dashed currentColor;
+        border: 1px dashed $light;
         border-radius: 4px;
+
+        &--has__files{
+            border-color: $dark;
+        }
     }
 
     &__list {
@@ -30,6 +35,7 @@
 
             a {
                 @include animate(background);
+                background: $white;
                 width: 35px;
                 color: $dark-gunmetal;
                 height: 35px;
@@ -45,7 +51,7 @@
 
                 &:focus,
                 &:hover {
-                    background: $white;
+                    background: $milky-white;
                 }
             }
 
@@ -54,6 +60,7 @@
                 aspect-ratio: 1;
                 object-fit: contain;
                 border: 1px solid $primary;
+                border-radius: 3px;
             }
         }
     }
