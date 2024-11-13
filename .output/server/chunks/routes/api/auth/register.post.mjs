@@ -1,17 +1,12 @@
-import { o as defineEventHandler, r as readBody, f as createError, q as setResponseStatus } from '../../../runtime.mjs';
+import { n as defineEventHandler, r as readBody, c as createError, o as setResponseStatus } from '../../../runtime.mjs';
 import { PrismaClient } from '@prisma/client';
 import bcript from 'bcrypt';
 import 'node:http';
 import 'node:https';
-import 'node:zlib';
-import 'node:stream';
-import 'node:buffer';
-import 'node:util';
-import 'node:url';
-import 'node:net';
 import 'node:fs';
 import 'node:path';
 import 'requrl';
+import 'node:url';
 
 const prisma = new PrismaClient();
 const register_post = defineEventHandler(async (event) => {

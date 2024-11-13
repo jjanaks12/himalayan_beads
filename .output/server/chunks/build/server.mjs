@@ -1,5 +1,5 @@
 import { hasInjectionContext, inject, version, unref, toRaw, isRef, isReactive, toRef, readonly, defineComponent, h, computed, ref, provide, shallowReactive, watch, Suspense, nextTick, Fragment, Transition, getCurrentInstance, mergeProps, useSSRContext, createApp, effectScope, reactive, getCurrentScope, onErrorCaptured, onServerPrefetch, createVNode, resolveDynamicComponent, onScopeDispose, defineAsyncComponent, shallowRef, isReadonly, toRefs, markRaw, withCtx, isShallow } from 'vue';
-import { $ as $fetch$1, B as hasProtocol, C as isScriptProtocol, D as joinURL, F as withQuery, d as defu, G as sanitizeStatusCode, H as createHooks, f as createError$1, I as appendHeader, J as getRequestHeaders, K as getHeader, L as toRouteMatcher, M as createRouter$1, N as withoutTrailingSlash, P as withoutBase } from '../runtime.mjs';
+import { $ as $fetch$1, A as hasProtocol, B as isScriptProtocol, C as joinURL, D as withQuery, d as defu, F as sanitizeStatusCode, G as createHooks, c as createError$1, H as appendHeader, I as getRequestHeaders, J as getHeader, K as toRouteMatcher, L as createRouter$1, M as withoutTrailingSlash, N as withoutBase } from '../runtime.mjs';
 import { b as baseURL } from '../routes/renderer.mjs';
 import { getActiveHead, CapoPlugin } from 'unhead';
 import { defineHeadPlugin } from '@unhead/shared';
@@ -8,14 +8,9 @@ import getURL from 'requrl';
 import { ssrRenderSuspense, ssrRenderComponent, ssrRenderVNode } from 'vue/server-renderer';
 import 'node:http';
 import 'node:https';
-import 'node:zlib';
-import 'node:stream';
-import 'node:buffer';
-import 'node:util';
-import 'node:url';
-import 'node:net';
 import 'node:fs';
 import 'node:path';
+import 'node:url';
 import 'vue-bundle-renderer/runtime';
 import 'devalue';
 import '@unhead/ssr';
@@ -799,13 +794,13 @@ const _routes = [
   {
     name: "dashboard-product-_component-rate",
     path: "/dashboard/product/_component/rate",
-    component: () => import('./index-BunGQRk2.mjs')
+    component: () => import('./index-Cclm-IJZ.mjs')
   },
   {
     name: "dashboard-product-id",
     path: "/dashboard/product/:id()",
     meta: __nuxt_page_meta$5 || {},
-    component: () => import('./_id_-hznKRKbG.mjs')
+    component: () => import('./_id_-D_RKjUjJ.mjs')
   },
   {
     name: "dashboard-product",
@@ -2101,8 +2096,8 @@ const plugins = [
   plugin_I4dbrL2rYz
 ];
 const layouts = {
-  admin: () => import('./index-DNAaIeZV.mjs'),
-  "admin-sidebar": () => import('./sidebar-C8UdPWLY.mjs'),
+  admin: () => import('./index-eD-nKGv5.mjs'),
+  "admin-sidebar": () => import('./sidebar-DQCq8Fce.mjs'),
   "default-footer": () => import('./footer-DG_Zj4YI.mjs'),
   "default-header": () => import('./header-BUQ-2Ra1.mjs'),
   default: () => import('./index-CH-nCyZX.mjs'),
