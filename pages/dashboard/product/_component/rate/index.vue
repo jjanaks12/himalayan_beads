@@ -29,9 +29,11 @@
         <div class="datatable__body">
             <table>
                 <thead>
-                    <th class="sn"></th>
-                    <th class="text--left">Amount</th>
-                    <th></th>
+                    <tr>
+                        <td class="sn"></td>
+                        <td class="text--left">Amount</td>
+                        <td></td>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(price, index) in prices">
