@@ -45,13 +45,6 @@ model Category {
   @@map("categories")
 }
 
-model Price {
-  id     String @id @default(cuid())
-  amount Int    @db.UnsignedInt
-
-  @@map("prices")
-}
-
 model Product {
   id          String    @id @default(cuid())
   name        String
@@ -62,11 +55,21 @@ model Product {
   category_id String
 
   category Category?        @relation(fields: [category_id], references: [id])
-  prices   PriceOnProduct[]
   images   ImageOnProduct[]
   stock    Stock?
+  prices   PriceOnProduct[]
 
   @@map("products")
+}
+
+model Price {
+  id        String  @id @default(cuid())
+  amount    Float
+  parent_id String?
+
+  products PriceOnProduct[]
+
+  @@map("prices")
 }
 
 model ImageOnProduct {
@@ -83,10 +86,11 @@ model ImageOnProduct {
 
 model PriceOnProduct {
   id         String @id @default(cuid())
-  price_id   String
   product_id String
+  price_id   String
 
-  Product Product? @relation(fields: [product_id], references: [id])
+  price  Price   @relation(fields: [price_id], references: [id])
+  product Product @relation(fields: [product_id], references: [id])
 
   @@map("price_on_product")
 }
@@ -114,7 +118,7 @@ model User {
 
   Session       Session[]
   Authenticator Authenticator[]
-  role          Role           @relation(fields: [role_id], references: [id])
+  role          Role            @relation(fields: [role_id], references: [id])
   image         Image?          @relation(fields: [image_id], references: [id])
 
   @@map("users")

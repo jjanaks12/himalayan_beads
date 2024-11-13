@@ -28,7 +28,7 @@ export const menus: Menu[] = [{
     path: '/dashboard/user',
     icon: 'mdiAccountGroup',
     permission: 'manage_user'
-}, {
+/* }, {
     title: 'Settings',
     path: '/dashboard/settings',
     icon: 'mdiCogOutline',
@@ -48,5 +48,5 @@ export const menus: Menu[] = [{
     title: 'Playground',
     path: '/dashboard/playground',
     icon: 'mdiPlayNetwork',
-    permission: '*'
+    permission: '*' */
 }]

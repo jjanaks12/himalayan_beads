@@ -1,9 +1,11 @@
 <script lang="ts" setup>
   import Underline from '@tiptap/extension-underline'
   import HorizontalRule from '@tiptap/extension-horizontal-rule'
+  import { debounce } from '~/lib/helper/debounce';
 
   interface TiptapEditorProps {
     modelValue: string
+    disabled?: boolean
   }
 
   const props = defineProps<TiptapEditorProps>()
@@ -13,17 +15,28 @@
     content: props.modelValue,
     extensions: [TipTapDocument, TipTapParagraph, TipTapText, TipTapBold, TipTapItalic, TipTapStrike, TipTapBlockquote, TipTapBulletList, TipTapHeading, TipTapListItem, TipTapHistory, TipTapOrderedList, Underline, HorizontalRule],
     onUpdate: ({ editor }) => {
-      emit('update:modelValue', editor.getHTML())
+      debounce(() => {
+        emit('update:modelValue', editor.getHTML())
+      }, 5000)
     }
   })
 
   onBeforeUnmount(() => {
     unref(editor).destroy()
   })
+
+  watch(() => props.modelValue, () => {
+    editor.value?.commands.setContent(props.modelValue)
+  })
+
+  onMounted(() => {
+    if (props.modelValue)
+      editor.value?.commands.setContent(props.modelValue)
+  })
 </script>
 
 <template>
-  <div class="editor">
+  <div :class="{ 'editor': true, 'editor--disabled': disabled }">
     <div class="editor__menu" v-if="editor">
       <div class="editor__menu__group">
         <button @click="editor.chain().focus().toggleBold().run()"

@@ -13,7 +13,11 @@ export default defineEventHandler(async (event) => {
         },
         include: {
             category: true,
-            prices: true,
+            prices: {
+                include: {
+                    price: true
+                }
+            },
             images: {
                 include: {
                     images: true

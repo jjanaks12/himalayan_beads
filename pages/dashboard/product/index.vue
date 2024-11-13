@@ -66,6 +66,9 @@
                 </a>
             </div>
         </header>
+        <div class="datatable__filter">
+            <form action="#" class="search__form"></form>
+        </div>
         <div class="datatable__body">
             <table>
                 <thead>
@@ -85,11 +88,11 @@
                         <td class="text--center">{{ formatDate(product.createdAt) }}</td>
                         <td class="text--right">
                             <a class="btn btn--xs btn__info" href="#" @click.prevent="editProduct = product">
-                                <span class="prepend-icon icon-edit"></span>
+                                <MdiIcon icon="mdiPencil" size="16" />
                                 Edit
                             </a>
                             <a class="btn btn--xs btn__danger" href="#" @click.prevent="deletingProduct = product">
-                                <span class="prepend-icon icon-trash"></span>
+                                <MdiIcon icon="mdiDelete" size="16" />
                                 Delete
                             </a>
                         </td>

@@ -51,9 +51,7 @@ export default defineEventHandler(async (event) => {
               data: category
             }
           })
-          .catch((e) => {
-            console.log(e);
-
+          .catch(() => {
             response = {
               status: 'failed',
               message: `Cannot save ${data.name}`

@@ -1,12 +1,17 @@
-import { a as useRuntimeConfig, n as defineEventHandler, r as readBody } from '../../runtime.mjs';
+import { a as useRuntimeConfig, o as defineEventHandler, r as readBody } from '../../runtime.mjs';
 import { mkdir, writeFile } from 'fs/promises';
 import { PrismaClient } from '@prisma/client';
 import 'node:http';
 import 'node:https';
+import 'node:zlib';
+import 'node:stream';
+import 'node:buffer';
+import 'node:util';
+import 'node:url';
+import 'node:net';
 import 'node:fs';
 import 'node:path';
 import 'requrl';
-import 'node:url';
 
 const storeFileLocally = async (file, fileNameOrIdLength, filelocation = "") => {
   const { binaryString, ext } = parseDataUrl(file.content);

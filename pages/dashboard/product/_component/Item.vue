@@ -21,7 +21,7 @@
 
 <template>
     <div class="wrap">
-        <figure class="image" v-if="product.images.length > 0">
+        <figure class="image" v-if="featuredProduct">
             <img :src="featuredProduct" :alt="(product.name as string)">
         </figure>
         <div class="holder">

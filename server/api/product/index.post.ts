@@ -49,9 +49,7 @@ export default defineEventHandler(async (event) => {
           data: product
         }
       })
-      .catch((e) => {
-        console.log(e);
-        
+      .catch(() => {
         response = {
           status: 'failed',
           message: 'Something wrong with the database'

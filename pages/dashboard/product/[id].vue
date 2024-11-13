@@ -1,7 +1,9 @@
 <script lang="ts" setup>
   import type { FullProduct, ProductWithImage } from '~/store/product'
-  import TiptapEditor from '~/components/TiptapEditor.vue'
+
   import ImageBlock from './_component/imageBlock.vue'
+  import ProductDescription from './_component/productDescription.vue'
+  import Rate from './_component/rate/index.vue'
 
   useHead({
     title: 'Products :: Himalayan Beads'
@@ -15,15 +17,14 @@
   const route = useRoute()
 
   const product = ref<FullProduct>()
-  const productDescription = ref('')
 
   const fetchProductDetail = () => {
     $fetch('/api/product/' + route.params.id)
       .then((data: any) => {
-        if (data.status == 'success')
+        if (data.status == 'success') {
           product.value = data.data
+        }
       })
-
   }
 
   onBeforeMount(() => {
@@ -36,6 +37,7 @@
     <header class="content__header">
       <div class="content__header__holder">
         <h1>{{ product?.name }}</h1>
+        <em>{{ product?.category?.name }}</em>
       </div>
       <div class="content__header__action">
         <nuxt-link class="btn btn__primary" to="/dashboard/product">
@@ -45,12 +47,10 @@
       </div>
     </header>
     <div class="content__body">
-      <h2>Images</h2>
       <ImageBlock v-if="product" :id="product.id" :images="(product.images as ProductWithImage[])"
         @update="fetchProductDetail" />
-      <h2>Rates</h2>
-      <h2>Product description</h2>
-      <TiptapEditor v-model="productDescription" />
+      <Rate :prices="product?.prices" @update="fetchProductDetail" />
+      <ProductDescription :product="product" v-if="product" @update="fetchProductDetail" />
     </div>
   </section>
 </template>

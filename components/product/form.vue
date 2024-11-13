@@ -2,7 +2,7 @@
     import type { Product } from '@prisma/client'
     import { Form, Field, ErrorMessage, type SubmissionContext } from 'vee-validate'
 
-    import { productSchema } from '~/lib/schema/product'
+    import { productSchema } from '~/lib/schema/product.schema'
     import { useProductStore } from '~/store/product';
     import { useProductCategoryStore } from '~/store/productCategory'
 
@@ -56,18 +56,11 @@
 </script>
 
 <template>
-    <Form :validation-schema="productSchema" @submit="formSubmit" ref="form">
+    <Form class="form" :validation-schema="productSchema" @submit="formSubmit" ref="form">
         <div class="form__group">
             <label for="pf__name">Name</label>
             <Field type="text" name="name" id="pf__name" />
             <ErrorMessage name="name" class="input--error" />
-        </div>
-        <div class="form__group">
-            <label for="pf__description">Description</label>
-            <Field name="description" v-slot="{ field }">
-                <textarea v-bind="field" id="pf__description" />
-            </Field>
-            <ErrorMessage class="input--error" name="description" />
         </div>
         <div class="form__group">
             <label for="cf__category_id">Category</label>

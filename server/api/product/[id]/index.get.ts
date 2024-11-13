@@ -11,7 +11,11 @@ export default defineEventHandler((event) => new Promise(async (resolve, reject)
   await prisma.product.findFirst({
     where: { id },
     include: {
-      prices: true,
+      prices: {
+        include: {
+          price: true
+        }
+      },
       images: {
         include: {
           images: true
