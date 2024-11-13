@@ -70,7 +70,7 @@
     </div>
     <div class="form__group">
       <label class="custom__file">
-        <input type="file" @change="handleFileInput" name="file" multiple accept="image/*" />
+        <input type="file" @change="handleFileInput" name="file" accept="image/*" />
         <div class="custom__file__text">
           <ol class="custom__file__list">
             <template v-if="files.length > 0">

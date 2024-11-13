@@ -1,4 +1,6 @@
 .modal {
+    $modal: &;
+
     @include animate(opacity visiblity);
     background: rgba($charcoal-black, 0.3);
     display: flex;
@@ -9,10 +11,14 @@
     z-index: 9;
     opacity: 0;
     visibility: hidden;
-    
+
     &.modal--active {
         opacity: 1;
         visibility: visible;
+    }
+
+    &--xl #{$modal}__content {
+        max-width: 992px;
     }
 
     &__content {

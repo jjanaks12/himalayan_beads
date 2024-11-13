@@ -10,10 +10,10 @@ export default defineNuxtConfig({
 
   modules: [
     '@pinia/nuxt',
+    '@sidebase/nuxt-auth',
     'nuxt-file-storage',
     'nuxt-tiptap-editor',
-    'nuxt-mdi',
-    '@sidebase/nuxt-auth',
+    'nuxt-mdi'
   ],
 
   runtimeConfig: {
@@ -37,6 +37,7 @@ export default defineNuxtConfig({
 
   auth: {
     isEnabled: true,
+    baseURL: process.env.AUTH_ORIGIN,
     provider: {
       type: 'authjs'
     },

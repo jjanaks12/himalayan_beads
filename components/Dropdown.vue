@@ -1,6 +1,5 @@
 <script setup lang="ts">
     import breakpoints from '~/lib/helper/breakpoints'
-    import { debounce } from '~/lib/helper/debounce'
 
     interface DropdownProps {
         as?: string
@@ -54,10 +53,10 @@
                 </div>
             </component>
         </teleport>
-        <component v-else :is="as" :class="{ 'dropdown__menu': true, 'dropdown--active': isActive }">
-            <div class="dropdown__holder">
+        <div v-else :class="{ 'dropdown__menu': true, 'dropdown--active': isActive }">
+            <component :is="as" class="dropdown__holder">
                 <slot />
-            </div>
-        </component>
+            </component>
+        </div>
     </div>
 </template>

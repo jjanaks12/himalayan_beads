@@ -25,8 +25,6 @@
             callbackUrl: '/dashboard'
         })
             .then(({ ok }: any) => {
-                console.log(route.query.callbackUrl as string);
-                
                 if (ok)
                     if (route.query.callbackUrl)
                         router.push(route.query.callbackUrl as string)

@@ -1,5 +1,5 @@
 import { defineComponent, ref, h, resolveComponent, computed } from 'vue';
-import { O as parseQuery, A as hasProtocol, C as joinURL, P as withTrailingSlash, M as withoutTrailingSlash } from '../runtime.mjs';
+import { Q as parseQuery, B as hasProtocol, D as joinURL, R as withTrailingSlash, N as withoutTrailingSlash } from '../runtime.mjs';
 import { u as useRouter, n as nuxtLinkDefaults, e as resolveRouteObject, f as navigateTo, g as useNuxtApp, c as useRuntimeConfig } from './server.mjs';
 
 async function preloadRouteComponents(to, router = useRouter()) {

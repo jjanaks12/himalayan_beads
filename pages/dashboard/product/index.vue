@@ -3,6 +3,7 @@
 
     import { useProductStore } from '@/store/product'
     import { formatDate } from '~/lib/filter'
+    import ProductItem from './_component/Item.vue'
 
     import ProductForm from '@/components/product/form.vue'
     import Alert from '~/components/Alert.vue'
@@ -65,6 +66,9 @@
                 </a>
             </div>
         </header>
+        <div class="datatable__filter">
+            <form action="#" class="search__form"></form>
+        </div>
         <div class="datatable__body">
             <table>
                 <thead>
@@ -79,25 +83,16 @@
                     <tr v-for="(product, index) in productList" :key="product.id">
                         <td class="sn">{{ index + 1 }}</td>
                         <td>
-                            <div class="wrap">
-                                <figure class="image">
-                                    <img src="" :alt="product.name">
-                                </figure>
-                                <div class="holder">
-                                    <NuxtLink :to="'/dashboard/product/' + product.id" class="title">{{ product.name }}
-                                    </NuxtLink>
-                                    <em class="subtitle">{{ product.category?.name }}</em>
-                                </div>
-                            </div>
+                            <product-item :product="product" />
                         </td>
                         <td class="text--center">{{ formatDate(product.createdAt) }}</td>
                         <td class="text--right">
                             <a class="btn btn--xs btn__info" href="#" @click.prevent="editProduct = product">
-                                <span class="prepend-icon icon-edit"></span>
+                                <MdiIcon icon="mdiPencil" size="16" />
                                 Edit
                             </a>
                             <a class="btn btn--xs btn__danger" href="#" @click.prevent="deletingProduct = product">
-                                <span class="prepend-icon icon-trash"></span>
+                                <MdiIcon icon="mdiDelete" size="16" />
                                 Delete
                             </a>
                         </td>
