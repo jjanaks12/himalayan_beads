@@ -1,0 +1,2 @@
+import{c as e,b as a,d as r}from"./B4G2sQzk.js";const o=e().shape({email:a().required().label("Email"),password:a().required().label("Password")}),l=e().shape({email:a().required().label("Email"),password:a().required().label("Password"),password_confirmation:a().required().oneOf([r("password")],"Password do not match").label("Confirm password")});export{o as l,l as r};
+//# sourceMappingURL=DuqGHabL.js.map
