@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import type { FullProduct, ProductWithImage } from '~/store/product'
+  // import type { FullProduct, ProductWithImage } from '~/store/product'
 
   import ImageBlock from './_component/imageBlock.vue'
   import ProductDescription from './_component/productDescription.vue'
@@ -16,10 +16,10 @@
 
   const route = useRoute()
 
-  const product = ref<FullProduct>()
+  const product = ref<any>()
 
   const fetchProductDetail = () => {
-    $fetch('/api/product/' + route.params.id)
+    $fetch('/api/product/' + route.params?.id)
       .then((data: any) => {
         if (data.status == 'success') {
           product.value = data.data
@@ -47,7 +47,7 @@
       </div>
     </header>
     <div class="content__body">
-      <ImageBlock v-if="product" :id="product.id" :images="(product.images as ProductWithImage[])"
+      <ImageBlock v-if="product" :id="product.id" :images="(product.images as any[])"
         @update="fetchProductDetail" />
       <Rate :prices="product?.prices" @update="fetchProductDetail" />
       <ProductDescription :product="product" v-if="product" @update="fetchProductDetail" />

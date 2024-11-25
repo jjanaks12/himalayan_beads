@@ -89,7 +89,7 @@ model PriceOnProduct {
   product_id String
   price_id   String
 
-  price  Price   @relation(fields: [price_id], references: [id])
+  price   Price   @relation(fields: [price_id], references: [id])
   product Product @relation(fields: [product_id], references: [id])
 
   @@map("price_on_product")
@@ -120,8 +120,29 @@ model User {
   Authenticator Authenticator[]
   role          Role            @relation(fields: [role_id], references: [id])
   image         Image?          @relation(fields: [image_id], references: [id])
+  accounts      Account[]
 
   @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user_id           String
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
 model Session {

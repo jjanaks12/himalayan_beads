@@ -1,14 +1,19 @@
-import { u as useTypedBackendConfig, a as useRuntimeConfig, E as ERROR_MESSAGES, d as defu, e as eventHandler, s as sendRedirect, p as parseCookies, g as getHeaders, b as getQuery, c as createError, i as isMethod, r as readBody, f as getRequestHost, h as getRequestProtocol, j as getServerOrigin, k as getResponseHeader, l as setResponseHeader, m as setCookie } from '../../../runtime.mjs';
+import { u as useTypedBackendConfig, a as useRuntimeConfig, E as ERROR_MESSAGES, d as defu, e as eventHandler, s as sendRedirect, p as parseCookies, g as getHeaders, c as getQuery, f as createError, i as isMethod, r as readBody, h as getRequestHost, j as getRequestProtocol, k as getServerOrigin, l as getResponseHeader, m as setResponseHeader, n as setCookie } from '../../../runtime.mjs';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcript from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
 import { AuthHandler } from 'next-auth/core';
 import 'node:http';
 import 'node:https';
+import 'node:zlib';
+import 'node:stream';
+import 'node:buffer';
+import 'node:util';
+import 'node:url';
+import 'node:net';
 import 'node:fs';
 import 'node:path';
 import 'requrl';
-import 'node:url';
 
 let preparedAuthjsHandler;
 let usedSecret;
@@ -406,7 +411,7 @@ PrismaAdapter_1 = dist.PrismaAdapter = PrismaAdapter;
 const prisma = new PrismaClient();
 const _____ = NuxtAuthHandler({
   adapter: PrismaAdapter_1(prisma),
-  secret: useRuntimeConfig().authSecret,
+  secret: "SnT6DzHYt+R3ARk/GCU6QReas46RoaC4QoNbktBdzBg=",
   pages: {
     signIn: "/login"
   },

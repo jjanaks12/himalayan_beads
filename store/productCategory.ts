@@ -1,22 +1,22 @@
 import { Prisma, type Category } from '@prisma/client'
 import { defineStore } from 'pinia'
 
-const categoryWithPredecessor = Prisma.validator<Prisma.CategoryDefaultArgs>()({
+/* const categoryWithPredecessor = Prisma.validator<Prisma.CategoryDefaultArgs>()({
   include: {
     predecessor: true,
     image: true
   }
 })
-type CategoryWithPredecessor = Prisma.CategoryGetPayload<typeof categoryWithPredecessor>
+type CategoryWithPredecessor = Prisma.CategoryGetPayload<typeof categoryWithPredecessor> */
 
 export const useProductCategoryStore = defineStore('product_category', () => {
-  const categoryList = ref<CategoryWithPredecessor[]>([])
+  const categoryList = ref<any[]>([])
 
   const fetchCategory = async () => {
-    $fetch<APIResponse<CategoryWithPredecessor[]>>('/api/category')
+    $fetch<APIResponse<any[]>>('/api/category')
       .then(response => {
         if (response.status == 'success')
-          categoryList.value = response.data
+          categoryList.value = response.data as any[]
       })
   }
 

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+    import { useRoleStore } from '~/store/role'
+
     useHead({
         title: 'Roles :: Himalayan Beads'
     })
@@ -8,7 +10,14 @@
         middleware: 'auth'
     })
 
+    const { roleList } = storeToRefs(useRoleStore())
+    const { fetchRoles } = useRoleStore()
+
     const showForm = ref(false)
+
+    onMounted(() => {
+        fetchRoles()
+    })
 </script>
 
 <template>
@@ -29,13 +38,19 @@
             <table>
                 <thead>
                     <tr>
-                        <th></th>
+                        <th class="sn"></th>
                         <th class="text--left">Name</th>
                         <th>Created at</th>
                         <th class="text--right">Action</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr v-for="(role, index) in roleList">
+                        <td class="sn">{{ index + 1 }}</td>
+                        <td>{{ role.name }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

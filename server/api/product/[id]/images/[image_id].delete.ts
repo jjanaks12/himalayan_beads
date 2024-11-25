@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
   if (!image)
     response.message = "That image doesnot exits"
   else {
-    const res: any = await $fetch(`/api/image/${image.images.id}`, {
+    const res: any = await $fetch(`/api/image/${image?.images.id}`, {
       method: 'DELETE'
     })
 

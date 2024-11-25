@@ -109,7 +109,7 @@
                 </a>
               </td>
             </tr>
-            <tr v-if="category?.predecessor.length > 0 && toggleAccordion[category.id]">
+            <tr v-if="category?.predecessor.length > 0 && toggleAccordion[category?.id]">
               <td colspan="4" class="no--spacing">
                 <table class="subtable">
                   <tbody>

@@ -7,6 +7,7 @@
 
     import ProductForm from '@/components/product/form.vue'
     import Alert from '~/components/Alert.vue'
+    import Modal from '~/components/Modal.vue'
 
     useHead({
         title: 'Products :: Himalayan Beads'
@@ -27,10 +28,10 @@
 
     const showDeleteAlert = computed(() => deletingProduct.value != null)
 
-    const deleteProduct = () => {
+    const deleteProduct = async () => {
         isDeleting.value = true
 
-        $fetch(`/api/category/${deletingProduct.value?.id}/`, {
+        await $fetch(`/api/category/${deletingProduct.value?.id}/`, {
             method: 'DELETE'
         })
             .then(() => {
@@ -48,6 +49,7 @@
         else
             showForm.value = false
     })
+
     onMounted(() => {
         fetchProduct()
     })
