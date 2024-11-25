@@ -35,7 +35,7 @@
         form.value?.resetForm()
 
         if (props.product) {
-            form.value?.setFieldValue('id', props.product.id)
+            form.value?.setFieldValue('id', props.product?.id)
             form.value?.setFieldValue('name', props.product.name)
             form.value?.setFieldValue('description', props.product.description || '')
             form.value?.setFieldValue('category_id', props.product.category_id || '')

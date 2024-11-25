@@ -1,12 +1,17 @@
-import { n as defineEventHandler, a as useRuntimeConfig } from '../../../runtime.mjs';
+import { o as defineEventHandler, a as useRuntimeConfig } from '../../../runtime.mjs';
 import { PrismaClient } from '@prisma/client';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import 'node:http';
 import 'node:https';
+import 'node:zlib';
+import 'node:stream';
+import 'node:buffer';
+import 'node:util';
+import 'node:url';
+import 'node:net';
 import 'node:fs';
 import 'requrl';
-import 'node:url';
 
 const { storage } = useRuntimeConfig();
 const prisma = new PrismaClient();

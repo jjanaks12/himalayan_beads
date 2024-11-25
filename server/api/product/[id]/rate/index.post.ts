@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
 
   await prisma.priceOnProduct.create({
     data: {
-      price_id: price.id as string,
+      price_id: price?.id as string,
       product_id: product_id as string,
     }
   })

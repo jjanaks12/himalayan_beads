@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import type { FullProduct } from '~/store/product'
+    import Copy from '~/components/copy.vue'
 
     interface ProductItemProps {
         product: FullProduct
@@ -9,8 +10,8 @@
     const featuredProduct = computed(() => {
         let image = ''
 
-        if (props.product.images.length > 0) {
-            const featuredImage = props.product.images.find(image => image.featured)
+        if (props.product?.images.length > 0) {
+            const featuredImage = props.product?.images.find(image => image.featured)
             if (featuredImage)
                 image = featuredImage?.images?.url as string
         }

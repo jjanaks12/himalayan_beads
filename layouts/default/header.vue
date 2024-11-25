@@ -39,8 +39,8 @@
                         <span>Heya!</span>
                         Welcome to Himalayan Beads
                     </strong>
-                    <NuxtLink to="register" class="link" v-if="status == 'unauthenticated'">sign in</NuxtLink>
-                    <NuxtLink to="dashboard" class="link" v-else>dashboard</NuxtLink>
+                    <NuxtLink to="/register" class="link" v-if="status == 'unauthenticated'">sign in</NuxtLink>
+                    <NuxtLink to="/dashboard" class="link" v-else>dashboard</NuxtLink>
                     <ul class="secondary__menu">
                         <li><a href="#">Track order</a></li>
                         <li><a href="#">HB Perks</a></li>

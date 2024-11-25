@@ -1,11 +1,16 @@
-import { n as defineEventHandler } from '../../../../../runtime.mjs';
+import { o as defineEventHandler } from '../../../../../runtime.mjs';
 import { PrismaClient } from '@prisma/client';
 import 'node:http';
 import 'node:https';
+import 'node:zlib';
+import 'node:stream';
+import 'node:buffer';
+import 'node:util';
+import 'node:url';
+import 'node:net';
 import 'node:fs';
 import 'node:path';
 import 'requrl';
-import 'node:url';
 
 const prisma = new PrismaClient();
 const _image_id__delete = defineEventHandler(async (event) => {
@@ -26,7 +31,7 @@ const _image_id__delete = defineEventHandler(async (event) => {
   if (!image)
     response.message = "That image doesnot exits";
   else {
-    const res = await $fetch(`/api/image/${image.images.id}`, {
+    const res = await $fetch(`/api/image/${image == null ? void 0 : image.images.id}`, {
       method: "DELETE"
     });
     if (res.status == "failed")

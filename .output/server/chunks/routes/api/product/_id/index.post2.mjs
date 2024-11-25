@@ -1,11 +1,16 @@
-import { n as defineEventHandler, r as readBody } from '../../../../runtime.mjs';
+import { o as defineEventHandler, r as readBody } from '../../../../runtime.mjs';
 import { PrismaClient } from '@prisma/client';
 import 'node:http';
 import 'node:https';
+import 'node:zlib';
+import 'node:stream';
+import 'node:buffer';
+import 'node:util';
+import 'node:url';
+import 'node:net';
 import 'node:fs';
 import 'node:path';
 import 'requrl';
-import 'node:url';
 
 const prisma = new PrismaClient();
 const index_post = defineEventHandler(async (event) => {
@@ -24,7 +29,7 @@ const index_post = defineEventHandler(async (event) => {
   });
   await prisma.priceOnProduct.create({
     data: {
-      price_id: price.id,
+      price_id: price == null ? void 0 : price.id,
       product_id
     }
   });

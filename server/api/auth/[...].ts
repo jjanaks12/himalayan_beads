@@ -7,7 +7,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 export default NuxtAuthHandler({
     adapter: PrismaAdapter(prisma),
-    secret: useRuntimeConfig().authSecret,
+    secret: 'SnT6DzHYt+R3ARk/GCU6QReas46RoaC4QoNbktBdzBg=',
     pages: {
         signIn: '/login'
     },

@@ -38,7 +38,7 @@
 
     watch(() => props.product, () => {
         if (props.product)
-            productDescription.value = props.product.description as string
+            productDescription.value = props.product.description || ''
     })
 
     watch(isSaved, () => {
@@ -48,7 +48,7 @@
 
     onMounted(() => {
         if (props.product)
-            productDescription.value = props.product.description as string
+            productDescription.value = props.product.description || ''
     })
 </script>
 
