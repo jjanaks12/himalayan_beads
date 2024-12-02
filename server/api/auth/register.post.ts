@@ -18,7 +18,7 @@ export default defineEventHandler(async (event: H3Event) => {
 
     let userRole = await prisma.role.findFirst({
         where: {
-            name: 'user'
+            name: 'User'
         }
     })
 

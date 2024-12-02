@@ -2,6 +2,7 @@
 
   onMounted(() => {
     document.body.classList.add('simple--layout')
+    document.body.classList.remove('default--layout', 'admin--layout')
   })
 </script>
 

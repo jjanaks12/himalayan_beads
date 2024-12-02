@@ -5,7 +5,6 @@
 
   import { categorySchema } from '~/lib/schema/category'
   import { useProductCategoryStore } from '~/store/productCategory'
-  import FileUpload from '~/components/FileUpload.vue'
 
   interface CategoryFormProps {
     category?: Category | null
@@ -54,7 +53,7 @@
 </script>
 
 <template>
-  <Form class="category__form" action="#" :validation-schema="categorySchema" @submit="submitHandler" ref="form">
+  <Form class="form" action="#" :validation-schema="categorySchema" @submit="submitHandler" ref="form">
     <Field type="hidden" name="id" v-if="props.category" />
     <div class="form__group">
       <label for="cf__name">Name</label>

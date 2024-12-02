@@ -2,6 +2,10 @@
     import { Form, Field, ErrorMessage } from 'vee-validate'
     import { loginSchema } from '~/lib/schema/account.schema'
 
+    useHead({
+        title: 'Login :: Himalayan Beads'
+    })
+
     definePageMeta({
         layout: 'simple',
         middleware: 'auth',

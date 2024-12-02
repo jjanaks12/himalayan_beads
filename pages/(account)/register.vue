@@ -4,6 +4,10 @@
 
   import Brand from '@/components/brand.vue'
 
+  useHead({
+    title: 'Register :: Himalayan Beads'
+  })
+
   definePageMeta({
     layout: 'simple',
     middleware: 'auth',
@@ -16,6 +20,7 @@
   const route = useRoute()
   const router = useRouter()
   const isLoading = ref(false)
+  const showPassword = ref(false)
 
   const formSubmit = (values: any) => {
     isLoading.value = true
@@ -50,8 +55,12 @@
         </div>
         <div class="form__group">
           <label for="rf__password">Password</label>
-          <Field type="password" name="password" id="rf__password" />
+          <Field :type="showPassword ? 'text' : 'password'" name="password" id="rf__password" />
           <ErrorMessage class="input--error" name="password" />
+          <a href="#" @click.prevent="showPassword = !showPassword" class="btn btn--xs btn__info btn--icon">
+            <MdiIcon icon="mdiEyeOutline" size="16" v-if="showPassword" />
+            <MdiIcon icon="mdiEyeOffOutline" size="16" v-else />
+          </a>
         </div>
         <div class="form__group">
           <label for="rf__confirm_password">Confirm Password</label>

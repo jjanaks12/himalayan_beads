@@ -4,6 +4,7 @@
 
     onMounted(() => {
         document.body.classList.add('default--layout')
+        document.body.classList.remove('simple--layout', 'admin--layout')
     })
 </script>
 

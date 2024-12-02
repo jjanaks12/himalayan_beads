@@ -1,5 +1,6 @@
 <script setup lang="ts">
-    import { useRoleStore } from '~/store/role'
+    import { formatDate } from '~/lib/filter';
+import { useRoleStore } from '~/store/role'
 
     useHead({
         title: 'Roles :: Himalayan Beads'
@@ -21,7 +22,6 @@
 </script>
 
 <template>
-
     <section class="datatable__section">
         <header class="datatable__header">
             <div class="datatable__header__holder">
@@ -47,9 +47,17 @@
                 <tbody>
                     <tr v-for="(role, index) in roleList">
                         <td class="sn">{{ index + 1 }}</td>
-                        <td>{{ role.name }}</td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <strong class="title">{{ role.name }}</strong>
+                            <em class="subtitle"></em>
+                        </td>
+                        <td class="text--center">{{ formatDate(role.createdAt) }}</td>
+                        <td class="text--right">
+                            <a href="#" class="btn btn__info btn--xs">
+                                <MdiIcon icon="mdiPencil" size="16" />
+                                edit
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -3,7 +3,7 @@ import fsDriver from 'unstorage/drivers/fs'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   sourcemap: true,
 
   css: ['/public/style.css', '@/assets/scss/main.scss'],
@@ -37,10 +37,16 @@ export default defineNuxtConfig({
 
   auth: {
     isEnabled: true,
-    // originEnvKey: 'AUTH_ORIGIN',
+    // origin: process.env.AUTH_ORIGIN,
+    disableServerSideAuth: false,
+    originEnvKey: 'AUTH_ORIGIN',
     baseURL: process.env.NUXT_BASE_URL,
     provider: {
       type: 'authjs',
+    },
+    sessionRefresh: {
+      enablePeriodically: 1 * 60 * 1000,
+      enableOnWindowFocus: true
     },
     globalAppMiddleware: false
   },

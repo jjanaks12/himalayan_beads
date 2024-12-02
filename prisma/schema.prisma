@@ -199,6 +199,8 @@ model Role {
 
   permissions PermissionOnRole[]
   users       User[]
+
+  @@map("roles")
 }
 
 model Permission {
@@ -209,6 +211,8 @@ model Permission {
   updatedAt   DateTime @updatedAt
 
   roles PermissionOnRole[]
+
+  @@map("permissions")
 }
 
 model PermissionOnRole {
@@ -218,4 +222,6 @@ model PermissionOnRole {
 
   permission Permission @relation(fields: [permission_id], references: [id], onDelete: Cascade)
   role       Role       @relation(fields: [role_id], references: [id], onDelete: Cascade)
+
+  @@map("permission_on_roles")
 }

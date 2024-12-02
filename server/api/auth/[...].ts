@@ -7,7 +7,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 export default NuxtAuthHandler({
     adapter: PrismaAdapter(prisma),
-    secret: 'SnT6DzHYt+R3ARk/GCU6QReas46RoaC4QoNbktBdzBg=',
+    secret: process.env.NUXT_AUTH_SECRET,
     pages: {
         signIn: '/login'
     },
@@ -56,11 +56,40 @@ export default NuxtAuthHandler({
     ],
     debug: process.env.NODE_ENV === 'development',
     session: {
-        strategy: 'jwt'
+        strategy: 'jwt',
+        maxAge: 30 * 24 * 60 * 60
     },
     callbacks: {
+        jwt: ({ token, account, profile }) => {
+            if (account) {
+                token.sessionToken = account.session_token
+            }
+            return token
+        },
         session: async ({ session, token }) => {
+            if (token.email) {
+                const userResponse = await $fetch(`/api/auth/me`, {
+                    method: 'POST',
+                    body: {
+                        email: token.email
+                    }
+                })
+
+                if (userResponse.status == 'success')
+                    session.user = userResponse.data as any
+            }
+
             return Promise.resolve(session)
+        }
+    },
+    events: {
+        signIn: async ({ user, account }) => {
+            /* await prisma.session.create({
+                data: {
+                    sessionToken: ''
+                }
+            })
+            console.log('user signed in: ', message) */
         }
     }
 })

@@ -2,7 +2,7 @@
     import Brand from '~/components/brand.vue'
 
     const isMenuActive = ref(false)
-    const { status } = useAuth()
+    const { status, signOut } = useAuth()
 
     const toggleMenu = () => {
         isMenuActive.value = !isMenuActive.value
@@ -39,8 +39,14 @@
                         <span>Heya!</span>
                         Welcome to Himalayan Beads
                     </strong>
-                    <NuxtLink to="/register" class="link" v-if="status == 'unauthenticated'">sign in</NuxtLink>
-                    <NuxtLink to="/dashboard" class="link" v-else>dashboard</NuxtLink>
+                    <template v-if="status == 'unauthenticated'">
+                        <NuxtLink to="/login" class="link">sign in</NuxtLink>
+                        <NuxtLink to="/register" class="link">sign up</NuxtLink>
+                    </template>
+                    <template v-else>
+                        <NuxtLink to="/dashboard" class="link">dashboard</NuxtLink>
+                        <a href="#" class="link" @click.prevent="() => { signOut() }">logout</a>
+                    </template>
                     <ul class="secondary__menu">
                         <li><a href="#">Track order</a></li>
                         <li><a href="#">HB Perks</a></li>

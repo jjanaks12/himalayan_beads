@@ -203,4 +203,59 @@
     .form__group {
         margin-bottom: 1rem;
     }
+
+    .input--error {
+        color: $danger;
+        font-size: 80%;
+        padding-left: 15px;
+    }
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1;
+
+    ul {
+        @extend %listreset;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    a,
+    button {
+        background: none;
+        color: $primary;
+        min-width: 27px;
+        padding: 5px;
+        aspect-ratio: 1;
+        padding: 0;
+        border: 1px solid $primary;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+    }
+
+    a,
+    strong {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    strong {
+        background: $primary;
+        color: $white;
+        min-width: 27px;
+        padding: 5px;
+        aspect-ratio: 1;
+        border-radius: 4px;
+    }
 }
