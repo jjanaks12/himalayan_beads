@@ -86,7 +86,7 @@
 </script>
 
 <template>
-    <div class="content__body">
+    <div class="content__block">
         <div class="content__block__title">
             <h2>Images</h2>
         </div>
@@ -120,35 +120,37 @@
             </label>
             <div class="image__list">
                 <figure :class="{ 'image': true, 'image--featured': image.featured }" v-for="image in images">
-                    <img :src="(image.images?.url as string)" alt="image description">
+                    <a href="#" @click="viewImage = (image.images?.url as string)">
+                        <img :src="(image.images?.url as string)" alt="image description">
+                    </a>
                     <div class="image__action">
                         <span class="image__action__item" v-if="image.featured">
-                            <MdiIcon icon="mdiStar" class="featured--icon text--warning" />
+                            <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiStar" class="featured--icon text--warning" />
                         </span>
                         <Dropdown as="ul">
                             <template v-slot:opener="{ clickHandler }">
                                 <a href="#"
                                     :class="{ 'dropdown__opener image__action__item image__action__item--link': true, 'loading': loading[image.id] }"
                                     @click.prevent="clickHandler">
-                                    <MdiIcon icon="mdiDotsVertical" size="24" v-if="!loading[image.id]" />
+                                    <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiDotsVertical" size="24" v-if="!loading[image.id]" />
                                 </a>
                             </template>
                             <li>
                                 <a href="#" @click.prevent="deleteImageID = image.id">
                                     Delete
-                                    <MdiIcon icon="mdiTrashCan" />
+                                    <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiTrashCan" />
                                 </a>
                             </li>
                             <li>
                                 <a href="#" @click="viewImage = (image.images?.url as string)">
                                     view
-                                    <MdiIcon icon="mdiEye" />
+                                    <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiEye" />
                                 </a>
                             </li>
                             <li v-if="!image.featured">
                                 <a href="#" @click.prevent="setAsFeatured(image.id)">
                                     Set as featured
-                                    <MdiIcon icon="mdiStarCircleOutline" />
+                                    <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiStarCircleOutline" />
                                 </a>
                             </li>
                         </Dropdown>

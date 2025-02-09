@@ -19,6 +19,9 @@ $success: #75D16D;
 $info: $primary-light;
 $danger: #faad19;
 
+$primary-gradient: linear-gradient(45deg, $primary-dark 0%, $primary-light 100%);
+$secondary-gradient: linear-gradient(90deg, rgba(0, 157, 216, .05) 0%, rgba(73, 0, 255, .03) 50%, rgba(255, 0, 227, .04) 100%);
+
 $light: $white;
 $dark: $dark-gunmetal;
 

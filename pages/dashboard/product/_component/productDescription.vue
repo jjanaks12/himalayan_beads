@@ -58,7 +58,7 @@
             <h2>Product description</h2>
             <span class="loading" v-if="isLoading"></span>
             <span class="text--success" v-if="isSaved">
-                <MdiIcon icon="mdiContentSaveCheck" />
+                <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiContentSaveCheck" />
                 saved
             </span>
         </div>

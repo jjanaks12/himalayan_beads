@@ -1,3 +1,5 @@
+import * as Icons from '@mdi/js'
+
 type APISuccess<T> = {
     status: 'success',
     data: T
@@ -34,5 +36,23 @@ type APIParam<T> = {
     per_page: number
     data: T
 }
-// vee-validate.d.ts
-// declare module 'vee-validate'
+
+type Menu = {
+    id: number
+    title: string
+    name: string
+    path: string
+    icon: keyof typeof Icons
+    permission: string
+    sub_menu?: Menu[]
+    parent_id?: number
+}
+
+type DashboardDetail = {
+    [props: string]: number
+}
+
+interface CartItem {
+    product: any
+    quantity: number
+}

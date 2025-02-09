@@ -7,7 +7,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 export default NuxtAuthHandler({
     adapter: PrismaAdapter(prisma),
-    secret: process.env.NUXT_AUTH_SECRET,
+    secret: process.env.NUXTAUTH_SECRET,
     pages: {
         signIn: '/login'
     },
@@ -27,7 +27,7 @@ export default NuxtAuthHandler({
                     })
 
                 const user = await prisma.user.findUnique({
-                    where: { email: credentials.email },
+                    where: { email: credentials.email }
                 })
 
                 if (!user)

@@ -8,7 +8,8 @@
 
   definePageMeta({
     layout: 'admin',
-    middleware: 'auth'
+    middleware: ['auth', 'authorization'],
+    permission: 'view_user'
   })
 
   const { userList } = storeToRefs(useUserStore())
@@ -54,7 +55,7 @@
             </td>
             <td class="text--center">{{ formatDate(user.createdAt) }}</td>
             <td class="text--center">
-              <MdiIcon icon="mdiShieldCheck" class="text--success" v-if="user.emailVerified != null" />
+              <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiShieldCheck" class="text--success" v-if="user.emailVerified != null" />
             </td>
             <td class="text--right">
               <a href="#" class="btn btn--xs btn__danger">change role</a>

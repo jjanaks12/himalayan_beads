@@ -35,7 +35,7 @@
   <Modal :show="showConfirm" @modal:close="cancelAction">
     <div class="confirm__dialog">
       <div class="icon__holder" v-if="icon">
-        <MdiIcon :icon="icon" size="64" />
+        <MdiIcon preserveAspectRatio="xMidYMid meet" :icon="icon" size="64" />
       </div>
       <h2>{{ title }}</h2>
       <div class="text__holder">
@@ -43,11 +43,11 @@
       </div>
       <div class="confirm__dialog__action">
         <a href="#" class="btn btn__primary btn--outline" @click.prevent="cancelAction">
-          <MdiIcon icon="mdiClose" />
+          <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiClose" />
           {{ cancelText }}
         </a>
         <a href="#" class="btn btn__primary" @click.prevent="confirmAction">
-          <MdiIcon icon="mdiCheck" />
+          <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiCheck" />
           {{ confirmText }}
         </a>
       </div>

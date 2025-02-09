@@ -29,11 +29,11 @@
   <div class="copy">
     <a href="#" @click.prevent="copyNow" v-if="!isCopied" class="copy__btn" title="Click to copy">
       <slot />
-      <MdiIcon icon="mdiContentCopy" />
+      <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiContentCopy" />
     </a>
     <span class="copy__text" v-else>
       Copied
-      <MdiIcon icon="mdiCheck" />
+      <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiCheck" />
     </span>
   </div>
 </template>

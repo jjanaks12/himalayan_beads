@@ -11,7 +11,8 @@
 
   definePageMeta({
     layout: 'admin',
-    middleware: 'auth'
+    middleware: ['auth', 'authorization'],
+    permission: 'view_product'
   })
 
   const route = useRoute()
@@ -41,14 +42,13 @@
       </div>
       <div class="content__header__action">
         <nuxt-link class="btn btn__primary" to="/dashboard/product">
-          <MdiIcon icon="mdiReply" />
+          <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiReply" />
           Back
         </nuxt-link>
       </div>
     </header>
     <div class="content__body">
-      <ImageBlock v-if="product" :id="product.id" :images="(product.images as any[])"
-        @update="fetchProductDetail" />
+      <ImageBlock v-if="product" :id="product.id" :images="(product.images as any[])" @update="fetchProductDetail" />
       <Rate :prices="product?.prices" @update="fetchProductDetail" />
       <ProductDescription :product="product" v-if="product" @update="fetchProductDetail" />
     </div>

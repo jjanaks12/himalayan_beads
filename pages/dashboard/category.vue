@@ -14,7 +14,8 @@
 
   definePageMeta({
     layout: 'admin',
-    middleware: 'auth'
+    middleware: ['auth', 'authorization'],
+    permission: 'view_category'
   })
 
   const { categoryList } = storeToRefs(useProductCategoryStore())
@@ -62,10 +63,10 @@
         <h1>Product category</h1>
       </div>
       <div class="datatable__header__action">
-        <a class="btn btn__primary" href="#" @click.prevent="showForm = true">
+        <ThemeButton @click.prevent="showForm = true" persmission="create_category">
           <span class="prepend-icon icon-add"></span>
           Add Category
-        </a>
+        </ThemeButton>
       </div>
     </header>
     <div class="datatable__body">
@@ -89,6 +90,10 @@
                   </figure>
                   <div class="holder">
                     <strong class="title">{{ category.name }}</strong>
+                    <em class="badge badge--info">
+                      {{ category._count.products }}
+                      product{{ category._count.products > 1 ? 's' : '' }}
+                    </em>
                   </div>
                 </div>
               </td>
@@ -118,14 +123,14 @@
                       <td class="text--center">{{ subCategory.name }}</td>
                       <td>{{ formatDate(subCategory.createdAt) }}</td>
                       <td class="text--right">
-                        <a class="btn btn--xs btn__info" href="#" @click.prevent="editCategory = subCategory">
+                        <ThemeButton @click.prevent="editCategory = subCategory" persmission="update_category">
                           <span class="prepend-icon icon-edit"></span>
                           Edit
-                        </a>
-                        <a class="btn btn--xs btn__danger" href="#" @click.prevent="deletingCategory = subCategory">
+                        </ThemeButton>
+                        <ThemeButton @click.prevent="deletingCategory = subCategory" persmission="delete_category">
                           <span class="prepend-icon icon-trash"></span>
                           Delete
-                        </a>
+                        </ThemeButton>
                       </td>
                     </tr>
                   </tbody>

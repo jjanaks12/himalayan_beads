@@ -1,5 +1,6 @@
 import { Prisma, type Product } from '@prisma/client'
 import { defineStore } from 'pinia'
+import type { APIParam, APIQuery, APIResponse } from '~/himalayan_beads'
 import { debounce } from '~/lib/helper/debounce'
 
 const fullProduct = Prisma.validator<Prisma.ProductDefaultArgs>()({
@@ -25,7 +26,7 @@ export const useProductStore = defineStore('product', () => {
   const isLoading = ref(false)
   const param = ref<APIParam<any>>()
   const query = ref<APIQuery>({
-    per_page: 15,
+    per_page: 20,
     current: 1,
     s: ''
   })
@@ -64,7 +65,7 @@ export const useProductStore = defineStore('product', () => {
   }
 
   const prevPage = () => {
-    const current = Math.max(0, query.value.current + 1)
+    const current = Math.max(0, query.value.current - 1)
 
     if (current != param.value?.current)
       query.value = { ...query.value, current }

@@ -7,20 +7,10 @@ const prisma = new PrismaClient()
 export default defineEventHandler(async (event: H3Event) => {
     const { email, password } = await readBody(event)
     let res: any = {}
-
     const hash = bcript.hashSync(password, 10)
 
-    const user = await prisma.user.findUnique({
-        where: {
-            email
-        }
-    })
-
-    let userRole = await prisma.role.findFirst({
-        where: {
-            name: 'User'
-        }
-    })
+    const user = await prisma.user.findUnique({ where: { email } })
+    let userRole = await prisma.role.findFirst({ where: { name: 'User' } })
 
     if (!userRole)
         throw createError({

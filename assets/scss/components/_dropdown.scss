@@ -24,7 +24,14 @@
             border-color: transparent transparent color.adjust($milky-white, $lightness: -5%);
             position: absolute;
             bottom: 100%;
-            right: 10px;
+
+            #{$dropdown}--left & {
+                left: 10px;
+            }
+
+            #{$dropdown}--right & {
+                right: 10px;
+            }
 
             @include media('>=desktop') {
                 content: '';

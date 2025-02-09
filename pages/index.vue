@@ -2,7 +2,7 @@
     import Accordion from '@/components/accordion/index.vue'
     import AccordionItem from '~/components/accordion/AccordionItem.vue'
 
-    import ProductSection from './(home)/product.vue'
+    import ProductSection from './_home/product.vue'
 
     useHead({
         title: 'Home page'

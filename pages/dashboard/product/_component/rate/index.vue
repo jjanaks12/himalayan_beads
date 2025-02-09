@@ -22,7 +22,7 @@
         <div class="content__block__title">
             <h2>Rates</h2>
             <a href="#" class="btn btn__primary btn--outline" @click="showAddModal = true" v-if="prices?.length == 0">
-                <MdiIcon icon="mdiPlus" size="24" />
+                <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiPlus" size="24" />
                 Add Rate
             </a>
         </div>
@@ -41,11 +41,11 @@
                         <td>${{ price.price.amount }}</td>
                         <td class="text--right">
                             <a class="btn btn--xs btn__info" href="#" @click.prevent>
-                                <MdiIcon icon="mdiPencil" size="16" />
+                                <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiPencil" size="16" />
                                 Edit
                             </a>
                             <a class="btn btn--xs btn__danger" href="#" @click.prevent>
-                                <MdiIcon icon="mdiDelete" size="16" />
+                                <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiDelete" size="16" />
                                 Delete
                             </a>
                         </td>

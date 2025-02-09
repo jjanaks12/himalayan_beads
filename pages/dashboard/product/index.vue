@@ -16,7 +16,8 @@
 
     definePageMeta({
         layout: 'admin',
-        middleware: 'auth'
+        middleware: ['auth', 'authorization'],
+        permission: 'view_product'
     })
 
     const { fetchProduct, nextPage, prevPage, gotoPage } = useProductStore()
@@ -66,11 +67,11 @@
                             placeholder="Search text here...">
                     </div>
                     <button type="submit">
-                        <MdiIcon icon="mdiMagnify" size="24" />
+                        <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiMagnify" size="24" />
                     </button>
                 </form>
                 <a class="btn btn__primary btn--icon" href="#" @click.prevent="fetchProduct" :disabled="isLoading">
-                    <MdiIcon icon="mdiReload" size="16" />
+                    <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiReload" size="16" />
                 </a>
                 <a class="btn btn__primary" href="#" @click.prevent="showForm = true">
                     <span class="prepend-icon icon-add"></span>
@@ -100,14 +101,15 @@
                             </td>
                             <td class="text--center">{{ formatDate(product.createdAt) }}</td>
                             <td class="text--right">
-                                <a class="btn btn--xs btn__info" href="#" @click.prevent="editProduct = product">
-                                    <MdiIcon icon="mdiPencil" size="16" />
+                                <ThemeButton size="xs" @click="editProduct = product" persmission="update_product">
+                                    <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiPencil" size="16" />
                                     Edit
-                                </a>
-                                <a class="btn btn--xs btn__danger" href="#" @click.prevent="deletingProduct = product">
-                                    <MdiIcon icon="mdiDelete" size="16" />
+                                </ThemeButton>
+                                <ThemeButton size="xs" @click="deletingProduct = product" type="danger"
+                                    persmission="delete_product">
+                                    <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiDelete" size="16" />
                                     Delete
-                                </a>
+                                </ThemeButton>
                             </td>
                         </tr>
                     </template>
@@ -118,7 +120,8 @@
             </table>
         </div>
         <footer class="datatable__footer">
-            <Pagination :current="query.current" :total="10" :onNext="nextPage" :onPrev="prevPage" :onGoto="gotoPage" />
+            <Pagination :current="query.current" :total="param?.total_page || 0" :onNext="nextPage" :onPrev="prevPage"
+                :onGoto="gotoPage" />
         </footer>
         <Modal v-model:show="showForm" @modal:close="editProduct = null">
             <ProductForm :product="editProduct || null" @update-form="() => {

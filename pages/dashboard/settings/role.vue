@@ -1,6 +1,8 @@
 <script setup lang="ts">
-    import { formatDate } from '~/lib/filter';
-import { useRoleStore } from '~/store/role'
+    import { formatDate } from '~/lib/filter'
+    import { useRoleStore } from '~/store/role'
+
+    import RoleForm from '@/pages/dashboard/settings/_role/form.vue'
 
     useHead({
         title: 'Roles :: Himalayan Beads'
@@ -8,17 +10,24 @@ import { useRoleStore } from '~/store/role'
 
     definePageMeta({
         layout: 'admin',
-        middleware: 'auth'
+        middleware: ['auth', 'authorization'],
+        permission: 'view_role'
     })
 
     const { roleList } = storeToRefs(useRoleStore())
     const { fetchRoles } = useRoleStore()
 
     const showForm = ref(false)
+    const editRole = ref(null)
 
     onMounted(() => {
         fetchRoles()
     })
+
+    watch(editRole, () => {
+        if (editRole.value)
+            showForm.value = true
+    }, { deep: true })
 </script>
 
 <template>
@@ -48,19 +57,37 @@ import { useRoleStore } from '~/store/role'
                     <tr v-for="(role, index) in roleList">
                         <td class="sn">{{ index + 1 }}</td>
                         <td>
-                            <strong class="title">{{ role.name }}</strong>
-                            <em class="subtitle"></em>
+                            <div class="wrap">
+                                <div class="holder">
+                                    <strong class="title">{{ role.name }}</strong>
+                                    <div class="badge__group">
+                                        <span class="badge badge--info" v-for="permission in role.permissions">{{
+                                            permission.name }}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                         <td class="text--center">{{ formatDate(role.createdAt) }}</td>
                         <td class="text--right">
-                            <a href="#" class="btn btn__info btn--xs">
-                                <MdiIcon icon="mdiPencil" size="16" />
+                            <ThemeButton size="xl" @click="editRole = role" persmission="update_role">
+                                <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiPencil" size="16" />
                                 edit
-                            </a>
+                            </ThemeButton>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </section>
+    <Modal :show="showForm" size="xl" @modal:close="() => {
+        showForm = false
+        editRole = null
+    }">
+        <RoleForm :role="editRole" @update="() => {
+            showForm = false
+            editRole = null
+
+            fetchRoles()
+        }" />
+    </Modal>
 </template>

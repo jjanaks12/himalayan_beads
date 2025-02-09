@@ -3,7 +3,7 @@ import fsDriver from 'unstorage/drivers/fs'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   sourcemap: true,
 
   css: ['/public/style.css', '@/assets/scss/main.scss'],
@@ -13,7 +13,8 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth',
     'nuxt-file-storage',
     'nuxt-tiptap-editor',
-    'nuxt-mdi'
+    'nuxt-mdi',
+    'nuxt-swiper',
   ],
 
   runtimeConfig: {
@@ -49,6 +50,9 @@ export default defineNuxtConfig({
       enableOnWindowFocus: true
     },
     globalAppMiddleware: false
+  },
+
+  swiper: {
   },
 
   vite: {

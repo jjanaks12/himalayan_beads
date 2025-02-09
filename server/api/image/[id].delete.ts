@@ -2,6 +2,8 @@ import { Image, PrismaClient } from "@prisma/client"
 import fs from "node:fs/promises"
 import path from "node:path"
 
+import { APIResponse } from "~/himalayan_beads"
+
 const { storage } = useRuntimeConfig()
 const prisma = new PrismaClient()
 export default defineEventHandler(async (event) => {

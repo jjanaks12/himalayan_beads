@@ -6,7 +6,6 @@
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["omitApi"]
 }
 
 datasource db {
@@ -197,7 +196,7 @@ model Role {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  permissions PermissionOnRole[]
+  permissions Permission[]
   users       User[]
 
   @@map("roles")
@@ -210,18 +209,7 @@ model Permission {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  roles PermissionOnRole[]
+  roles Role[]
 
   @@map("permissions")
-}
-
-model PermissionOnRole {
-  id            String @id @default(cuid())
-  permission_id String
-  role_id       String
-
-  permission Permission @relation(fields: [permission_id], references: [id], onDelete: Cascade)
-  role       Role       @relation(fields: [role_id], references: [id], onDelete: Cascade)
-
-  @@map("permission_on_roles")
 }

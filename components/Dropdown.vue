@@ -3,10 +3,12 @@
 
     interface DropdownProps {
         as?: string
+        direction?: 'right' | 'left'
     }
 
     const props = withDefaults(defineProps<DropdownProps>(), {
-        as: 'div'
+        as: 'div',
+        direction: 'left'
     })
     const isActive = ref(false)
     const dropdown = ref()
@@ -31,6 +33,12 @@
         isMobile.value = e.matches
     }
 
+    const classList = computed(() => ({
+        'dropdown': true,
+        'dropdown--active': isActive.value,
+        ['dropdown--' + props.direction]: true
+    }))
+
     onMounted(() => {
         document.addEventListener('click', clickOnOutside)
         matchMedia(breakpoints('desktop')).addListener(mediaChangeHandler)
@@ -44,7 +52,7 @@
 </script>
 
 <template>
-    <div :class="{ 'dropdown': true, 'dropdown--active': isActive }" ref="dropdown">
+    <div :class="classList" ref="dropdown">
         <slot name="opener" :click-handler="toggleDropdown" />
         <teleport to="body" v-if="!isMobile">
             <component :is="as" :class="{ 'dropdown__menu': true, 'dropdown--active': isActive }">

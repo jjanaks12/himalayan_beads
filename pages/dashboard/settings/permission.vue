@@ -10,15 +10,16 @@
 
 	definePageMeta({
 		layout: 'admin',
-		middleware: 'auth'
+		middleware: ['auth', 'authorization'],
+        permission: 'view_permission'
 	})
 
 	const { permissionList } = storeToRefs(usePermissionStore())
-	const { fetchUser } = usePermissionStore()
-	const showForm = ref(true)
+	const { fetch } = usePermissionStore()
+	const showForm = ref(false)
 
 	onMounted(() => {
-		fetchUser()
+		fetch()
 	})
 </script>
 
@@ -52,7 +53,7 @@
 						<td class="text--center">{{ formatDate(permission.createdAt) }}</td>
 						<td class="text--right">
 							<a href="#" class="btn btn__info btn--xs">
-								<MdiIcon icon="mdiPencil" size="16" />
+								<MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiPencil" size="16" />
 								edit
 							</a>
 						</td>

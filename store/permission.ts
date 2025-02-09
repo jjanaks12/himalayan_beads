@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 export const usePermissionStore = defineStore('permission', () => {
     const permissionList = ref<Permission[]>([])
 
-    const fetchUser = () => {
+    const fetch = () => {
         $fetch('/api/permission', {
             method: 'GET'
         })
@@ -14,5 +14,5 @@ export const usePermissionStore = defineStore('permission', () => {
             })
     }
 
-    return { permissionList, fetchUser }
+    return { permissionList, fetch }
 })

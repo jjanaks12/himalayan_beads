@@ -3,17 +3,16 @@
 .datatable {
     &__section {
         background: $milky-white;
-        padding: 20px;
         max-width: 992px;
         border-radius: 4px;
+        border: 1px solid #e8eaed;
     }
 
     &__header {
         display: flex;
         align-items: center;
-        padding-bottom: 20px;
-        margin-bottom: 20px;
-        border-bottom: 1px solid $dark-gunmetal;
+        padding: 20px;
+        border-bottom: 1px solid #e8eaed;
 
         &__holder {
             flex-grow: 1;
@@ -32,6 +31,8 @@
     }
 
     &__body {
+        padding: 20px;
+
         table {
             width: 100%;
             border-spacing: 0;
@@ -43,8 +44,9 @@
 
             th,
             td {
+                vertical-align: top;
                 padding: 5px;
-                border-bottom: 1px solid rgba($charcoal-black, 0.1);
+                border-bottom: 1px dashed rgba($charcoal-black, 0.05);
             }
 
             td {
@@ -94,6 +96,7 @@
             }
 
             .wrap {
+                max-width: 400px;
                 display: flex;
             }
 
@@ -128,9 +131,8 @@
     &__footer {
         display: flex;
         justify-content: space-between;
-        margin-top: 20px;
-        padding-top: 20px;
-        border-top: 1px solid $dark-gunmetal;
+        padding: 20px;
+        border-top: 1px solid #e8eaed;
 
         .pagination {
             margin-left: auto;
@@ -157,6 +159,7 @@
     0% {
         background-color: $white;
     }
+
     100% {
         background-color: $charcoal-black;
     }

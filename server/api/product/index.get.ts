@@ -1,6 +1,8 @@
 import { PrismaClient, Product } from "@prisma/client"
 import { type H3Event } from 'h3'
 
+import { APIParam, APIQuery, APIResponse } from "~/himalayan_beads"
+
 const prisma = new PrismaClient()
 export default defineEventHandler(async (event: H3Event) => {
     let response: APIResponse<APIParam<any>> = {

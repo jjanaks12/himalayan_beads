@@ -8,7 +8,7 @@
   }
 
   const emit = defineEmits(['modal:close'])
-  const props = withDefaults(defineProps<ModalProps>(), {
+  withDefaults(defineProps<ModalProps>(), {
     size: 'md'
   })
 

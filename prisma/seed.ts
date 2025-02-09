@@ -16,69 +16,45 @@ const main = () => new Promise(async (resolve) => {
             publish: true,
             permissions: {
                 create: [{
-                    permission: {
-                        create: { name: 'create_user' },
-                    }
+                    name: 'create_user'
                 }, {
-                    permission: {
-                        create: { name: 'update_user' },
-                    }
+                    name: 'update_user'
                 }, {
-                    permission: {
-                        create: { name: 'view_user' },
-                    }
+                    name: 'view_user'
                 }, {
-                    permission: {
-                        create: { name: 'delete_user' },
-                    }
+                    name: 'delete_user'
                 }, {
-                    permission: {
-                        create: { name: 'create_product' },
-                    }
+                    name: 'create_product'
                 }, {
-                    permission: {
-                        create: { name: 'update_product' },
-                    }
+                    name: 'update_product'
                 }, {
-                    permission: {
-                        create: { name: 'view_product' },
-                    }
+                    name: 'view_product'
                 }, {
-                    permission: {
-                        create: { name: 'delete_product' },
-                    }
+                    name: 'delete_product'
                 }, {
-                    permission: {
-                        create: { name: 'create_category' },
-                    }
+                    name: 'create_category'
                 }, {
-                    permission: {
-                        create: { name: 'update_category' },
-                    }
+                    name: 'update_category'
                 }, {
-                    permission: {
-                        create: { name: 'view_category' },
-                    }
+                    name: 'view_category'
                 }, {
-                    permission: {
-                        create: { name: 'delete_category' },
-                    }
+                    name: 'delete_category'
                 }, {
-                    permission: {
-                        create: { name: 'create_role' },
-                    }
+                    name: 'create_role'
                 }, {
-                    permission: {
-                        create: { name: 'update_role' },
-                    }
+                    name: 'update_role'
                 }, {
-                    permission: {
-                        create: { name: 'view_role' },
-                    }
+                    name: 'view_role'
                 }, {
-                    permission: {
-                        create: { name: 'delete_role' }
-                    }
+                    name: 'delete_role'
+                }, {
+                    name: 'create_permission'
+                }, {
+                    name: 'update_permission'
+                }, {
+                    name: 'view_permission'
+                }, {
+                    name: 'delete_permission'
                 }]
             }
         }

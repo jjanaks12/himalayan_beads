@@ -1,4 +1,5 @@
 import { Category, PrismaClient } from "@prisma/client"
+import { APIResponse } from "~/himalayan_beads"
 
 const prisma = new PrismaClient()
 
@@ -15,7 +16,8 @@ export default defineEventHandler(async (event) => {
     },
     include: {
       predecessor: true,
-      image: true
+      image: true,
+      _count: true
     }
   })
     .then((data) => {

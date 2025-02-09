@@ -174,12 +174,12 @@ CREATE TABLE `permissions` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `permission_on_roles` (
-    `id` VARCHAR(191) NOT NULL,
-    `permission_id` VARCHAR(191) NOT NULL,
-    `role_id` VARCHAR(191) NOT NULL,
+CREATE TABLE `_PermissionToRole` (
+    `A` VARCHAR(191) NOT NULL,
+    `B` VARCHAR(191) NOT NULL,
 
-    PRIMARY KEY (`id`)
+    UNIQUE INDEX `_PermissionToRole_AB_unique`(`A`, `B`),
+    INDEX `_PermissionToRole_B_index`(`B`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
@@ -225,7 +225,7 @@ ALTER TABLE `authenticators` ADD CONSTRAINT `authenticators_userId_fkey` FOREIGN
 ALTER TABLE `authenticators` ADD CONSTRAINT `authenticators_sessionId_fkey` FOREIGN KEY (`sessionId`) REFERENCES `sessions`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `permission_on_roles` ADD CONSTRAINT `permission_on_roles_permission_id_fkey` FOREIGN KEY (`permission_id`) REFERENCES `permissions`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `_PermissionToRole` ADD CONSTRAINT `_PermissionToRole_A_fkey` FOREIGN KEY (`A`) REFERENCES `permissions`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `permission_on_roles` ADD CONSTRAINT `permission_on_roles_role_id_fkey` FOREIGN KEY (`role_id`) REFERENCES `roles`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `_PermissionToRole` ADD CONSTRAINT `_PermissionToRole_B_fkey` FOREIGN KEY (`B`) REFERENCES `roles`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

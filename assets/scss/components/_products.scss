@@ -30,6 +30,35 @@
         display: block;
     }
 
+    &__body {
+        display: flex;
+        width: 100%;
+    }
+
+    &__image {
+        max-width: 40%;
+        flex: 40% 0 0;
+        margin: 0;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__description {
+        padding-left: 20px;
+
+        #{$product}__price {
+            color: $primary;
+            font-size: 200%;
+        }
+
+        #{$product}__item__action {
+            position: static;
+        }
+    }
+
     &__item {
         $item: &;
         position: relative;
@@ -37,16 +66,18 @@
 
         &__image {
             background: radial-gradient(50% 50% at 50% 50%, $milky-white 0%, #F8F9FB 100%);
-            min-height: 230px;
-            flex-grow: 1;
+            height: 230px;
+            flex-grow: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
 
             img {
-                max-width: 100%;
-                height: auto;
+                max-width: 90%;
+                max-height: 90%;
+                aspect-ratio: 1;
+                object-fit: contain;
             }
         }
 
@@ -60,6 +91,9 @@
 
             img {
                 max-width: none;
+                max-height: none;
+                aspect-ratio: unset;
+                object-fit: none;
                 width: 100%;
             }
 
@@ -169,6 +203,7 @@
 
                     &__image {
                         flex: 100px 0 0;
+                        height: auto;
                         aspect-ratio: 1;
                         min-height: 0;
 
@@ -243,10 +278,15 @@
                 }
 
                 #{$item} {
+                    @include animate(background);
                     text-align: center;
                     display: flex;
                     flex-direction: column;
                     border: 1px solid #E5E9EA;
+
+                    &:hover {
+                        background: $milky-white;
+                    }
                 }
             }
         }
@@ -295,7 +335,7 @@
 
                     &--last {
                         text-align: center;
-                        
+
                         .holder {
                             width: 100%;
                             aspect-ratio: 1;

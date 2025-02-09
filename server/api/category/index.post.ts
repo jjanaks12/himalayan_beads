@@ -1,6 +1,5 @@
 import { Category, Image, PrismaClient } from "@prisma/client"
-import fs from 'fs'
-import path from 'path'
+import { APIResponse } from "~/himalayan_beads"
 
 const prisma = new PrismaClient()
 

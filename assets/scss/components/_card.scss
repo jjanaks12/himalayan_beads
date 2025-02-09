@@ -1,0 +1,45 @@
+.card {
+    background: $secondary-gradient;
+    border: 1px solid #e8eaed;
+    border-radius: 0.5rem;
+
+    &__header,
+    &__body,
+    &__footer {
+        padding: 0.5rem 1rem;
+    }
+
+    &__header {
+        border-bottom: 1px solid #e8eaed;
+    }
+
+    &__footer {
+        border-top: 1px solid #e8eaed;
+    }
+
+    &__title {
+        font-size: 1.2rem;
+        margin-bottom: 0;
+    }
+
+    &__stats {
+        overflow: hidden;
+
+        dt {
+            color: $philippine-silver;
+            text-transform: uppercase;
+            font-weight: 300;
+            font-size: 80%;
+            float: left;
+            clear: both;
+            padding-top: 0.4rem;
+        }
+
+        dd {
+            overflow: hidden;
+            font-size: 140%;
+            padding-left: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+    }
+}

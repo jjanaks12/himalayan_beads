@@ -1,4 +1,5 @@
 import { PrismaClient, Product } from "@prisma/client"
+import { APIResponse } from "~/himalayan_beads"
 
 const prisma = new PrismaClient()
 export default defineEventHandler((event) => new Promise(async (resolve, reject) => {

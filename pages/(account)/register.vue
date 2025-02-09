@@ -36,6 +36,9 @@
           else
             router.push('/dashboard')
       })
+      .finally(() => {
+        isLoading.value = false
+      })
   }
 </script>
 
@@ -57,9 +60,9 @@
           <label for="rf__password">Password</label>
           <Field :type="showPassword ? 'text' : 'password'" name="password" id="rf__password" />
           <ErrorMessage class="input--error" name="password" />
-          <a href="#" @click.prevent="showPassword = !showPassword" class="btn btn--xs btn__info btn--icon">
-            <MdiIcon icon="mdiEyeOutline" size="16" v-if="showPassword" />
-            <MdiIcon icon="mdiEyeOffOutline" size="16" v-else />
+          <a href="#" @click.prevent="showPassword = !showPassword" class="btn btn--xs btn__info btn--icon" tabindex="-1">
+            <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiEyeOutline" size="16" v-if="showPassword" />
+            <MdiIcon preserveAspectRatio="xMidYMid meet" icon="mdiEyeOffOutline" size="16" v-else />
           </a>
         </div>
         <div class="form__group">

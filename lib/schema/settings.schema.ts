@@ -7,5 +7,6 @@ export const permissionSchema = Yup.object().shape({
 
 export const roleSchema = Yup.object().shape({
     name: Yup.string().required().label('Name'),
-    description: Yup.string().required().label('Description'),
+    description: Yup.string().label('Description'),
+    permissions: Yup.array().of(Yup.string()).min(1).required().label('Permission'),
 })
