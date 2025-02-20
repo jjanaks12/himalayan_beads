@@ -1,7 +1,15 @@
+import { PrismaClient } from '@prisma/client'
 import { type H3Event } from 'h3'
 
-export default defineEventHandler(async (event: H3Event) => {
-  const body = await readBody(event)
+import authCheck from '~/lib/middleware/authCheck'
 
-  return body
+const prisma = new PrismaClient()
+export default defineEventHandler({
+  onRequest: [authCheck],
+  handler: async (event: H3Event) => {
+    const { user } = await requireUserSession(event)
+    const body = await readBody(event)
+
+    return body
+  }
 })

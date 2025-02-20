@@ -13,6 +13,7 @@
 .row {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
     margin: 0 math.div(-$grid-gutter-width, 2);
 
     &--5--col--tablet .col {
@@ -47,6 +48,11 @@
             flex: 50% 0 0;
         }
     }
+}
+
+.col {
+    flex-grow: 1;
+    padding: 0 math.div($grid-gutter-width, 2);
 }
 
 @for $i from 1 through ($no-of-column-in-grid) {

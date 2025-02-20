@@ -15,13 +15,13 @@
             if (menu.sub_menu && menu.sub_menu.length > 0) {
                 const newSubmenus: Menu[] = []
                 for (const submenu of menu.sub_menu) {
-                    if (can(submenu.permission))
+                    if (can(submenu.permission, submenu.role))
                         newSubmenus.push(submenu)
                 }
                 if (newSubmenus.length > 0)
                     newMenus.push({ ...menu, sub_menu: newSubmenus })
             } else
-                if (can(menu.permission)) {
+                if (can(menu.permission, menu.role)) {
                     newMenu = { ...menu }
                     newMenus.push(newMenu)
                 }

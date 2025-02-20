@@ -38,12 +38,13 @@ type APIParam<T> = {
 }
 
 type Menu = {
-    id: number
+    // id: number
     title: string
     name: string
     path: string
     icon: keyof typeof Icons
-    permission: string
+    permission: string | string[]
+    role?: string
     sub_menu?: Menu[]
     parent_id?: number
 }
@@ -52,7 +53,19 @@ type DashboardDetail = {
     [props: string]: number
 }
 
-interface CartItem {
-    product: any
+interface CartItem<T> {
+    product: T
     quantity: number
+}
+
+declare global {
+    namespace PrismaJson {
+        type JSONOrderDetail = {
+            detail: {
+                product_id: string
+                quantity: number
+                price_id: string
+            }[]
+        }
+    }
 }

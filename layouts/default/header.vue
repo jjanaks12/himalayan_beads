@@ -62,7 +62,7 @@
                         <li><a href="#">Terms</a></li>
                     </ul>
                 </div>
-                <Dropdown direction="right" class="language">
+                <!-- <Dropdown direction="right" class="language">
                     <template v-slot:opener="{ clickHandler }">
                         <a href="#" class="dropdown__opener" @click.prevent="clickHandler">
                             <img src="/images/flag-us.png" alt="us-en">
@@ -83,8 +83,8 @@
                             </a>
                         </li>
                     </ul>
-                </Dropdown>
-                <form action="#" class="search__form">
+                </Dropdown> -->
+                <!-- <form action="#" class="search__form">
                     <fieldset class="fieldset">
                         <div class="form__group">
                             <label for="sf__search">Search</label>
@@ -92,9 +92,9 @@
                         </div>
                         <button type="submit"><span class="icon-search"></span></button>
                     </fieldset>
-                </form>
+                </form> -->
                 <div class="holder">
-                    <Wishlist />
+                    <!-- <Wishlist /> -->
                     <Cart />
                 </div>
             </nav>

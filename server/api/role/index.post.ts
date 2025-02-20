@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Permission } from '@prisma/client'
 import type { H3Event } from 'h3'
 
 import { APIResponse } from '~/himalayan_beads'
@@ -12,7 +12,12 @@ export default defineEventHandler(async (event: H3Event) => {
   }
 
   if (id) {
+    let diff: string[] = []
     const permissionList = await prisma.role.findUnique({ where: { id } }).permissions()
+    if (permissionList != null) {
+      const permissionListOfId = permissionList.map((permission: Permission) => permission.id)
+      diff = permissionListOfId.filter(permissionId => !permissions.includes(permissionId))
+    }
 
     const role = await prisma.role.update({
       where: { id },
@@ -20,7 +25,8 @@ export default defineEventHandler(async (event: H3Event) => {
         name,
         description,
         permissions: {
-          connect: permissions.map((permission_id: string) => ({ id: permission_id }))
+          connect: permissions.map((permission_id: string) => ({ id: permission_id })),
+          disconnect: diff.map((permission_id: string) => ({ id: permission_id })),
         }
       }
     })

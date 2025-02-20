@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import type { CartItem } from '~/himalayan_beads'
 
 export const useCart = defineStore('cart', () => {
-  const list = ref<CartItem[]>([])
+  const list = ref<CartItem<Product>[]>([])
   const isLoading = ref(false)
 
   const addToCart = (product: Product) => {
@@ -11,7 +11,7 @@ export const useCart = defineStore('cart', () => {
   }
 
   const removeFromCart = (product_id: string) => {
-    const ci: any = list.value.find((cartItem: CartItem) => cartItem?.product?.id === product_id)
+    const ci: any = list.value.find((cartItem: CartItem<Product>) => cartItem?.product?.id === product_id)
     const index = list.value.indexOf(ci)
 
     if (index >= 0)
@@ -19,7 +19,7 @@ export const useCart = defineStore('cart', () => {
   }
 
   const isInCart = (product_id: string) => {
-    const ci: any = list.value.find((cartItem: CartItem) => cartItem?.product?.id === product_id)
+    const ci: any = list.value.find((cartItem: CartItem<Product>) => cartItem?.product?.id === product_id)
     return ci != null
   }
 
@@ -29,8 +29,15 @@ export const useCart = defineStore('cart', () => {
       method: 'POST',
       body: list.value
     })
-    isLoading.value = false
+      .finally(() => {
+        isLoading.value = false
+      })
   }
 
   return { list, isLoading, addToCart, removeFromCart, isInCart, checkout }
+}, {
+  persist: [{
+    storage: persistedState.localStorage,
+    pick: ['list']
+  }]
 })

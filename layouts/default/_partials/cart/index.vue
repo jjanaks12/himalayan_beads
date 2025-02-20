@@ -2,8 +2,7 @@
     import { useCart } from '~/store/cart'
     import CartItem from './cartItem.vue'
 
-    const { list, isLoading } = storeToRefs(useCart())
-    const { checkout } = useCart()
+    const { list } = storeToRefs(useCart())
 
     const hasItemInCart = computed(() => list.value.length > 0)
 </script>
@@ -19,9 +18,7 @@
             <CartItem :cart-item="cartItem" :index="index" v-for="(cartItem, index) in list" />
         </div>
         <div class="cart__action" v-if="hasItemInCart">
-            <a href="#" :class="{ 'btn btn__danger': true, 'loading': isLoading }" @click.prevent="checkout">
-                Checkout
-            </a>
+            <NuxtLink to="/checkout" class="btn btn__danger">Checkout</NuxtLink>
         </div>
     </Dropdown>
 </template>

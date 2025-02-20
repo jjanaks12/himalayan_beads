@@ -15,6 +15,8 @@ export default defineNuxtConfig({
     'nuxt-tiptap-editor',
     'nuxt-mdi',
     'nuxt-swiper',
+    'nuxt-auth-utils',
+    '@pinia-plugin-persistedstate/nuxt',
   ],
 
   runtimeConfig: {

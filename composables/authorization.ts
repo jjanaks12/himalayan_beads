@@ -4,7 +4,10 @@ export const useAuthorization = () => {
     const { data } = useAuth()
     const permissions = computed(() => (data.value?.user as UserWithRoles).role.permissions.map((permission) => permission.name))
 
-    const can = (permission: string | string[]): boolean => {
+    const can = (permission: string | string[], role: string | null = null): boolean => {
+        if (role != null)
+            return (role == (data.value?.user as UserWithRoles).role.name)
+
         if (Array.isArray(permission)) {
             let isTrue = false
             for (const p of permission) {

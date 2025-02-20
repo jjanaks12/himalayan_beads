@@ -1,8 +1,7 @@
-import { PrismaClient, type Permission } from "@prisma/client"
+import type { PrismaClient } from "@prisma/client"
 
-const prisma = new PrismaClient()
-
-const main = () => new Promise(async (resolve) => {
+export const roleSeed = async (prisma: PrismaClient) => {
+    /* User role */
     await prisma.role.create({
         data: {
             name: 'User',
@@ -10,6 +9,7 @@ const main = () => new Promise(async (resolve) => {
         }
     })
 
+    /* Admin role */
     await prisma.role.create({
         data: {
             name: 'Admin',
@@ -55,19 +55,16 @@ const main = () => new Promise(async (resolve) => {
                     name: 'view_permission'
                 }, {
                     name: 'delete_permission'
+                }, {
+                    name: 'create_order'
+                }, {
+                    name: 'update_order'
+                }, {
+                    name: 'view_order'
+                }, {
+                    name: 'delete_order'
                 }]
             }
         }
     })
-    resolve(true)
-})
-
-main()
-    .then(async () => {
-        await prisma.$disconnect()
-    })
-    .catch(async (e) => {
-        console.error(e)
-        await prisma.$disconnect()
-        process.exit(1)
-    })
+}

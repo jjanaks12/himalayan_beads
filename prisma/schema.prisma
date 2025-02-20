@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -120,6 +120,7 @@ model User {
   role          Role            @relation(fields: [role_id], references: [id])
   image         Image?          @relation(fields: [image_id], references: [id])
   accounts      Account[]
+  orders        Order[]
 
   @@map("users")
 }
@@ -212,4 +213,66 @@ model Permission {
   roles Role[]
 
   @@map("permissions")
+}
+
+enum OrderStatus {
+  NEW
+  PENDING
+  CANCELLED
+  PRCESSING
+  COMPLETED
+}
+
+enum OrderType {
+  CASH_ON_DELIVERY
+  ONLINE
+}
+
+enum AddressType {
+  DEFAULT
+  SHIPPING
+}
+
+model Address {
+  id      String @id @default(cuid())
+  street  String
+  address String
+  city    String
+  state   String
+  zipCode String
+
+  countryId String
+  country   Country     @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  type      AddressType
+  Order     Order[]
+
+  @@map("addresses")
+}
+
+model Order {
+  id        String      @id @default(cuid())
+  status    OrderStatus
+  type      OrderType
+  userId    String
+  /// [JSONOrderDetail]
+  detail    Json
+  addressId String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  address Address @relation(fields: [addressId], references: [id], onDelete: Cascade)
+
+  @@map("orders")
+}
+
+model Country {
+  id   String @id @default(cuid())
+  name String @db.VarChar(255)
+  abbr String @db.VarChar(255)
+  code String @db.VarChar(255)
+
+  addresses Address[]
+
+  @@map("countries")
 }

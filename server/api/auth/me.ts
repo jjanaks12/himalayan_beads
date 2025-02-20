@@ -1,4 +1,6 @@
+import { type H3Event } from 'h3'
 import { Prisma, PrismaClient } from "@prisma/client"
+
 import { APIResponse } from "~/himalayan_beads"
 
 const prisma = new PrismaClient()
@@ -15,7 +17,7 @@ const userWithRoles = Prisma.validator<Prisma.UserDefaultArgs>()({
   }
 })
 export type UserWithRoles = Prisma.UserGetPayload<typeof userWithRoles>
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event: H3Event) => {
   let response: APIResponse<UserWithRoles> = {
     status: 'failed',
     message: ''

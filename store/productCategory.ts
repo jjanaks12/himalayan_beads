@@ -1,5 +1,6 @@
 import { Prisma, type Category } from '@prisma/client'
 import { defineStore } from 'pinia'
+import type { APIResponse } from '~/himalayan_beads'
 
 /* const categoryWithPredecessor = Prisma.validator<Prisma.CategoryDefaultArgs>()({
   include: {

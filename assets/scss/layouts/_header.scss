@@ -60,6 +60,7 @@
         @include media('>=desktop') {
             text-align: unset;
             order: unset;
+            margin-left: auto;
         }
     }
 

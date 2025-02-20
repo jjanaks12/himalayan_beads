@@ -201,6 +201,10 @@
 }
 
 .form {
+    fieldset {
+        margin-bottom: 40px;
+    }
+
     .label {
         font-weight: 400;
         display: block;
