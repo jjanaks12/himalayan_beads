@@ -1,0 +1,2 @@
+import{u as t}from"./D2hDXtRd.js";import{e as a,h as n,o,j as r,w as u,R as i,n as l,S as m,B as p}from"./DYYBa1ra.js";const b=a({__name:"ThemeButton",props:{variant:{default:"solid"},size:{default:"md"},type:{default:"primary"},as:{default:"button"},persmission:{default:"*"}},setup(d){const{can:s}=t();return(e,f)=>n(s)(e.persmission)?(o(),r(m(e.as),{key:0,class:l({btn:!0,["btn--"+e.size]:!0,["btn--"+e.variant]:!0,["btn__"+e.type]:!0})},{default:u(()=>[i(e.$slots,"default")]),_:3},8,["class"])):p("",!0)}});export{b as _};
+//# sourceMappingURL=CfQIW0-U.js.map

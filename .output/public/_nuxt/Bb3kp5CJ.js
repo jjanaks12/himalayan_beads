@@ -1,0 +1,2 @@
+import{u as r}from"./D2hDXtRd.js";import{e as l,C as u,h as o,o as i,c,R as m,n as p,B as d}from"./DYYBa1ra.js";const b=l({__name:"Button",props:{color:{default:"primary"},variant:{default:"default"},permission:{default:"*"},loading:{type:Boolean}},setup(a){const e=a,{can:n}=r(),s=u(()=>({btn:!0,loading:e.loading,[`btn__${e.color}`]:!0,[`btn--${e.variant}`]:!0}));return(t,f)=>o(n)(t.permission)?(i(),c("button",{key:0,class:p(o(s))},[m(t.$slots,"default")],2)):d("",!0)}});export{b as _};
+//# sourceMappingURL=Bb3kp5CJ.js.map

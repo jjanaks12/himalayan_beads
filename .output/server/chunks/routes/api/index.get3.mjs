@@ -1,27 +1,30 @@
-import { o as defineEventHandler } from '../../runtime.mjs';
+import { d as defineEventHandler, h as getQuery } from '../../runtime.mjs';
 import { PrismaClient } from '@prisma/client';
 import 'node:http';
 import 'node:https';
-import 'node:zlib';
-import 'node:stream';
-import 'node:buffer';
-import 'node:util';
-import 'node:url';
-import 'node:net';
+import 'node:crypto';
 import 'node:fs';
 import 'node:path';
 import 'requrl';
+import 'node:url';
 
 const prisma = new PrismaClient();
 const index_get = defineEventHandler(async (event) => {
   let response = {
-    status: "success",
-    data: []
+    status: "failed",
+    message: ""
   };
+  const { per_page = 10, current = 1, s = "", sort } = getQuery(event);
+  const skip = (current - 1) * per_page;
   await prisma.product.findMany({
+    skip,
+    take: parseInt(per_page.toString()),
     where: {
-      deletedAt: null
+      deletedAt: null,
+      id: { contains: s },
+      name: { contains: s }
     },
+    orderBy: [{ createdAt: "desc" }],
     include: {
       category: true,
       prices: {
@@ -36,10 +39,17 @@ const index_get = defineEventHandler(async (event) => {
       },
       stock: true
     }
-  }).then((data) => {
+  }).then(async (data) => {
+    const total = await prisma.product.count();
     response = {
       status: "success",
-      data
+      data: {
+        total,
+        total_page: Math.ceil(total / per_page),
+        current,
+        per_page,
+        data
+      }
     };
   }).catch(() => {
     response = {

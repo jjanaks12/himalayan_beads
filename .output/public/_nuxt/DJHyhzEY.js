@@ -1,0 +1,2 @@
+import{e as t,o as s,c as d,a}from"./DYYBa1ra.js";import{u as o}from"./DyWVWhbP.js";const _={class:"datatable__section"},c=t({__name:"media",setup(l){return o({title:"Media :: Himalayan Beads"}),(r,e)=>(s(),d("section",_,e[0]||(e[0]=[a("header",{class:"datatable__header"},[a("div",{class:"datatable__header__holder"},[a("h1",null,"Media")]),a("div",{class:"datatable__header__action"})],-1)])))}});export{c as default};
+//# sourceMappingURL=DJHyhzEY.js.map

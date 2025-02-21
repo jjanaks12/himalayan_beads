@@ -1,0 +1,1 @@
+{"version":3,"file":"H9LLdzPJ.js","sources":["../../../../virtual:public?%2Fimages%2Flogo.svg"],"sourcesContent":["import { publicAssetsURL } from '#internal/nuxt/paths';export default publicAssetsURL(\"/images/logo.svg\")"],"names":["_imports_1","publicAssetsURL"],"mappings":"mCAAuD,MAAeA,EAAAC,EAAgB,kBAAkB"}

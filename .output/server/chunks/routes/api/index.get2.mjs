@@ -1,30 +1,32 @@
-import { o as defineEventHandler } from '../../runtime.mjs';
+import { d as defineEventHandler } from '../../runtime.mjs';
 import { PrismaClient } from '@prisma/client';
+import { a as authCheck } from '../../_/authCheck.mjs';
 import 'node:http';
 import 'node:https';
-import 'node:zlib';
-import 'node:stream';
-import 'node:buffer';
-import 'node:util';
-import 'node:url';
-import 'node:net';
+import 'node:crypto';
 import 'node:fs';
 import 'node:path';
 import 'requrl';
+import 'node:url';
+import '../../_/nuxtAuthHandler.mjs';
+import 'next-auth/core';
 
 const prisma = new PrismaClient();
-const index_get = defineEventHandler(async (event) => {
-  let res = {
-    status: "failed",
-    message: ""
-  };
-  await prisma.permission.findMany().then((pemissions) => {
-    res = {
-      status: "success",
-      data: pemissions
+const index_get = defineEventHandler({
+  onRequest: [authCheck],
+  handler: async () => {
+    let res = {
+      status: "failed",
+      message: ""
     };
-  });
-  return res;
+    await prisma.permission.findMany().then((pemissions) => {
+      res = {
+        status: "success",
+        data: pemissions
+      };
+    });
+    return res;
+  }
 });
 
 export { index_get as default };

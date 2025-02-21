@@ -1,16 +1,12 @@
-import { o as defineEventHandler } from '../../runtime.mjs';
+import { d as defineEventHandler } from '../../runtime.mjs';
 import { PrismaClient } from '@prisma/client';
 import 'node:http';
 import 'node:https';
-import 'node:zlib';
-import 'node:stream';
-import 'node:buffer';
-import 'node:util';
-import 'node:url';
-import 'node:net';
+import 'node:crypto';
 import 'node:fs';
 import 'node:path';
 import 'requrl';
+import 'node:url';
 
 const prisma = new PrismaClient();
 const index_get = defineEventHandler(async (event) => {
@@ -25,7 +21,8 @@ const index_get = defineEventHandler(async (event) => {
     },
     include: {
       predecessor: true,
-      image: true
+      image: true,
+      _count: true
     }
   }).then((data) => {
     response = {

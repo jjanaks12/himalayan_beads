@@ -1,17 +1,16 @@
-import { a as useRuntimeConfig, o as defineEventHandler, r as readBody } from '../../runtime.mjs';
+import { u as useRuntimeConfig, d as defineEventHandler, r as readBody } from '../../runtime.mjs';
 import { mkdir, writeFile } from 'fs/promises';
 import { PrismaClient } from '@prisma/client';
+import { a as authCheck } from '../../_/authCheck.mjs';
 import 'node:http';
 import 'node:https';
-import 'node:zlib';
-import 'node:stream';
-import 'node:buffer';
-import 'node:util';
-import 'node:url';
-import 'node:net';
+import 'node:crypto';
 import 'node:fs';
 import 'node:path';
 import 'requrl';
+import 'node:url';
+import '../../_/nuxtAuthHandler.mjs';
+import 'next-auth/core';
 
 const storeFileLocally = async (file, fileNameOrIdLength, filelocation = "") => {
   const { binaryString, ext } = parseDataUrl(file.content);
@@ -46,21 +45,24 @@ const parseDataUrl = (file) => {
 };
 
 const prisma = new PrismaClient();
-const index_post = defineEventHandler(async (event) => {
-  const { files } = await readBody(event);
-  const data = [];
-  for (const file of files) {
-    const name = await storeFileLocally(file, 8);
-    await prisma.image.create({
-      data: {
-        name,
-        url: "/uploads/" + name
-      }
-    }).then((image) => {
-      data.push(image);
-    });
+const index_post = defineEventHandler({
+  onRequest: [authCheck],
+  handler: async (event) => {
+    const { files } = await readBody(event);
+    const data = [];
+    for (const file of files) {
+      const name = await storeFileLocally(file, 8);
+      await prisma.image.create({
+        data: {
+          name,
+          url: "/uploads/" + name
+        }
+      }).then((image) => {
+        data.push(image);
+      });
+    }
+    return data;
   }
-  return data;
 });
 
 export { index_post as default };

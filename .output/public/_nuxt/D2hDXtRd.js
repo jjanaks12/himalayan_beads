@@ -1,0 +1,2 @@
+import{g as c,C as i}from"./DYYBa1ra.js";const m=()=>{const{data:u}=c(),n=i(()=>{var e;return((e=u.value)==null?void 0:e.user).role.permissions.map(r=>r.name)}),l=(e,r=null)=>{var t;if(r!=null)return r==((t=u.value)==null?void 0:t.user).role.name;if(Array.isArray(e)){let s=!1;for(const o of e)s=s||a(o);return s}else return a(e)},a=e=>{const[r,t]=e.split("_");return r==="*"?!0:r==="manage"?n.value.filter(s=>s.includes(t)).length===4:n.value.includes(e)};return{can:l}};export{m as u};
+//# sourceMappingURL=D2hDXtRd.js.map

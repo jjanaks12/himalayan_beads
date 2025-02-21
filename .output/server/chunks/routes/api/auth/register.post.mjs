@@ -1,33 +1,21 @@
-import { o as defineEventHandler, r as readBody, f as createError, q as setResponseStatus } from '../../../runtime.mjs';
+import { d as defineEventHandler, r as readBody, c as createError, s as setResponseStatus } from '../../../runtime.mjs';
 import { PrismaClient } from '@prisma/client';
 import bcript from 'bcrypt';
 import 'node:http';
 import 'node:https';
-import 'node:zlib';
-import 'node:stream';
-import 'node:buffer';
-import 'node:util';
-import 'node:url';
-import 'node:net';
+import 'node:crypto';
 import 'node:fs';
 import 'node:path';
 import 'requrl';
+import 'node:url';
 
 const prisma = new PrismaClient();
 const register_post = defineEventHandler(async (event) => {
   const { email, password } = await readBody(event);
   let res = {};
   const hash = bcript.hashSync(password, 10);
-  const user = await prisma.user.findUnique({
-    where: {
-      email
-    }
-  });
-  let userRole = await prisma.role.findFirst({
-    where: {
-      name: "user"
-    }
-  });
+  const user = await prisma.user.findUnique({ where: { email } });
+  let userRole = await prisma.role.findFirst({ where: { name: "User" } });
   if (!userRole)
     throw createError({
       statusCode: 400,
