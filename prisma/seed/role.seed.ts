@@ -1,70 +1,202 @@
+import bcript from 'bcrypt'
 import type { PrismaClient } from "@prisma/client"
 
 export const roleSeed = async (prisma: PrismaClient) => {
+    const create_user = await prisma.permission.create({
+        data: {
+            name: 'create_user'
+        }
+    })
+    const update_user = await prisma.permission.create({
+        data: {
+            name: 'update_user'
+        }
+    })
+    const view_user = await prisma.permission.create({
+        data: {
+            name: 'view_user'
+        }
+    })
+    const delete_user = await prisma.permission.create({
+        data: {
+            name: 'delete_user'
+        }
+    })
+    const create_product = await prisma.permission.create({
+        data: {
+            name: 'create_product'
+        }
+    })
+    const update_product = await prisma.permission.create({
+        data: {
+            name: 'update_product'
+        }
+    })
+    const view_product = await prisma.permission.create({
+        data: {
+            name: 'view_product'
+        }
+    })
+    const delete_product = await prisma.permission.create({
+        data: {
+            name: 'delete_product'
+        }
+    })
+    const create_category = await prisma.permission.create({
+        data: {
+            name: 'create_category'
+        }
+    })
+    const update_category = await prisma.permission.create({
+        data: {
+            name: 'update_category'
+        }
+    })
+    const view_category = await prisma.permission.create({
+        data: {
+            name: 'view_category'
+        }
+    })
+    const delete_category = await prisma.permission.create({
+        data: {
+            name: 'delete_category'
+        }
+    })
+    const create_role = await prisma.permission.create({
+        data: {
+            name: 'create_role'
+        }
+    })
+    const update_role = await prisma.permission.create({
+        data: {
+            name: 'update_role'
+        }
+    })
+    const view_role = await prisma.permission.create({
+        data: {
+            name: 'view_role'
+        }
+    })
+    const delete_role = await prisma.permission.create({
+        data: {
+            name: 'delete_role'
+        }
+    })
+    const create_permission = await prisma.permission.create({
+        data: {
+            name: 'create_permission'
+        }
+    })
+    const update_permission = await prisma.permission.create({
+        data: {
+            name: 'update_permission'
+        }
+    })
+    const view_permission = await prisma.permission.create({
+        data: {
+            name: 'view_permission'
+        }
+    })
+    const delete_permission = await prisma.permission.create({
+        data: {
+            name: 'delete_permission'
+        }
+    })
+    const create_order = await prisma.permission.create({
+        data: {
+            name: 'create_order'
+        }
+    })
+    const update_order = await prisma.permission.create({
+        data: {
+            name: 'update_order'
+        }
+    })
+    const view_order = await prisma.permission.create({
+        data: {
+            name: 'view_order'
+        }
+    })
+    const delete_order = await prisma.permission.create({
+        data: {
+            name: 'delete_order'
+        }
+    })
     /* User role */
     await prisma.role.create({
         data: {
             name: 'User',
-            publish: true
+            publish: true,
+            permissions: {
+                connect: [{
+                    id: create_order.id
+                }, {
+                    id: delete_order.id
+                }]
+            }
         }
     })
 
     /* Admin role */
-    await prisma.role.create({
+    const adminRole = await prisma.role.create({
         data: {
             name: 'Admin',
             publish: true,
             permissions: {
-                create: [{
-                    name: 'create_user'
+                connect: [{
+                    id: create_user.id
                 }, {
-                    name: 'update_user'
+                    id: update_user.id
                 }, {
-                    name: 'view_user'
+                    id: view_user.id
                 }, {
-                    name: 'delete_user'
+                    id: delete_user.id
                 }, {
-                    name: 'create_product'
+                    id: create_product.id
                 }, {
-                    name: 'update_product'
+                    id: update_product.id
                 }, {
-                    name: 'view_product'
+                    id: view_product.id
                 }, {
-                    name: 'delete_product'
+                    id: delete_product.id
                 }, {
-                    name: 'create_category'
+                    id: create_category.id
                 }, {
-                    name: 'update_category'
+                    id: update_category.id
                 }, {
-                    name: 'view_category'
+                    id: view_category.id
                 }, {
-                    name: 'delete_category'
+                    id: delete_category.id
                 }, {
-                    name: 'create_role'
+                    id: create_role.id
                 }, {
-                    name: 'update_role'
+                    id: update_role.id
                 }, {
-                    name: 'view_role'
+                    id: view_role.id
                 }, {
-                    name: 'delete_role'
+                    id: delete_role.id
                 }, {
-                    name: 'create_permission'
+                    id: create_permission.id
                 }, {
-                    name: 'update_permission'
+                    id: update_permission.id
                 }, {
-                    name: 'view_permission'
+                    id: view_permission.id
                 }, {
-                    name: 'delete_permission'
+                    id: delete_permission.id
                 }, {
-                    name: 'create_order'
+                    id: update_order.id
                 }, {
-                    name: 'update_order'
-                }, {
-                    name: 'view_order'
-                }, {
-                    name: 'delete_order'
+                    id: view_order.id
                 }]
             }
+        }
+    })
+
+    await prisma.user.create({
+        data: {
+            email: 'admin@himalayanbeads.com',
+            password: bcript.hashSync('password', 10),
+            role_id: adminRole.id
         }
     })
 }
