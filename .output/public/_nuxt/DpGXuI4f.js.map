@@ -1,1 +1,0 @@
-{"version":3,"file":"DpGXuI4f.js","sources":["../../../../pages/dashboard/order.vue"],"sourcesContent":["<script lang=\"ts\" setup>\n  definePageMeta({\n    layout: 'admin'\n  })\n\n  useHead({\n    title: 'Order :: Himalayan Beads'\n  })\n</script>\n\n<template>\n  <div>\n\n  </div>\n</template>\n"],"names":["useHead"],"mappings":"gHAKU,OAAAA,EAAA,CACN,MAAO,0BAAA,CACR"}

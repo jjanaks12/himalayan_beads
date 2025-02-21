@@ -1,2 +1,0 @@
-import{_ as e}from"./DS798s9t.js";import{e as a,p as t,o as s,c as i,b as n,a as d,R as m}from"./DYYBa1ra.js";import"./Bb5ziO1M.js";import"./EnSD2S2e.js";import"./H9LLdzPJ.js";import"./BIFzPT6V.js";import"./D2hDXtRd.js";const r={id:"admin",class:"admin--layout"},c={id:"admin-main"},k=a({__name:"index",setup(l){return t(()=>{document.body.classList.add("admin--layout"),document.body.classList.remove("default--layout","simple--layout")}),(o,p)=>(s(),i("div",r,[n(e),d("main",c,[m(o.$slots,"default")])]))}});export{k as default};
-//# sourceMappingURL=Cq5adTpe.js.map

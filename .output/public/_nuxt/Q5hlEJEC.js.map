@@ -1,1 +1,0 @@
-{"version":3,"file":"Q5hlEJEC.js","sources":["../../../../node_modules/@prisma/client/index-browser.js"],"sourcesContent":["const prisma = require('.prisma/client/index-browser')\n\nmodule.exports = prisma\n"],"names":["prisma","require$$0","indexBrowser"],"mappings":"4CAAA,MAAMA,EAASC,EAEf,IAAAC,EAAiBF","x_google_ignoreList":[0]}

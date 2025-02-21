@@ -1,2 +1,0 @@
-import{r as l}from"./DYYBa1ra.js";function d(){const s=l([]),i=e=>new Promise((t,r)=>{const a=new FileReader;a.onload=n=>{var o;s.value.push({...e,name:e.name,size:e.size,type:e.type,lastModified:e.lastModified,content:(o=n.target)==null?void 0:o.result}),t()},a.onerror=n=>{r(n)},a.readAsDataURL(e)});return{files:s,handleFileInput:async e=>{s.value.splice(0);const t=[];for(const r of e.target.files)t.push(i(r));await Promise.all(t)}}}export{d as u};
-//# sourceMappingURL=BD13MmOs.js.map

@@ -1,2 +1,0 @@
-import{C as g}from"./DYYBa1ra.js";const P=e=>{const a=g(()=>{var n;let i="/images/logo.svg";if((e==null?void 0:e.images.length)>0){const s=e==null?void 0:e.images.find(l=>l.featured);s&&(i=(n=s==null?void 0:s.images)==null?void 0:n.url)}return i}),m=g(()=>{let i;return(e==null?void 0:e.prices.length)>0&&(i=(e==null?void 0:e.prices[(e==null?void 0:e.prices.length)-1]).price.amount),i});return{featuredImage:a,currentPrice:m}};export{P as u};
-//# sourceMappingURL=Cg7dsiSK.js.map
