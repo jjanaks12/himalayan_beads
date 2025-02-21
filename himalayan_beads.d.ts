@@ -1,4 +1,5 @@
 import * as Icons from '@mdi/js'
+import type { Address, Category, Country, Image, Order, Price, Stock } from '@prisma/client'
 
 type APISuccess<T> = {
     status: 'success',
@@ -56,6 +57,23 @@ type DashboardDetail = {
 interface CartItem<T> {
     product: T
     quantity: number
+}
+
+type FullProduct = Product & {
+    prices: Price[]
+    category: Category
+    images: Image[]
+    stock: Stock
+}
+
+type ProductWithRate = Product & {
+    rate: Price
+}
+
+type OrderWithShippingAddress = Order & {
+    shippingAddress: Address & {
+        country: Country
+    }
 }
 
 declare global {

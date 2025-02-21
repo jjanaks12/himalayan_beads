@@ -1,16 +1,16 @@
 <script setup lang="ts">
     import { useProduct } from '~/composables/product'
     import type { CartItem } from '~/himalayan_beads'
-    import { useCart } from '~/store/cart'
+    import { useCartStore } from '~/store/cart'
 
     interface CartItemProps {
-        cartItem: CartItem
+        cartItem: CartItem<any>
     }
 
     const props = defineProps<CartItemProps>()
     const { currentPrice, featuredImage } = useProduct(props.cartItem.product)
 
-    const { removeFromCart } = useCart()
+    const { removeFromCart } = useCartStore()
 </script>
 
 <template>

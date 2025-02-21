@@ -1,13 +1,19 @@
 import type { Product } from '@prisma/client'
 import { defineStore } from 'pinia'
-import type { CartItem } from '~/himalayan_beads'
+import type { CartItem, FullProduct, ProductWithRate } from '~/himalayan_beads'
 
-export const useCart = defineStore('cart', () => {
-  const list = ref<CartItem<Product>[]>([])
+export const useCartStore = defineStore('cart', () => {
+  const list = ref<CartItem<ProductWithRate>[]>([])
   const isLoading = ref(false)
 
-  const addToCart = (product: Product) => {
-    list.value.push({ product, quantity: 1 })
+  const addToCart = ({ prices, ...product }: FullProduct) => {
+    list.value.push({
+      product: {
+        ...product,
+        prices,
+        rate: prices[prices.length - 1].price
+      }, quantity: 1
+    })
   }
 
   const removeFromCart = (product_id: string) => {

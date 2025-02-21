@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { useCart } from '~/store/cart'
+  import { useCartStore } from '~/store/cart'
 
   const route = useRoute()
   const product: any = await $fetch(`/api/product/${route.params.productId}`, {
@@ -16,7 +16,7 @@
 
   const sliderRef = ref(null)
   useSwiper(sliderRef)
-  const { addToCart, isInCart } = useCart()
+  const { addToCart, isInCart } = useCartStore()
 
   const currentPrice = computed(() => {
     let price

@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { useProduct } from '~/composables/product'
-    import { useCart } from '~/store/cart'
+    import { useCartStore } from '~/store/cart'
 
     interface ProductItemProps {
         product: any
@@ -8,7 +8,7 @@
 
     const props = defineProps<ProductItemProps>()
     const { featuredImage, currentPrice } = useProduct(props.product)
-    const { addToCart, isInCart } = useCart()
+    const { addToCart, isInCart } = useCartStore()
 </script>
 
 <template>
@@ -24,11 +24,11 @@
             <em class="product__price" v-if="currentPrice">$ {{ currentPrice }}</em>
         </div>
         <div class="product__item__action">
-            <a class="btn btn--xs btn__primary btn--outline" href="#" @click.prevent="addToCart(product)"
-                v-if="!isInCart(product.id) && currentPrice">
+            <Button permission="create_order" v-if="!isInCart(product.id) && currentPrice"
+                @click.prevent="addToCart(product)">
                 <span class="icon-add"></span>
                 Add to cart
-            </a>
+            </Button>
         </div>
     </div>
 </template>

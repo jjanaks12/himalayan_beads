@@ -1,8 +1,8 @@
 <script setup lang="ts">
-    import { useCart } from '~/store/cart'
+    import { useCartStore } from '~/store/cart'
     import CartItem from './cartItem.vue'
 
-    const { list } = storeToRefs(useCart())
+    const { list } = storeToRefs(useCartStore())
 
     const hasItemInCart = computed(() => list.value.length > 0)
 </script>

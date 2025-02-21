@@ -18,7 +18,7 @@ export const menus: Menu[] = [{
     name: 'dashboard-order',
     icon: 'mdiCart',
     permission: ['create_order', 'delete_order'],
-    path: '/dashboard/order'
+    path: '/dashboard/myOrder'
 }, {
     // id: 2,
     title: 'Product',
@@ -50,6 +50,14 @@ export const menus: Menu[] = [{
         path: '/dashboard/category/',
         icon: 'mdiShape',
         permission: 'manage_category',
+        // parent_id: 2
+    }, {
+        // id: 4,
+        title: 'Orders',
+        name: 'dashboard-order',
+        path: '/dashboard/order/',
+        icon: 'mdiCart',
+        permission: ['view_order', 'update_order'],
         // parent_id: 2
     },]
 }, {

@@ -2,16 +2,14 @@
   definePageMeta({
     layout: 'admin'
   })
+
+  useHead({
+    title: 'Order :: Himalayan Beads'
+  })
 </script>
 
 <template>
-  <section class="datatable__section">
-    <header class="datatable__header">
-      <div class="datatable__header__holder">
-        <h1>Order</h1>
-      </div>
-      <div class="datatable__header__action">
-      </div>
-    </header>
-  </section>
+  <div>
+
+  </div>
 </template>

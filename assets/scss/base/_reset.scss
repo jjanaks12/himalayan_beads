@@ -119,6 +119,10 @@ select[multiple] {
     height: auto;
 }
 
+address {
+    font-style: normal;
+}
+
 .form__group {
     label:not([class]) {
         display: inline-block;

@@ -3,20 +3,16 @@
         @include media('>=tablet') {
             padding: 40px 0;
         }
+
+        h2 {
+            margin-bottom: 60px;
+        }
     }
 
     &__content {
 
         h3 {
-            margin-bottom: 20px;
-        }
-
-        .form {
-            .holder {
-                h3 {
-                    margin-bottom: 0;
-                }
-            }
+            margin-bottom: 40px;
         }
     }
 }

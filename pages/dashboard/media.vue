@@ -2,6 +2,10 @@
   definePageMeta({
     layout: 'admin'
   })
+
+  useHead({
+    title: 'Media :: Himalayan Beads'
+  })
 </script>
 
 <template>

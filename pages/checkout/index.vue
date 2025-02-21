@@ -1,22 +1,25 @@
 <script lang="ts" setup>
-  import { useCart } from '~/store/cart'
+  import { useCartStore } from '~/store/cart'
   import CheckoutForm from './_components/CheckoutForm.vue'
+  import CartItem from '~/layouts/default/_partials/cart/cartItem.vue'
 
   useHead({
     title: 'Checkout your order'
   })
 
-  const { list } = storeToRefs(useCart())
+  const { list } = storeToRefs(useCartStore())
 </script>
 
 <template>
   <section class="checkout__section">
     <div class="container">
-      <div class="row">
+      <div class="row" v-if="list.length > 0">
         <div class="col-5">
           <aside class="checkout__sidebar">
             <h2>Product summary</h2>
-            <pre>{{ list }}</pre>
+            <div class="product__item__list product__item__list--list">
+              <CartItem :cart-item="cartItem" :index="index" v-for="(cartItem, index) in list" />
+            </div>
           </aside>
         </div>
         <div class="col-7">
@@ -25,6 +28,10 @@
             <CheckoutForm />
           </div>
         </div>
+      </div>
+      <div class="checkout__empty text--center" v-else>
+        <h1>Your cart is empty</h1>
+        <p>Check <NuxtLink :to="{ name: 'product' }">these products</NuxtLink>, you may find what you are looking for</p>
       </div>
     </div>
   </section>
