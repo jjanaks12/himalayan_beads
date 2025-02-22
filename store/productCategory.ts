@@ -21,17 +21,14 @@ export const useProductCategoryStore = defineStore('product_category', () => {
       })
   }
 
-  const saveCategory = (values: any) => new Promise((resolve, reject) => {
+  const saveCategory = (values: any) => new Promise((resolve) => {
     {
       $fetch<APIResponse<Category>>('/api/category', {
         method: 'POST',
         body: values
       })
-        .then((a) => {
-          if (a.status == 'success')
-            resolve(true)
-          else
-            reject(a.message)
+        .then(() => {
+          resolve(true)
         })
     }
   })
