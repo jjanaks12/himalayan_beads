@@ -31,7 +31,11 @@
             .then(({ ok }: any) => {
                 if (ok)
                     if (route.query.callbackUrl)
-                        router.push(route.query.callbackUrl as string)
+                        navigateTo({
+                            path: route.query.callbackUrl as string
+                        }, {
+                            external: true
+                        })
                     else
                         router.push('/dashboard')
             })
