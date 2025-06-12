@@ -1,0 +1,37 @@
+### Login router
+POST  http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+    "email": "jjanaks12@gmail.com",
+    "password": "password"
+}
+
+### register route
+POST http://localhost:8000/api/register
+Content-Type: application/json
+
+{
+    "email": "jjanaks12@gmail.com",
+    "password": "password"
+}
+
+### refresh token route
+POST http://localhost:8000/api/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzgwODE0NDgsImV4cCI6MTc1Mzg2MDI0OCwiYXVkIjoiY202Z2c5dXg2MDAwMHZkZ3dwMTYycjdwNyIsImlzcyI6ImphbmFrc3RoYS5jb20ubnAifQ.oW0DnO9Csbm0Ty4LMuoDs6hVmT5b8_XU9xzL6DCO8r0"
+}
+
+###  logout route
+DELETE  http://localhost:8000/api/logout
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzgwODI0NjAsImV4cCI6MTc1Mzg2MTI2MCwiYXVkIjoiY202Z2c5dXg2MDAwMHZkZ3dwMTYycjdwNyIsImlzcyI6ImphbmFrc3RoYS5jb20ubnAifQ.oY8oKATDJtWwgEpDKkL2aJfyRTiiXVzPI-lV7l6LwU4"
+}
+
+###  users route
+GET  http://localhost:8000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzgwODI0NjAsImV4cCI6MTczODA4NjA2MCwiYXVkIjoiY202Z2c5dXg2MDAwMHZkZ3dwMTYycjdwNyIsImlzcyI6ImphbmFrc3RoYS5jb20ubnAifQ.mtl8eSAE0VFHbWjpXnOG6Jz2Yk9W6iaZiV5X896nhpI
