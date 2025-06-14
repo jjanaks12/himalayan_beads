@@ -1,5 +1,46 @@
+import tailwindcss from "@tailwindcss/vite"
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
-  devtools: { enabled: true }
+  devtools: { enabled: true },
+
+  modules: [
+    '@pinia/nuxt',
+    '@nuxt/fonts',
+    'pinia-plugin-persistedstate',
+    'shadcn-nuxt'
+  ],
+
+  css: ['@/assets/css/main.css'],
+
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
+
+  shadcn: {
+    prefix: '',
+    componentDir: './components/ui'
+  },
+
+  app: {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+      bodyAttrs: {
+        class: 'font-[Ek Mukta]'
+      }
+    }
+  },
+
+  runtimeConfig: {
+    public: {
+      appName: process.env.NUXT_APP_NAME,
+      serverUrl: process.env.NUXT_SERVER_URL,
+      apiUrl: process.env.NUXT_API_URL,
+      mailAdmin: process.env.NUXT_MAIL_ADMIN,
+    }
+  }
 })
