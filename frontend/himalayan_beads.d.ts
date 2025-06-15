@@ -93,7 +93,27 @@ type Role = {
 }
 
 type User = {
+    id: string
+    first_name?: string
+    last_name?: string
+    email: string
+    role_id: string
+    image_id?: string
+    emailVerified?: string
+    deletedAt?: string
+    createdAt: string
+    updatedAt: string
+
     role: Role
+    image?: Image
+    accounts: Account[]
+    orders: Order[]
+}
+
+type Image = {
+    id: string
+    name: string
+    url?: string
 }
 
 type Token = {

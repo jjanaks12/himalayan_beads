@@ -17,6 +17,7 @@ export const useAuthStore = defineStore('auth', () => {
     ? user.value?.role?.permissions.map((permission) => permission.name)
     : []
   ))
+  const fullName = computed(() => [user.value?.first_name, user.value?.last_name].join(' ').trim())
   const role = computed(() => user.value?.role?.name)
 
   const fetch = async () => {
@@ -96,7 +97,11 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     user, token, isLoading,
-    isLoggedin, permissions, role,
-    fetch, login, logout, register, refreshToken
+    isLoggedin, permissions, role, fullName,
+    fetch, login, logout, register, refreshToken, updateDetail
+  }
+}, {
+  persist: {
+    pick: ['user', 'token']
   }
 })

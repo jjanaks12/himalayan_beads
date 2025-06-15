@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     useHead({
-        title: 'User'
+        title: 'Change password'
     })
 
     definePageMeta({
@@ -10,5 +10,5 @@
 </script>
 
 <template>
-    <h1>Hello world</h1>
+
 </template>

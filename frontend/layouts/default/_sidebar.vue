@@ -1,22 +1,38 @@
 <script lang="ts" setup>
+    import { XIcon } from 'lucide-vue-next';
+    import { useSidebar } from '~/components/ui/sidebar';
+    import { useAuthStore } from '~/store/auth'
 
+    const { toggleSidebar } = useSidebar()
+    const { isLoggedin } = storeToRefs(useAuthStore())
 </script>
 
 <template>
-    <Sidebar collapsible="offcanvas" variant="sidebar">
-        <SidebarHeader class="pt-16">
-            <strong class="greetings font-light block mb-4">
-                <span class="text-4xl block font-bold">Heya!</span>
-                Welcome to Himalayan Beads
-            </strong>
-            <ul class="flex gap-2 text-sm text-[#B37557] underline uppercase mb-4">
-                <li>
-                    <NuxtLink :to="{ name: 'login' }">Signin</NuxtLink>
-                </li>
-                <li>
-                    <NuxtLink :to="{ name: 'register' }">Signup</NuxtLink>
-                </li>
-            </ul>
+    <Sidebar collapsible="offcanvas" variant="sidebar" position="absolute">
+        <SidebarHeader class="pt-4">
+            <Button variant="light" @click="toggleSidebar" size="icon" class="ml-auto mb-12">
+                <XIcon />
+            </Button>
+            <template v-if="!isLoggedin">
+                <strong class="greetings font-light block mb-4">
+                    <span class="text-4xl block font-bold">Heya!</span>
+                    Welcome to Himalayan Beads
+                </strong>
+                <ul class="flex gap-2 text-sm text-[#B37557] underline uppercase mb-4">
+                    <template v-if="!isLoggedin">
+                        <li>
+                            <NuxtLink :to="{ name: 'login' }">Signin</NuxtLink>
+                        </li>
+                        <li>
+                            <NuxtLink :to="{ name: 'register' }">Signup</NuxtLink>
+                        </li>
+                    </template>
+                    <li v-else>
+                        <NuxtLink :to="{ name: 'dashboard' }">Dashboard</NuxtLink>
+                    </li>
+                </ul>
+            </template>
+            <AuthUser v-else />
         </SidebarHeader>
         <SidebarContent class="gap-0">
             <SidebarGroup class="bg-[#e6e6e6] p-0">

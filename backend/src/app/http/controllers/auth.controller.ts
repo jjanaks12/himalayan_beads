@@ -112,4 +112,28 @@ export class AuthController {
             next(error)
         }
     }
+
+    public static async profile(request: Request, response: Response, next: NextFunction) {
+        try {
+            console.log('Test::::',request.body);
+            
+            response.send(await prisma.user.findFirstOrThrow({
+                where: {
+                    id: request.body.auth_user.id
+                },
+                omit: {
+                    password: true
+                },
+                include: {
+                    role: {
+                        include: {
+                            permissions: true
+                        }
+                    }
+                }
+            }))
+        } catch (error) {
+            next(error)
+        }
+    }
 }

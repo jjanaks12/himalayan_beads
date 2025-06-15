@@ -1,0 +1,1 @@
+export const abbr = (str: string) => str.split(' ').map(word => word.charAt(0)).join('')

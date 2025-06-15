@@ -4,7 +4,7 @@
   const route = useRoute()
   const { isLoggedin } = storeToRefs(useAuthStore())
 
-  const homeURL = computed(() => isLoggedin.value
+  const homeURL = computed(() => !isLoggedin.value
     ? 'index'
     : route.meta.layout == 'admin'
       ? 'dashboard'

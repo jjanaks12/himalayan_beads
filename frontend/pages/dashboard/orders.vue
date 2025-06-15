@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     useHead({
-        title: 'User'
+        title: 'Orders'
     })
 
     definePageMeta({
@@ -10,5 +10,5 @@
 </script>
 
 <template>
-    <h1>Hello world</h1>
+
 </template>

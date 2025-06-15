@@ -93,6 +93,22 @@ export const useMenu = () => {
             icon: 'UserLock',
             permission: 'manage_permission',
             // parent_id: 6
+        }, {
+            // id: 8,
+            title: 'User detail',
+            name: 'dashboard-settings-user_detail',
+            path: '/dashboard/settings/user_detail/',
+            icon: 'UserPenIcon',
+            permission: '*',
+            // parent_id: 6
+        }, {
+            // id: 8,
+            title: 'Change password',
+            name: 'dashboard-settings-change_password',
+            path: '/dashboard/settings/change_password/',
+            icon: 'KeyRoundIcon',
+            permission: '*',
+            // parent_id: 6
         }]
     }, {
         // id: 9,

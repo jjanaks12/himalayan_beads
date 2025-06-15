@@ -8,33 +8,39 @@
 
 <template>
     <Sidebar variant="sidebar">
-        <SidebarHeader class="p-8 bg-white">
-            <Brand />
+        <SidebarHeader class="p-8 bg-white text-gray-500">
+            <AuthUser />
         </SidebarHeader>
         <SidebarContent class="gap-0">
-            <SidebarGroup class="bg-[#e6e6e6] p-0">
+            <SidebarGroup class="bg-[#e5e5e5] p-0">
                 <SidebarMenu>
                     <SidebarMenuItem v-for="(menu, index) in menus">
                         <SidebarMenuButton class="h-10" variant="light" asChild>
-                            <NuxtLink :to="menu.path">
+                            <span v-if="menu.sub_menu">
+                                <icon :name="menu.icon" />
+                                {{ menu.title }}
+                            </span>
+                            <NuxtLink :to="menu.path" v-else>
                                 <icon :name="menu.icon" />
                                 {{ menu.title }}
                             </NuxtLink>
                         </SidebarMenuButton>
-                        <SidebarMenu v-if="menu.sub_menu && menu.sub_menu.length > 0">
-                            <SidebarMenuItem v-for="submenu in menu.sub_menu">
-                                <SidebarMenuButton class="h-10" variant="light" asChild>
-                                    <icon :name="submenu.icon" />
-                                    {{ submenu.title }}
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        </SidebarMenu>
+                        <SidebarMenuSub v-if="menu.sub_menu && menu.sub_menu.length > 0">
+                            <SidebarMenuSubItem v-for="submenu in menu.sub_menu">
+                                <SidebarMenuSubButton class="h-10" asChild>
+                                    <NuxtLink :to="submenu.path">
+                                        <icon :name="submenu.icon" />
+                                        {{ submenu.title }}
+                                    </NuxtLink>
+                                </SidebarMenuSubButton>
+                            </SidebarMenuSubItem>
+                        </SidebarMenuSub>
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
-            <Button>Logout</Button>
+            <Button variant="light">Logout</Button>
         </SidebarFooter>
     </Sidebar>
 </template>
