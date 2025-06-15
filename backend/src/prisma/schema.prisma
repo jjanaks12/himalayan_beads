@@ -12,13 +12,268 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+model Image {
+  id   String  @id @default(cuid())
+  name String
+  url  String?
+
+  category         Category?
+  products         ImageOnProduct[]
+  imageOnProductId String?
+  users            User[]
+
+  @@map("images")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  parent_id   String?
+  image_id    String?   @unique
+  description String?
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  image       Image?     @relation(fields: [image_id], references: [id])
+  successor   Category?  @relation("parentCategory", fields: [parent_id], references: [id])
+  predecessor Category[] @relation("parentCategory")
+  products    Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id          String    @id @default(cuid())
+  name        String
+  description String?   @db.Text
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  category_id String
+
+  category Category?        @relation(fields: [category_id], references: [id])
+  images   ImageOnProduct[]
+  stock    Stock?
+  prices   PriceOnProduct[]
+
+  @@map("products")
+}
+
+model Price {
+  id        String  @id @default(cuid())
+  amount    Float
+  parent_id String?
+
+  products PriceOnProduct[]
+
+  @@map("prices")
+}
+
+model ImageOnProduct {
+  id         String  @id @default(cuid())
+  product_id String?
+  image_id   String?
+  featured   Boolean @default(false)
+
+  products Product? @relation(fields: [product_id], references: [id])
+  images   Image?   @relation(fields: [image_id], references: [id])
+
+  @@map("image_on_product")
+}
+
+model PriceOnProduct {
+  id         String @id @default(cuid())
+  product_id String
+  price_id   String
+
+  price   Price   @relation(fields: [price_id], references: [id])
+  product Product @relation(fields: [product_id], references: [id])
+
+  @@map("price_on_product")
+}
+
+model Stock {
+  id         String  @id @default(cuid())
+  quantity   Int
+  product_id String  @unique
+  product    Product @relation(fields: [product_id], references: [id])
+
+  @@map("stocks")
+}
 
 model User {
-  id         String    @id @default(cuid())
-  email      String    @unique
-  password   String
-  created_at DateTime  @default(now())
-  updated_at DateTime?
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String
+  role_id       String
+  image_id      String?
+  emailVerified DateTime?
+  deletedAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  Session       Session[]
+  Authenticator Authenticator[]
+  role          Role            @relation(fields: [role_id], references: [id])
+  image         Image?          @relation(fields: [image_id], references: [id])
+  accounts      Account[]
+  orders        Order[]
 
   @@map("users")
+}
+
+model Account {
+  id                  String  @id @default(cuid())
+  type                String
+  provider            String
+  provider_account_id String
+  refresh_token       String?
+  access_token        String?
+  expires_at          Int?
+  token_type          String?
+  scope               String?
+  id_token            String?
+  session_state       String?
+  is_subscribed       Boolean @default(false)
+
+  user_id String @unique
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([provider, provider_account_id])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user_id       String
+  user          User            @relation(fields: [user_id], references: [id])
+  Authenticator Authenticator[]
+
+  @@index([user_id])
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Session   Session? @relation(fields: [sessionId], references: [id])
+  sessionId String?
+
+  @@id([userId, credentialID])
+  @@map("authenticators")
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  publish     Boolean
+  deletedAt   DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  permissions Permission[]
+  users       User[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  roles Role[]
+
+  @@map("permissions")
+}
+
+enum OrderStatus {
+  NEW
+  PENDING
+  CANCELLED
+  PRCESSING
+  COMPLETED
+}
+
+enum OrderType {
+  CASH_ON_DELIVERY
+  ONLINE
+}
+
+enum AddressType {
+  BILLING
+  SHIPPING
+}
+
+model Address {
+  id      String @id @default(cuid())
+  street  String
+  address String
+  city    String
+  state   String
+  zipCode String
+
+  countryId String
+  country   Country     @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  type      AddressType
+  orders    Order[]
+
+  @@map("addresses")
+}
+
+model Order {
+  id                String      @id @default(cuid())
+  status            OrderStatus
+  type              OrderType
+  userId            String
+  /// [JSONOrderDetail]
+  detail            Json
+  billingAddressId  String
+  shippingAddressId String
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  user            User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shippingAddress Address @relation(fields: [shippingAddressId], references: [id], onDelete: Cascade)
+
+  @@map("orders")
+}
+
+model Country {
+  id   String @id @default(cuid())
+  name String @db.VarChar(255)
+  abbr String @db.VarChar(255)
+  code String @db.VarChar(255)
+
+  addresses Address[]
+
+  @@map("countries")
 }

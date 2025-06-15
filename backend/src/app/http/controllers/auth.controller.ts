@@ -24,6 +24,8 @@ export class AuthController {
     public static async login(request: Request<{}, {}, UserLoginRequest>, response: Response, next: NextFunction) {
         try {
             const result = await userLoginSchema.validate(request.body, { abortEarly: false })
+            console.log(result);
+
             const userExists = await prisma.user.findUnique({ where: { email: result.email } })
 
             if (!userExists)
@@ -49,6 +51,7 @@ export class AuthController {
         try {
             const result = await userRegistrationSchema.validate(request.body, { abortEarly: false })
             const userExists = await prisma.user.findUnique({ where: { email: result.email } })
+            const role = await prisma.role.findFirst({ where: { name: 'User' } })
 
             if (userExists)
                 throw createHttpError.Conflict(`${result.email} is already been registered`)
@@ -59,7 +62,8 @@ export class AuthController {
             const newUser = await prisma.user.create({
                 data: {
                     email: result.email,
-                    password: hashPassword
+                    password: hashPassword,
+                    role_id: role.id
                 },
                 omit: {
                     password: true

@@ -1,16 +1,21 @@
 import { PrismaClient } from "@prisma/client"
 
-const prisma = new PrismaClient()
-const main = async () => {
+import { roleSeed } from "./role.seed"
+import { countrySeed } from "./country.seed"
 
-}
+const prisma = new PrismaClient()
+const main = () => new Promise(async (resolve) => {
+    await roleSeed(prisma)
+    await countrySeed(prisma)
+    resolve(true)
+})
 
 main()
     .then(async () => {
         await prisma.$disconnect()
     })
     .catch(async (e) => {
-        await prisma.$disconnect()
         console.error(e)
+        await prisma.$disconnect()
         process.exit(1)
     })
