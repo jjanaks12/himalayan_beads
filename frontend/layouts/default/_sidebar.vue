@@ -63,6 +63,8 @@
                     <SidebarMenuItem>
                         <SidebarMenuButton class="h-10" variant="light">Terms</SidebarMenuButton>
                     </SidebarMenuItem>
+                    <Language />
+
                 </SidebarMenu>
             </SidebarGroup>
         </SidebarContent>

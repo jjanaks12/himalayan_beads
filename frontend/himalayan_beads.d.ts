@@ -149,3 +149,13 @@ interface CartItem<T> {
   product: T;
   quantity: number;
 }
+
+export interface BlogPost {
+  id: number;
+  image: string;
+  category: string;
+  timeAgo: string;
+  title: string;
+  description: string;
+  slug: string; // The unique identifier for the URL
+}

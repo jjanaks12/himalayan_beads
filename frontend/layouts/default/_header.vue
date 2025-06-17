@@ -78,7 +78,9 @@ const navItems: NavItem[] = [
 
         <!-- Right Section: Interactive Icons -->
         <div class="flex items-center gap-2 lg:gap-4 flex-shrink-0">
-          <Language />
+           <div class="hidden md:block">
+            <Language />
+          </div>
           <div class="relative flex-1 max-w-xs hidden sm:block">
             <form @submit.prevent="handleSearch" class="relative">
               <Input v-model="searchQuery" placeholder="Search..." class="pl-10 pr-4 h-9 bg-gray-50 border-gray-200 focus:bg-white focus:border-gray-300 rounded-2xl" />
