@@ -1,55 +1,116 @@
 // file: stores/cartStore.ts
 
+import { ref, computed } from "vue";
 import { defineStore } from "pinia";
+import type { Product, CartItem } from "~/himalayan_beads";
 
-export const useCartStore = defineStore("cart", {
-  // State: The data of our store
-  state: () => ({
-    wishlistItems: [] as number[],
-    cartItems: [] as number[],
-  }),
+export const useCartStore = defineStore(
+  "cart",
+  () => {
+    // --- STATE ---
+    const wishlistItems = ref<Product[]>([]);
+    const cartItems = ref<CartItem<Product>[]>([]);
 
-  // Getters: Computed properties for our state
-  getters: {
-    /**
-     * Checks if a product is in the wishlist.
-     * @param state - The store's state.
-     * @returns A function that takes a productId and returns a boolean.
-     */
-    isWishlisted: (state) => {
-      return (productId: number) => state.wishlistItems.includes(productId);
-    },
-    isCarted: (state) => {
-      return (productId: number) => state.cartItems.includes(productId);
-    },
-  },
+    // --- GETTERS ---
+    const isWishlisted = computed(() => (productId: number): boolean => {
+      return wishlistItems.value.some((item) => item && item.id === productId);
+    });
 
-  // Actions: Methods to change the state
-  actions: {
-    /**
-     * Toggles a product's presence in the wishlist.
-     * @param productId - The ID of the product to toggle.
-     */
-    toggleWishlist(productId: number) {
-      const index = this.wishlistItems.indexOf(productId);
+    const isCarted = computed(() => (productId: number): boolean => {
+      return cartItems.value.some(
+        (item) => item && item.product && item.product.id === productId
+      );
+    });
+
+    const totalCartItems = computed((): number => {
+      return cartItems.value.reduce((total, item) => total + item.quantity, 0);
+    });
+
+    // --- ACTIONS ---
+    function toggleWishlist(product: Product) {
+      const index = wishlistItems.value.findIndex(
+        (item) => item.id === product.id
+      );
       if (index > -1) {
-        this.wishlistItems.splice(index, 1); // Remove if exists
+        wishlistItems.value.splice(index, 1);
       } else {
-        this.wishlistItems.push(productId); // Add if not
+        wishlistItems.value.push(product);
       }
-    },
+    }
+
+    function addToCart(product: Product) {
+      const existingItem = cartItems.value.find(
+        (item) => item.product.id === product.id
+      );
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cartItems.value.push({ product: product, quantity: 1 });
+      }
+    }
+
+    // --- NEW REMOVAL FUNCTIONS ---
 
     /**
-     * Adds a product to the cart (placeholder function).
-     * @param productId - The ID of the product to add.
+     * Removes an item completely from the wishlist by its ID.
+     * @param productId The ID of the product to remove from the wishlist.
      */
-    addToCart(productId: number) {
-      this.cartItems.push(productId); // Add if not
-      // In a real app, you would add logic here to manage cart items.
-      console.log(`Product ${productId} added to cart!`);
-    },
-  },
+    function removeFromWishlist(productId: number) {
+      wishlistItems.value = wishlistItems.value.filter(
+        (item) => item.id !== productId
+      );
+    }
 
-  // Enable persistence for this store
-  persist: true,
-});
+    /**
+     * Removes an item line completely from the cart by its product ID.
+     * @param productId The ID of the product to remove from the cart.
+     */
+    function removeFromCart(productId: number) {
+      cartItems.value = cartItems.value.filter(
+        (item) => item.product.id !== productId
+      );
+    }
+
+    /**
+     * Decreases an item's quantity in the cart. If the quantity reaches zero, it removes the item.
+     * @param productId The ID of the product whose quantity should be decreased.
+     */
+    function decreaseCartItemQuantity(productId: number) {
+      const existingItem = cartItems.value.find(
+        (item) => item.product.id === productId
+      );
+
+      if (existingItem) {
+        if (existingItem.quantity > 1) {
+          existingItem.quantity--;
+        } else {
+          // If quantity is 1, remove the item completely by calling our other function.
+          removeFromCart(productId);
+        }
+      }
+    }
+
+    // The return object, structured according to your convention
+    return {
+      // State
+      wishlistItems,
+      cartItems,
+      // Getters
+      isWishlisted,
+      isCarted,
+      totalCartItems,
+      // Actions
+      toggleWishlist,
+      addToCart,
+      removeFromWishlist,
+      removeFromCart,
+      decreaseCartItemQuantity,
+    };
+  },
+  {
+    // Persistence configuration
+    persist: {
+      pick: ["wishlistItems", "cartItems"],
+    },
+  }
+);
