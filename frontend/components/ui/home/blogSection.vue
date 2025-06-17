@@ -137,20 +137,10 @@ onMounted(() => {
             </p>
 
             <!-- Read More Button - Shows on Hover -->
-            <div class="read__more__container relative h-10">
-              <!-- 
-    The parent div is now just a simple container. 
-    No transitions or hover classes needed here.
-  -->
+            <div class="read__more__container relative h-10"> 
               <div
                 class="read__more__button absolute inset-0 flex items-center"
-              >
-                <!-- 
-      MODIFIED:
-      - We removed all hover and transition classes.
-      - We added `opacity-0` to set the initial hidden state.
-      - The custom CSS animation will now control the hover effect.
-    -->
+              > 
                 <button
                   class="read__more__btn opacity-0 bg-white font-bold border border-[#804224] hover:bg-[#804224] hover:text-white text-[#804224] px-4 py-2 rounded text-xs font-medium transition-colors duration-300 flex items-center gap-1 transform hover:scale-105"
                   @click.stop="navigateToPost(post.slug)"

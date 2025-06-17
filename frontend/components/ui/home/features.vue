@@ -1,11 +1,25 @@
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
+import { useIntersectionObserver } from "@vueuse/core";
 
-// Animation states
+// --- Animation Logic using @vueuse/core ---
+const featuresRef = ref<HTMLElement | null>(null);
 const isVisible = ref(false);
-const featuresRef = ref<HTMLElement>();
 
-// Features data
+useIntersectionObserver(
+  featuresRef,
+  ([{ isIntersecting }]) => {
+    if (isIntersecting) {
+      isVisible.value = true;
+    }
+  },
+  {
+    threshold: 0.2,
+    rootMargin: "0px 0px -50px 0px",
+  }
+);
+
+// --- Component Data (Added a longer description for testing) ---
 const features = [
   {
     id: 1,
@@ -17,7 +31,7 @@ const features = [
     id: 2,
     title: "ENERGIZED RUDRAKSHA",
     description:
-      "Lorem ipsum grön elcertifikat pabyggade om valstuga att gensax spepuck i bloggosfar.",
+      "Lorem ipsum grön elcertifikat pabyggade om valstuyggade om valstuyggade om valstuyggade om valstuga att gensax spepuck i bloggosfar. This description is longer to properly test the multi-line clamping and equal height feature.",
   },
   {
     id: 3,
@@ -32,43 +46,25 @@ const features = [
       "Lorem ipsum grön elcertifikat pabyggade om valstuga att gensax spepuck i bloggosfar.",
   },
 ];
-
-onMounted(() => {
-  // Create intersection observer for scroll animations
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          isVisible.value = true;
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.2,
-      rootMargin: "0px 0px -50px 0px",
-    }
-  );
-
-  if (featuresRef.value) {
-    observer.observe(featuresRef.value);
-  }
-});
 </script>
 
 <template>
   <section
     ref="featuresRef"
-    class="features__section py-16 lg:py-24 bg-[#F3F3F3]"
+    class="features__section py-16 lg:py-24 bg-[#F8F9FA]"
   >
     <div class="container mx-auto px-4">
       <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12"
       >
+        <!--
+          MODIFICATION FOR EQUAL HEIGHTS:
+          - `flex flex-col` turns the card into a flex container.
+        -->
         <div
           v-for="(feature, index) in features"
           :key="feature.id"
-          class="feature__item text-center group transition-all duration-700 ease-out"
+          class="feature__item text-center group transition-all duration-700 ease-out flex flex-col"
           :class="{
             'opacity-100 translate-y-0': isVisible,
             'opacity-0 translate-y-8': !isVisible,
@@ -77,36 +73,34 @@ onMounted(() => {
             transitionDelay: `${index * 150}ms`,
           }"
         >
-          <!-- Icon Placeholder -->
+          <!-- Icon Placeholder (Design-accurate styling) -->
           <div class="feature__icon mb-6 flex justify-center">
             <div
-              class="icon__placeholder w-16 h-16 bg-gray-400 transition-all duration-500 ease-out group-hover:bg-gray-500 group-hover:scale-110 group-hover:rotate-3"
-              :class="{
-                'animate-pulse': !isVisible,
-                'shadow-lg': isVisible,
-              }"
-            >
-              <!-- Future icon will replace this placeholder -->
-            </div>
+              class="icon__placeholder w-16 h-16 bg-slate-400 shadow-sm transition-all duration-500 ease-out group-hover:bg-slate-500 group-hover:shadow-md group-hover:scale-105 group-hover:rotate-3"
+            ></div>
           </div>
 
-          <!-- Feature Title -->
+          <!-- Feature Title (with line clamp) -->
           <h3
-            class="feature__title text-sm lg:text-base font-bold text-gray-800 mb-4 uppercase tracking-wide leading-tight transition-colors duration-300 group-hover:text-[#804224]"
+            class="feature__title text-sm lg:text-base font-bold text-gray-800 mb-3 uppercase tracking-wide leading-tight transition-colors duration-300 group-hover:text-[#804224] min-h-[2.75rem] flex items-center justify-center line-clamp-2"
           >
             {{ feature.title }}
           </h3>
 
-          <!-- Feature Description -->
+          <!-- 
+            MODIFICATION FOR EQUAL HEIGHTS:
+            - `flex-grow` makes the description expand to fill available space.
+            - `line-clamp-4` truncates text after 4 lines.
+          -->
           <p
-            class="feature__description text-sm text-gray-600 leading-relaxed transition-colors duration-300 group-hover:text-gray-700"
+            class="feature__description text-sm text-gray-600 leading-relaxed transition-colors duration-300 group-hover:text-gray-700 flex-grow line-clamp-4"
           >
             {{ feature.description }}
           </p>
 
           <!-- Hover Effect Line -->
           <div
-            class="feature__line w-0 h-0.5 bg-[#804224] mx-auto mt-4 transition-all duration-500 ease-out group-hover:w-12"
+            class="feature__line w-0 h-0.5 bg-[#804224] mx-auto mt-5 transition-all duration-500 ease-out group-hover:w-12"
           ></div>
         </div>
       </div>
@@ -115,6 +109,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
+/* Restoring your original custom styles for the shimmer effect and animations */
 .features__section {
   position: relative;
 }
@@ -128,6 +123,7 @@ onMounted(() => {
   overflow: hidden;
 }
 
+/* This is the shimmer/shine effect from your original code */
 .icon__placeholder::before {
   content: "";
   position: absolute;
@@ -147,7 +143,6 @@ onMounted(() => {
 .group:hover .icon__placeholder::before {
   left: 100%;
 }
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .feature__item {
