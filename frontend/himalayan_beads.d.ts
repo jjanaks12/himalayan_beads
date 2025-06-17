@@ -120,3 +120,8 @@ type Token = {
     accessToken: string
     refreshToken: string
 }
+
+type NavItem = {
+    name: string
+    to: RouteLocationRaw
+}

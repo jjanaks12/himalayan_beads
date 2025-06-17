@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-    import { XIcon } from 'lucide-vue-next';
-    import { useSidebar } from '~/components/ui/sidebar';
+    import { XIcon } from 'lucide-vue-next'
+    import { useSidebar } from '~/components/ui/sidebar'
     import { useAuthStore } from '~/store/auth'
 
     const { toggleSidebar } = useSidebar()
@@ -8,7 +8,7 @@
 </script>
 
 <template>
-    <Sidebar collapsible="offcanvas" variant="sidebar" position="absolute">
+    <Sidebar collapsible="offcanvas" variant="sidebar" position="absolute" class="z-50">
         <SidebarHeader class="pt-4">
             <Button variant="light" @click="toggleSidebar" size="icon" class="ml-auto mb-12">
                 <XIcon />
