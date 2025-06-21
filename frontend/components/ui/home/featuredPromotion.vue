@@ -46,8 +46,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" class="promotional__banners py-16 lg:py-20">
+  <section ref="sectionRef" class="promotional__banners py-2 ">
     <div class="container mx-auto px-4">
+       <h2 class="sr-only">Our Services and Special Offers</h2>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
         <template v-for="(banner, index) in banners" :key="banner.id">
           <!-- Template #1: Split Banner (Consultation) -->

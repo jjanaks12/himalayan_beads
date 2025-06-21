@@ -29,7 +29,7 @@
                         ? 'np'
                         : 'in'
                     }.png`" :alt="currentLanguage.name" class="w-4 h-3 object-cover  " loading="lazy" />
-                <span class="hidden lg:inline text-sm font-medium">{{ currentLanguage.name }}</span>
+                <span class="inline text-sm font-medium">{{ currentLanguage.name }}</span>
                 <ChevronDownIcon class="h-3 w-3 lg:h-4 lg:w-4 transition-transform duration-200"
                     :class="{ 'rotate-180': isLanguageOpen }" />
             </div>
