@@ -1,5 +1,6 @@
 import bcript from 'bcrypt'
 import type { PrismaClient } from "@prisma/client"
+import { faker } from '@faker-js/faker'
 
 export const roleSeed = async (prisma: PrismaClient) => {
     const create_user = await prisma.permission.create({
@@ -122,8 +123,9 @@ export const roleSeed = async (prisma: PrismaClient) => {
             name: 'delete_order'
         }
     })
+
     /* User role */
-    await prisma.role.create({
+    const userRole = await prisma.role.create({
         data: {
             name: 'User',
             publish: true,
@@ -192,11 +194,24 @@ export const roleSeed = async (prisma: PrismaClient) => {
         }
     })
 
+    const password = bcript.hashSync('password', 10)
     await prisma.user.create({
         data: {
             email: 'admin@himalayanbeads.com',
-            password: bcript.hashSync('password', 10),
+            password,
             role_id: adminRole.id
         }
     })
+
+    for (let i = 0; i < 20; i++) {
+        await prisma.user.create({
+            data: {
+                first_name: faker.person.firstName(),
+                last_name: faker.person.lastName(),
+                password,
+                email: faker.internet.email(),
+                role_id: userRole.id
+            }
+        })
+    }
 }

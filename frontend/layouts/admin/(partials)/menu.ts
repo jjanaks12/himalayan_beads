@@ -3,36 +3,38 @@ import type { Menu } from "~/himalayan_beads"
 export const useMenu = () => {
     const { can } = useAuthorization()
 
+    const route = useRoute()
+
     const menuList = ref<Menu[]>([{
         // id: 1,
         title: 'Dashboard',
-        name: 'dashboard',
+        name: 'dashboards',
         path: '/dashboard/',
         icon: 'LayoutDashboardIcon',
         permission: '*'
     }, {
         title: 'Media',
-        name: 'dashboard-media',
+        name: 'medias',
         icon: 'ShoppingBag',
-        permission: '*',
+        permission: 'manage_media',
         path: '/dashboard/medias'
     }, {
         title: 'Your Order',
-        name: 'dashboard-order',
+        name: 'myOrders',
         icon: 'CreditCard',
         permission: ['create_order', 'delete_order'],
         path: '/dashboard/myOrders'
     }, {
         // id: 2,
         title: 'Product',
-        name: '',
+        name: 'products',
         path: '/dashboard/products/',
         icon: 'Boxes',
         permission: '*',
         sub_menu: [{
             // id: 3,
             title: 'List',
-            name: 'dashboard-product',
+            name: 'products',
             path: '/dashboard/products/',
             icon: 'ListTree',
             permission: 'view_product',
@@ -40,7 +42,7 @@ export const useMenu = () => {
             sub_menu: [{
                 // id: 10,
                 title: 'List',
-                name: 'dashboard-product-id',
+                name: 'products_list_id',
                 path: '/dashboard/products/:id',
                 icon: 'ListTree',
                 permission: 'manage_product',
@@ -49,23 +51,23 @@ export const useMenu = () => {
         }, {
             // id: 4,
             title: 'Category',
-            name: 'dashboard-category',
-            path: '/dashboard/categories/',
+            name: 'products_categories',
+            path: '/dashboard/products/categories/',
             icon: 'Shapes',
             permission: 'manage_category',
             // parent_id: 2
         }, {
             // id: 4,
             title: 'Orders',
-            name: 'dashboard-order',
-            path: '/dashboard/orders/',
+            name: 'products_orders',
+            path: '/dashboard/products/orders/',
             icon: 'BaggageClaim',
             permission: ['view_order', 'update_order'],
             // parent_id: 2
         },]
     }, {
         // id: 5,
-        name: 'dashboard-user',
+        name: 'users',
         title: 'Users',
         path: '/dashboard/users/',
         icon: 'Users',
@@ -73,14 +75,14 @@ export const useMenu = () => {
     }, {
         // id: 6,
         title: 'Settings',
-        name: '',
+        name: 'settings',
         path: '/dashboard/settings/',
         icon: 'Settings',
         permission: '*',
         sub_menu: [{
             // id: 7,
             title: 'Roles',
-            name: 'dashboard-settings-role',
+            name: 'settings_roles',
             path: '/dashboard/settings/roles/',
             icon: 'UserRoundCog',
             permission: 'manage_role',
@@ -88,7 +90,7 @@ export const useMenu = () => {
         }, {
             // id: 8,
             title: 'Permissions',
-            name: 'dashboard-settings-permission',
+            name: 'settings_permissions',
             path: '/dashboard/settings/permissions/',
             icon: 'UserLock',
             permission: 'manage_permission',
@@ -96,7 +98,7 @@ export const useMenu = () => {
         }, {
             // id: 8,
             title: 'User detail',
-            name: 'dashboard-settings-user_detail',
+            name: 'settings_user_detail',
             path: '/dashboard/settings/user_detail/',
             icon: 'UserPenIcon',
             permission: '*',
@@ -104,7 +106,7 @@ export const useMenu = () => {
         }, {
             // id: 8,
             title: 'Change password',
-            name: 'dashboard-settings-change_password',
+            name: 'settings_change_password',
             path: '/dashboard/settings/change_password/',
             icon: 'KeyRoundIcon',
             permission: '*',
@@ -113,7 +115,7 @@ export const useMenu = () => {
     }, {
         // id: 9,
         title: 'Playground',
-        name: 'dashboard-playgroud',
+        name: 'playground',
         path: '/dashboard/playground/',
         icon: 'ListVideo',
         permission: '*',
@@ -141,6 +143,12 @@ export const useMenu = () => {
         }
         return newMenus
     })
+    const pages = computed(() => (route.name as string).split('-'))
+    const currentMenuIndex = computed(() => menus.value.findIndex(menu => pages.value.length == 1 ? true : menu.name === pages.value[1]))
+    const subMenuIndex = computed(() => menus.value[currentMenuIndex.value]?.sub_menu && menus.value[currentMenuIndex.value]?.sub_menu?.findIndex(subMenu => pages.value[2] ? subMenu.name.includes(pages.value[2]) : true))
 
-    return { menus }
+    return {
+        menus,
+        currentMenuIndex, subMenuIndex
+    }
 }

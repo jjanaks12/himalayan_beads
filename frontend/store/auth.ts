@@ -25,14 +25,13 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = data
   }
 
-  const login = async (formData: Y.InferType<typeof userLoginSchema>) => {
+  const login = async (formData: Y.InferType<typeof userLoginSchema>, redirectURL = '/dashboard') => {
     isLoading.value = true
 
     const { data } = await axios.post<Token>('/login', formData)
     if (data) {
       token.value = data
-      await fetch()
-      navigateTo('/dashboard')
+      navigateTo(redirectURL)
     }
     isLoading.value = false
   }
@@ -66,6 +65,7 @@ export const useAuthStore = defineStore('auth', () => {
       refreshToken: token.value?.refreshToken
     })
     token.value = null
+    user.value = null
     isLoading.value = false
     navigateTo('/login')
   }

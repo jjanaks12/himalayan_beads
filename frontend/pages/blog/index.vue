@@ -1,11 +1,11 @@
 <script lang="ts" setup>
     useHead({
-        title: 'Product'
+        title: 'Blogs'
     })
 
     definePageMeta({
-        layout: 'admin',
-        middleware: 'auth'
+        layout: 'default',
+        auth: false
     })
 </script>
 

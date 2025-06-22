@@ -1,3 +1,5 @@
-export { showImage } from './show_image'
 export { abbr } from './abbr'
+export { debounce } from './debounce'
 export { humanize } from './humanize'
+export { isObjEq } from './isObjectEqual'
+export { showImage } from './show_image'

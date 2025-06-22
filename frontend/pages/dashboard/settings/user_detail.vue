@@ -19,7 +19,7 @@
     const { isLoading, user, fullName } = storeToRefs(useAuthStore())
     const form = ref<FormContext | null>(null)
 
-    const avatar = computed(() => showImage(user.value?.image?.url as string))
+    const avatar = computed(() => showImage(user.value?.image?.name as string))
 
     const init = () => {
         if (form.value !== null && user.value) {
@@ -106,19 +106,6 @@
                             <Input type="email" v-bind="field" placeholder="Email" id="lf__email" autocomplete="email"
                                 disabled />
                             <ErrorMessage name="email" />
-                        </div>
-                    </div>
-                </Field>
-            </div>
-            <div class="w-1/2">
-                <Field name="phone_number" v-slot="{ field }">
-                    <label class="sr-only" for="lf__phone_number">Phone number</label>
-                    <div class="flex gap-2">
-                        <Phone class="mt-3" />
-                        <div class="flex-grow">
-                            <Input type="text" v-bind="field" placeholder="Phone number" id="lf__phone_number"
-                                autocomplete="mobile" />
-                            <ErrorMessage name="phone_number" />
                         </div>
                     </div>
                 </Field>

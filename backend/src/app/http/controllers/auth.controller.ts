@@ -4,8 +4,8 @@ import createHttpError from 'http-errors'
 import Bcrypt from 'bcrypt'
 
 import { userLoginSchema, userRegistrationSchema } from '@/app/lib/schema/user.schema'
-import { JWT } from '@/app/lib/services/jwt.services'
-import { Redis } from '@/app/lib/services/redis.service'
+import { JWT } from '@/lib/services/jwt.services'
+import { Redis } from '@/lib/services/redis.service'
 
 type UserRegistrationRequest = {
     email: string
@@ -24,7 +24,6 @@ export class AuthController {
     public static async login(request: Request<{}, {}, UserLoginRequest>, response: Response, next: NextFunction) {
         try {
             const result = await userLoginSchema.validate(request.body, { abortEarly: false })
-            console.log(result);
 
             const userExists = await prisma.user.findUnique({ where: { email: result.email } })
 
@@ -61,6 +60,8 @@ export class AuthController {
 
             const newUser = await prisma.user.create({
                 data: {
+                    first_name: result.first_name,
+                    last_name: result.last_name,
                     email: result.email,
                     password: hashPassword,
                     role_id: role.id
@@ -115,8 +116,6 @@ export class AuthController {
 
     public static async profile(request: Request, response: Response, next: NextFunction) {
         try {
-            console.log('Test::::',request.body);
-            
             response.send(await prisma.user.findFirstOrThrow({
                 where: {
                     id: request.body.auth_user.id
@@ -125,6 +124,7 @@ export class AuthController {
                     password: true
                 },
                 include: {
+                    image: true,
                     role: {
                         include: {
                             permissions: true

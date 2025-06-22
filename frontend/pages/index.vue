@@ -1,38 +1,38 @@
 <script lang="ts" setup>
-useHead({
-  title: "Home page - Himalayan Beads",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Discover the beauty of Himalayan Beads. Experience the spiritual benefits of our authentic rudraksha products.",
-    },
-  ],
-});
+  useHead({
+    title: "Home page - Himalayan Beads",
+    meta: [
+      {
+        name: "description",
+        content:
+          "Discover the beauty of Himalayan Beads. Experience the spiritual benefits of our authentic rudraksha products.",
+      },
+    ],
+  });
 
-definePageMeta({
-  layout: "default",
-  auth: false,
-});
+  definePageMeta({
+    layout: "default",
+    auth: false,
+  });
 
-import UiHomeHeroBanner from '~/components/ui/home/heroBanner.vue'
-import UiHomePromotionBanner from '~/components/ui/home/promotionBanner.vue'
-import UiHomeFeature from '~/components/ui/home/features.vue'
-import UiHomeFeaturedProduct from '~/components/ui/home/featuredProducts.vue'
-import UiHomeFeaturedPromotion from '~/components/ui/home/featuredPromotion.vue'
-import faqReview from '~/components/ui/home/faqReview.vue'
-import callToActionVideo from '~/components/ui/home/callToActionVideo.vue'
-import infoBanner from '~/components/ui/home/infoBanner.vue'
-import blogSection from '~/components/ui/home/blogSection.vue'
+  import UiHomeHeroBanner from '~/components/pages/home/heroBanner.vue'
+  // import UiHomePromotionBanner from '~/components/pages/home/promotionBanner.vue'
+  import UiHomeFeature from '~/components/pages/home/features.vue'
+  import UiHomeFeaturedProduct from '~/components/pages/home/featuredProducts.vue'
+  import UiHomeFeaturedPromotion from '~/components/pages/home/featuredPromotion.vue'
+  import faqReview from '~/components/pages/home/faqReview.vue'
+  import callToActionVideo from '~/components/pages/home/callToActionVideo.vue'
+  import infoBanner from '~/components/pages/home/infoBanner.vue'
+  import blogSection from '~/components/pages/home/blogSection.vue'
 
 
 
 </script>
 
 <template>
-  <div class="home__page"> 
+  <div class="home__page">
     <UiHomeHeroBanner />
-    <UiHomePromotionBanner />
+    <!-- <UiHomePromotionBanner /> -->
     <UiHomeFeature />
     <UiHomeFeaturedProduct />
     <UiHomeFeaturedPromotion />
@@ -44,7 +44,7 @@ import blogSection from '~/components/ui/home/blogSection.vue'
 </template>
 
 <style scoped>
-.home__page {
-  min-height: 100vh;
-}
+  .home__page {
+    min-height: 100vh;
+  }
 </style>

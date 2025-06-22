@@ -25,6 +25,9 @@ router.use((error: any, request: Request, response: Response, next: NextFunction
         newError.errors = error.errors
     }
 
+    console.log(error);
+    
+
     response.status(status)
         .send({
             error: newError

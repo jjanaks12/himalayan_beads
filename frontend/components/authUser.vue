@@ -6,17 +6,18 @@
     const { user, role } = storeToRefs(useAuthStore())
 
     const avatar = computed(() => showImage(user.value?.image?.name as string))
+    const fullName = computed(() => [user.value?.first_name, user.value?.last_name].join(' ').trim())
 </script>
 
 <template>
     <div class="flex items-center gap-2 py-[3px]">
         <Avatar class="w-[60px] h-[60px]">
             <AvatarImage :src="avatar" class="object-cover" />
-            <AvatarFallback>{{ abbr(user?.name || appName) }}</AvatarFallback>
+            <AvatarFallback class="text-secondary">{{ abbr(fullName || appName) }}</AvatarFallback>
         </Avatar>
         <div class="flex-grow">
             <strong class="block">
-                <NuxtLink :to="{ name: 'dashboard' }">{{ user?.name || appName }}</NuxtLink>
+                <NuxtLink :to="{ name: 'dashboard' }">{{ fullName || appName }}</NuxtLink>
             </strong>
             <Badge variant="secondary">{{ role || 'user' }}</Badge>
         </div>

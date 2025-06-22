@@ -1,7 +1,9 @@
 <script lang="ts" setup>
     import { XIcon } from 'lucide-vue-next'
+
     import { useSidebar } from '~/components/ui/sidebar'
     import { useAuthStore } from '~/store/auth'
+    import AppSearch from './_search.vue'
 
     const { toggleSidebar } = useSidebar()
     const { isLoggedin } = storeToRefs(useAuthStore())
@@ -35,6 +37,10 @@
             <AuthUser v-else />
         </SidebarHeader>
         <SidebarContent class="gap-0">
+            <SidebarGroup>
+                <Language />
+                <AppSearch />
+            </SidebarGroup>
             <SidebarGroup class="bg-[#e6e6e6] p-0">
                 <SidebarMenu>
                     <SidebarMenuItem>
@@ -63,8 +69,6 @@
                     <SidebarMenuItem>
                         <SidebarMenuButton class="h-10" variant="light">Terms</SidebarMenuButton>
                     </SidebarMenuItem>
-                    <Language />
-
                 </SidebarMenu>
             </SidebarGroup>
         </SidebarContent>

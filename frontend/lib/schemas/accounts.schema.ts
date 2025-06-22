@@ -7,9 +7,9 @@ export const loginSchema = Y.object({
 })
 
 export const registerSchema = Y.object({
-    first_name: Y.string().required().label('Email'),
-    middle_name: Y.string().label('Email'),
-    last_name: Y.string().required().label('Email'),
+    first_name: Y.string().required().label('First name'),
+    last_name: Y.string().required().label('Last name'),
     email: Y.string().required().email().label('Email'),
     password: Y.string().min(6).required().label('Password'),
+    confirm_password: Y.string().required().oneOf([Y.ref('password')], 'Passwords must match'),
 })

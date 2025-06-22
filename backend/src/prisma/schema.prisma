@@ -14,10 +14,13 @@ datasource db {
 }
 
 model Image {
-  id   String  @id @default(cuid())
-  name String
-  url  String?
-  type String  @default("image")
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  url         String?
+  type        String   @default("image")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   category         Category?
   products         ImageOnProduct[]
@@ -196,7 +199,7 @@ model Role {
   name        String
   description String?  @db.Text
   publish     Boolean
-  deletedAt   DateTime @default(now())
+  deletedAt   DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -210,6 +213,7 @@ model Permission {
   id          String   @id @default(cuid())
   name        String
   description String?  @db.Text
+  deletedAt   DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

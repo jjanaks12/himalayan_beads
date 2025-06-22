@@ -13,12 +13,18 @@
         layout: 'simple'
     })
 
-    const { isLoading } = storeToRefs(useAuthStore())
+    const route = useRoute()
+    const { isLoading, isLoggedin } = storeToRefs(useAuthStore())
     const { login } = useAuthStore()
 
     const signIn = async (formData: any) => {
-        await login(formData)
+        await login(formData, route.query.redirect_from as string)
     }
+
+    onMounted(() => {
+        if (isLoggedin.value)
+            navigateTo('/dashboard')
+    })
 </script>
 
 <template>
