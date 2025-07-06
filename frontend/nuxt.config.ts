@@ -9,7 +9,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxt/fonts',
     'pinia-plugin-persistedstate',
-    'shadcn-nuxt'
+    'shadcn-nuxt',
+    'nuxt-tiptap-editor'
   ],
 
   css: ['@/assets/css/main.css'],

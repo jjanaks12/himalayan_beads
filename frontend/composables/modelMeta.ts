@@ -1,4 +1,4 @@
-import type { APIParam } from "~/himalayan_beads"
+import type { APIParam, APIQuery } from "~/himalayan_beads"
 
 export const useModalMeta = () => {
     const isLoading = ref(false)

@@ -2,7 +2,6 @@
     import { EllipsisVerticalIcon, EyeIcon, PencilIcon, SlidersVerticalIcon, TrashIcon } from 'lucide-vue-next'
 
     import { useUserStore } from '~/store/user'
-    import UserSearch from '~/components/pages/users/search.vue'
 
     useHead({
         title: 'User'
@@ -31,7 +30,7 @@
                 Filters
             </div>
         </div>
-        <UserSearch />
+        <Search />
     </div>
     <Table>
         <TableHeader>

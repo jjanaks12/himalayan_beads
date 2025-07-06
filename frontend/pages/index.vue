@@ -24,9 +24,6 @@
   import callToActionVideo from '~/components/pages/home/callToActionVideo.vue'
   import infoBanner from '~/components/pages/home/infoBanner.vue'
   import blogSection from '~/components/pages/home/blogSection.vue'
-
-
-
 </script>
 
 <template>

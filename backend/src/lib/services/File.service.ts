@@ -19,7 +19,7 @@ export class FileHandler {
             this.uploadPath = path.join(this.uploadPath, folderName)
     }
 
-    async saveFile(base64STR: any, image_id: string): Promise<Image> {
+    async saveFile(base64STR: any, image_id: string = undefined): Promise<Image> {
         let image: Image
         const match = base64STR.match(/^data:(.*?)base64,/)
         if (!match && !match[1])
@@ -65,5 +65,14 @@ export class FileHandler {
             })
 
         return image
+    }
+
+    async deleteFile(name: string): Promise<boolean> {
+        const deleteFilePath = path.join(this.uploadPath, name)
+
+        if (fs.existsSync(deleteFilePath))
+            fs.unlinkSync(deleteFilePath)
+
+        return Promise.resolve(true)
     }
 }

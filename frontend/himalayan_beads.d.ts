@@ -1,5 +1,23 @@
 import * as Icons from "lucide-vue-next"
 
+enum OrderStatus {
+  NEW,
+  PENDING,
+  CANCELLED,
+  PRCESSING,
+  COMPLETED
+}
+
+enum OrderType {
+  CASH_ON_DELIVERY,
+  ONLINE
+}
+
+enum AddressType {
+  BILLING,
+  SHIPPING
+}
+
 type APISuccess<T> = {
   status: "success"
   data: T
@@ -23,8 +41,6 @@ type APISort<T> = {
 }
 
 type APIQuery<T> = {
-  per_page: number
-  current: number
   s: string
   sort?: APISort<T>
 }
@@ -113,6 +129,21 @@ type User = {
   orders: Order[]
 }
 
+type Order = {
+  id: string
+  status: OrderStatus
+  type: OrderType
+  userId: string
+  detail: Json
+  billingAddressId: string
+  shippingAddressId: string
+  createdAt: string
+  updatedAt: string
+  user: User
+  shippingAddress: Address
+  products: Product[]
+}
+
 type Image = {
   id: string
   name: string
@@ -129,14 +160,63 @@ type NavItem = {
   to: RouteLocationRaw
 }
 
-export interface Product {
-  id: number
-  type: "product"
+interface Product {
+  id: string
   name: string
-  subtitle: string
-  price: number
-  originalPrice: number | null
+  description: string
   image: string
+  category_id: string
+  deletedAt?: string
+  createdAt: string
+  updatedAt: string
+  category: Category
+  prices: Price[]
+  stock: Stock
+  images: ImageOnProduct[]
+  orders: Order[]
+  _count: {
+    orders: number
+  }
+}
+
+interface Price {
+  id: string
+  amount: number
+  parent_id: string
+  products: Product[]
+  successor: Price
+  predecessor: Price[]
+}
+
+interface Stock {
+  id: string
+  quantity: number
+  product_id: string
+  product: Product
+}
+
+interface ImageOnProduct {
+  id: string
+  product_id: string
+  image_id: string
+  featured: boolean
+  products: Product[]
+  image: Image
+}
+
+interface Category {
+  id: string
+  name: string
+  parent_id?: string
+  image_id?: string
+  description?: string
+  deletedAt?: string
+  createdAt: string
+  updatedAt: string
+  image?: Image
+  successor?: Category
+  predecessor: Category[]
+  products: Product[]
 }
 
 // Defines the shape of a banner item from your grid

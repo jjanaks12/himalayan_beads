@@ -22,10 +22,9 @@ model Image {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  category         Category?
-  products         ImageOnProduct[]
-  imageOnProductId String?
-  users            User[]
+  category Category?
+  products ImageOnProduct[]
+  users    User[]
 
   @@map("images")
 }
@@ -60,17 +59,23 @@ model Product {
   category Category?        @relation(fields: [category_id], references: [id])
   images   ImageOnProduct[]
   stock    Stock?
-  prices   PriceOnProduct[]
+  prices   Price[]
+  orders   Order[]
 
   @@map("products")
 }
 
 model Price {
-  id        String  @id @default(cuid())
+  id        String    @id @default(cuid())
   amount    Float
   parent_id String?
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?  @updatedAt
 
-  products PriceOnProduct[]
+  products    Product[]
+  successor   Price?    @relation("parentPrice", fields: [parent_id], references: [id])
+  predecessor Price[]   @relation("parentPrice")
 
   @@map("prices")
 }
@@ -82,27 +87,16 @@ model ImageOnProduct {
   featured   Boolean @default(false)
 
   products Product? @relation(fields: [product_id], references: [id])
-  images   Image?   @relation(fields: [image_id], references: [id])
+  image    Image?   @relation(fields: [image_id], references: [id])
 
   @@map("image_on_product")
 }
 
-model PriceOnProduct {
-  id         String @id @default(cuid())
-  product_id String
-  price_id   String
-
-  price   Price   @relation(fields: [price_id], references: [id])
-  product Product @relation(fields: [product_id], references: [id])
-
-  @@map("price_on_product")
-}
-
 model Stock {
-  id         String  @id @default(cuid())
+  id         String   @id @default(cuid())
   quantity   Int
-  product_id String  @unique
-  product    Product @relation(fields: [product_id], references: [id])
+  product_id String   @unique
+  product    Product? @relation(fields: [product_id], references: [id])
 
   @@map("stocks")
 }
@@ -126,6 +120,7 @@ model User {
   accounts      Account[]
   orders        Order[]
   Session       Session[]
+  newsletters   Newsletter[]
 
   @@map("users")
 }
@@ -195,13 +190,13 @@ model Authenticator {
 }
 
 model Role {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   name        String
-  description String?  @db.Text
+  description String?   @db.Text
   publish     Boolean
   deletedAt   DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   permissions Permission[]
   users       User[]
@@ -210,12 +205,12 @@ model Role {
 }
 
 model Permission {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   name        String
-  description String?  @db.Text
+  description String?   @db.Text
   deletedAt   DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   roles Role[]
 
@@ -271,6 +266,8 @@ model Order {
   user            User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   shippingAddress Address @relation(fields: [shippingAddressId], references: [id], onDelete: Cascade)
 
+  products Product[]
+
   @@map("orders")
 }
 
@@ -283,4 +280,18 @@ model Country {
   addresses Address[]
 
   @@map("countries")
+}
+
+model Newsletter {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  user_id    String?
+  user       User?    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  first_name String?
+  last_name  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([email])
+  @@map("newsletters")
 }

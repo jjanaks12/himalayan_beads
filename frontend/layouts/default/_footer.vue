@@ -98,7 +98,7 @@
           <p class="text-gray-400 text-xs sm:text-sm">©2024 Himalayan Beads Pvt. Ltd.</p>
           <div class="flex items-center gap-6">
             <div class="payment__methods flex items-center gap-3"></div>
-            <p class="text-gray-400 text-xs sm:text-sm">Created by <a href="#" class="hover:text-white">Pikdesigns</a></p>
+            <p class="text-gray-400 text-xs sm:text-sm">Created by <a href="http://janakstha.com.np" target="_blank" class="hover:text-white">janakstha</a></p>
           </div>
         </div>
       </div>

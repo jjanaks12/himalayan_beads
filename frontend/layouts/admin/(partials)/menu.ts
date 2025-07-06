@@ -109,7 +109,7 @@ export const useMenu = () => {
             name: 'settings_change_password',
             path: '/dashboard/settings/change_password/',
             icon: 'KeyRoundIcon',
-            permission: '*',
+            permission: '',
             // parent_id: 6
         }]
     }, {

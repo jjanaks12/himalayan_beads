@@ -63,10 +63,8 @@
             transitionDelay: `${index * 150}ms`,
           }">
           <!-- Icon Placeholder (Design-accurate styling) -->
-          <div class="feature__icon mb-6 flex justify-center">
-            <div
-              class="icon__placeholder w-16 h-16 bg-slate-400 shadow-sm transition-all duration-500 ease-out group-hover:bg-slate-500 group-hover:shadow-md group-hover:scale-105 group-hover:rotate-3">
-            </div>
+          <div
+            class="icon__placeholder w-16 h-16 bg-slate-400 shadow-sm transition-all duration-500 ease-out group-hover:bg-slate-500 group-hover:shadow-md group-hover:scale-105 group-hover:rotate-3 mb-6 flex mx-auto">
           </div>
 
           <!-- Feature Title (with line clamp) -->
@@ -74,10 +72,10 @@
             class="feature__title text-sm lg:text-base font-bold text-gray-800 mb-3 uppercase tracking-wide leading-tight transition-colors duration-300 group-hover:text-[#804224] min-h-[2.75rem] line-clamp-2">
             {{ feature.title }}
           </h3>
-          <p
+          <div
             class="feature__description text-sm text-gray-600 leading-relaxed transition-colors duration-300 group-hover:text-gray-700 flex-grow line-clamp-4">
-            {{ feature.description }}
-          </p>
+            <p>{{ feature.description }}</p>
+          </div>
 
           <!-- Hover Effect Line -->
           <div

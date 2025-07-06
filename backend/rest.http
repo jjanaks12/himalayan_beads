@@ -35,3 +35,12 @@ Content-Type: application/json
 ###  users route
 GET  http://localhost:8000/api/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzgwODI0NjAsImV4cCI6MTczODA4NjA2MCwiYXVkIjoiY202Z2c5dXg2MDAwMHZkZ3dwMTYycjdwNyIsImlzcyI6ImphbmFrc3RoYS5jb20ubnAifQ.mtl8eSAE0VFHbWjpXnOG6Jz2Yk9W6iaZiV5X896nhpI
+
+###
+POST  http://localhost:8000/api/newsletters
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTA4NTg4NjEsImV4cCI6MTc1MDg2MjQ2MSwiYXVkIjoiY21jYzA1cnV2MDAwMjQxNDRpZ2xlcDBkYyIsImlzcyI6IkhpbWFsYXlhbiBiZWFkcyJ9.kfwkoKa1HViex1eueD5x7KfMQBW5Wphd8HYsRej8_hg
+Content-Type: application/json
+
+{
+    "email": "yogeshshrestha845@gmail.com"
+}
