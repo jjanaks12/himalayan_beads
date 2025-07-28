@@ -52,7 +52,7 @@
               'opacity-100 translate-y-0': showContent,
               'opacity-0 translate-y-8': !showContent,
             }">
-            <NuxtLink :to="{ name: 'product' }"
+            <NuxtLink :to="{ name: 'products' }"
               class="btn btn__primary bg-[#A0522D] hover:bg-[#A0522D] text-white px-8 py-4 rounded-xs font-semibold uppercase tracking-wide transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
               Explore All Products
             </NuxtLink>

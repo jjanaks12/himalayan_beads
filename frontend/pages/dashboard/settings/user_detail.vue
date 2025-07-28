@@ -12,7 +12,8 @@
 
     definePageMeta({
         layout: 'admin',
-        middleware: 'auth'
+        middleware: 'auth',
+        authorization: '*'
     })
 
     const { updateDetail } = useAuthStore()

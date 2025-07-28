@@ -5,10 +5,11 @@
 
     definePageMeta({
         layout: 'admin',
-        middleware: 'auth'
+        middleware: 'auth',
+        authorization: ['update_order', 'view_order']
     })
 </script>
 
 <template>
-
+orders
 </template>

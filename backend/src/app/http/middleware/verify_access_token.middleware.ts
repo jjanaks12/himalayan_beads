@@ -17,10 +17,12 @@ export const verifyAccessToken = (request: Request, response: Response, next: Ne
 
         if (typeof payload != 'string') {
             const user = await prisma.user.findFirstOrThrow({
-                where: { id: payload.aud as string }, omit: {
+                where: { id: payload.aud as string },
+                omit: {
                     password: true
                 }
             })
+
             request.body = { ...request.body, auth_user: user }
         }
         next()

@@ -12,7 +12,7 @@
 
     definePageMeta({
         layout: 'admin',
-        middleware: 'auth'
+        authorization: 'manage_product'
     })
 
     const { can } = useAuthorization()

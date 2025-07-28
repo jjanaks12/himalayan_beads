@@ -14,7 +14,8 @@
 
     definePageMeta({
         layout: 'admin',
-        middleware: 'auth'
+        middleware: 'auth',
+        authorization: 'manage_product'
     })
 
     const route = useRoute()

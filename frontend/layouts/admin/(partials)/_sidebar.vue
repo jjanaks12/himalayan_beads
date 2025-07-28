@@ -1,8 +1,8 @@
 <script lang="ts" setup>
     import { useAuthStore } from '~/store/auth'
-    import { useMenu } from './menu'
+    import { useAppStore } from '~/store/app'
 
-    const { menus, currentMenuIndex, subMenuIndex } = useMenu()
+    const { menus, currentMenuIndex, subMenuIndex } = storeToRefs(useAppStore())
     const { logout } = useAuthStore()
 </script>
 

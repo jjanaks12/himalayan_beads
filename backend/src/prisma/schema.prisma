@@ -32,6 +32,7 @@ model Image {
 model Category {
   id          String    @id @default(cuid())
   name        String
+  slug        String    @unique
   parent_id   String?
   image_id    String?   @unique
   description String?
@@ -71,11 +72,12 @@ model Price {
   parent_id String?
   deletedAt DateTime?
   createdAt DateTime  @default(now())
-  updatedAt DateTime?  @updatedAt
+  updatedAt DateTime? @updatedAt
 
   products    Product[]
   successor   Price?    @relation("parentPrice", fields: [parent_id], references: [id])
   predecessor Price[]   @relation("parentPrice")
+  orders      Order[]
 
   @@map("prices")
 }
@@ -121,6 +123,7 @@ model User {
   orders        Order[]
   Session       Session[]
   newsletters   Newsletter[]
+  wishlists     Wishlist[]
 
   @@map("users")
 }
@@ -246,7 +249,9 @@ model Address {
   countryId String
   country   Country     @relation(fields: [countryId], references: [id], onDelete: Cascade)
   type      AddressType
-  orders    Order[]
+
+  shippingOrders Order[] @relation("shippingOrder")
+  billingOrders  Order[] @relation("billingOrder")
 
   @@map("addresses")
 }
@@ -263,10 +268,12 @@ model Order {
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
 
-  user            User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  shippingAddress Address @relation(fields: [shippingAddressId], references: [id], onDelete: Cascade)
+  user            User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shippingAddress Address @relation("shippingOrder", fields: [shippingAddressId], references: [id], onDelete: Cascade)
+  billingAddress  Address @relation("billingOrder", fields: [billingAddressId], references: [id], onDelete: Cascade)
 
   products Product[]
+  prices   Price[]
 
   @@map("orders")
 }
@@ -294,4 +301,13 @@ model Newsletter {
 
   @@index([email])
   @@map("newsletters")
+}
+
+model Wishlist {
+  id      String @id @default(cuid())
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  details Json
+
+  @@map("wishlists")
 }

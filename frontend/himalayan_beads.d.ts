@@ -74,7 +74,8 @@ type DashboardDetail = {
 
 interface CartItem<T> {
   product: T
-  quantity: number
+  quantity: number,
+  price: Price
 }
 
 type FullProduct = Product & {
@@ -86,6 +87,28 @@ type FullProduct = Product & {
 
 type ProductWithRate = Product & {
   rate: Price
+}
+
+type Country = {
+  id: string
+  name: string
+  abbr: string
+  code: string
+
+  addresses: Address[]
+}
+
+type Address = {
+  id: string
+  street: string
+  address: string
+  city: string
+  state: string
+  zipCode: string
+  countryId: string
+  Country: Country
+  type: AddressType
+  orders: Order[]
 }
 
 type OrderWithShippingAddress = Order & {
@@ -206,6 +229,7 @@ interface ImageOnProduct {
 
 interface Category {
   id: string
+  slug: string
   name: string
   parent_id?: string
   image_id?: string

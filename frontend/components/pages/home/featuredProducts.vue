@@ -19,7 +19,7 @@
     { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
   );
 
-  const { products } = storeToRefs(useProductStore())
+  const { products, params } = storeToRefs(useProductStore())
   const { fetch } = useProductStore()
 
   onBeforeMount(() => {
@@ -42,6 +42,11 @@
       <div class="products__grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 w-full">
         <ProductItem v-for="(item, index) in products" :key="item.id" :product="item" :index="index"
           :show="isVisible" />
+      </div>
+      <div class="text-right">
+        <NuxtLink
+          :to="{ name: 'products', query: { page: params.total > params.per_page ? params.current + 1 : null } }">view
+          more</NuxtLink>
       </div>
     </div>
   </section>

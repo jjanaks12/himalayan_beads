@@ -1,9 +1,11 @@
 <script lang="ts" setup>
   import { useAuthStore } from '~/store/auth'
   import Jobs from '~/lib/jobs'
+  import { useAppStore } from './store/app'
 
   const { isLoggedin } = storeToRefs(useAuthStore())
   const { fetch } = useAuthStore()
+  const { fetchCountry } = useAppStore()
 
   const isLoading = ref(true)
   const job = new Jobs()
@@ -12,7 +14,7 @@
     if (!isLoggedin.value)
       return
 
-    job.add([fetch])
+    job.add([fetch, fetchCountry])
 
     await job.run()
       .finally(() => {
@@ -30,7 +32,7 @@
 </script>
 
 <template>
-  <NuxtLayout v-cloak>
+  <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>

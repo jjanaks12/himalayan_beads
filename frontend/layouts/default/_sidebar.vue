@@ -38,7 +38,7 @@
         </SidebarHeader>
         <SidebarContent class="gap-0">
             <SidebarGroup>
-                <Language />
+                <!-- <Language /> -->
                 <AppSearch />
             </SidebarGroup>
             <SidebarGroup class="bg-[#e6e6e6] p-0">

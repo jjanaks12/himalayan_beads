@@ -8,4 +8,5 @@ export type APIQuery = {
     current: number
     s: string
     sort?: APISort
+    filter: Record<string, string>
 }

@@ -4,9 +4,11 @@ import type { Token, User } from "~/himalayan_beads"
 
 import type { userDetailSchema, userLoginSchema, userRegisterSchema } from "~/lib/schemas/user.schema"
 import { useAxios } from '~/services/axios'
+import { useCartStore } from './cartStore'
 
 export const useAuthStore = defineStore('auth', () => {
   const { axios } = useAxios()
+  const { cartItems, clearCart } = useCartStore()
 
   const token = ref<Token | null>(null)
   const isLoading = ref(false)
@@ -21,8 +23,10 @@ export const useAuthStore = defineStore('auth', () => {
   const role = computed(() => user.value?.role?.name)
 
   const fetch = async () => {
+    isLoading.value = true
     const { data } = await axios.get<User>('/profile')
     user.value = data
+    isLoading.value = false
   }
 
   const login = async (formData: Y.InferType<typeof userLoginSchema>, redirectURL = '/dashboard') => {
@@ -91,6 +95,11 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = null
   }
 
+  const checkout = async (info: any) => {
+    await axios.post('/users/checkout', info)
+    clearCart()
+  }
+
   watch(token, () => {
     checkUser()
   })
@@ -98,7 +107,7 @@ export const useAuthStore = defineStore('auth', () => {
   return {
     user, token, isLoading,
     isLoggedin, permissions, role, fullName,
-    fetch, login, logout, register, refreshToken, updateDetail, changePassword
+    fetch, login, logout, register, refreshToken, updateDetail, changePassword, checkout
   }
 }, {
   persist: {

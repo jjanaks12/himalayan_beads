@@ -27,6 +27,7 @@ export class CategoryController {
         try {
             const body: any = {
                 name: request.body.name,
+                slug: request.body.slug,
                 description: request.body.description,
                 parent_id: request.body.parent_id
             }

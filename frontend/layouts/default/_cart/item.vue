@@ -21,9 +21,9 @@
 </script>
 
 <template>
-    <li :key="item.product.id"
+    <div :key="item.product.id"
         class="flex items-start gap-4 p-3 border-b last:border-b-0 hover:bg-gray-50 transition-colors">
-        <figure class="w-16 h-16 bg-gray-100 rounded overflow-hidden">
+        <figure :class="{ 'w-16 h-16 bg-gray-100 rounded overflow-hidden': true, 'p-1': !image }">
             <img :src="image" :alt="item.product.name" class="w-full h-full object-cover" v-if="image">
             <img src="/images/logo.svg" class="w-full h-full object-contain" v-else />
         </figure>
@@ -39,10 +39,9 @@
         </div>
         <div class="text-right">
             <p class="text-sm text-[#A0522D] font-semibold">${{ (price * item.quantity).toFixed(2) }}</p>
-            <button @click.stop="removeFromCart(item.product.id)" title="Remove from cart"
-                class="text-gray-400 hover:text-red-500 p-1 rounded-full hover:bg-red-50 transition-colors mt-4">
+            <Button variant="ghost" size="icon" @click.stop="removeFromCart(item.product.id)" title="Remove from cart">
                 <XIcon class="w-4 h-4" />
-            </button>
+            </Button>
         </div>
-    </li>
+    </div>
 </template>

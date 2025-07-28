@@ -9,7 +9,8 @@
 
     definePageMeta({
         layout: 'admin',
-        middleware: 'auth'
+        middleware: 'auth',
+        authorization: 'manage_user'
     })
 
     const { can } = useAuthorization()

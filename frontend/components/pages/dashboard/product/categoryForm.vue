@@ -31,6 +31,7 @@
             if (category && form.value) {
                 form.value.setValues({
                     name: category.name,
+                    slug: category.slug,
                     description: category.description,
                     parent_id: category.parent_id
                 })
@@ -58,6 +59,15 @@
                 <div class="flex-grow">
                     <Input type="text" v-bind="field" placeholder="Name" id="pf__name" />
                     <ErrorMessage name="name" />
+                </div>
+            </div>
+        </Field>
+        <Field name="slug" v-slot="{ field }">
+            <Label for="cf__slug">Category slug</Label>
+            <div class="flex gap-2">
+                <div class="flex-grow">
+                    <Input type="text" v-bind="field" placeholder="Slug" id="cf__slug" />
+                    <ErrorMessage name="slug" />
                 </div>
             </div>
         </Field>

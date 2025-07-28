@@ -5,12 +5,14 @@ import { ProductController } from '@/app/http/controllers/product.controller'
 
 const router = Router()
 
-router.get('/', [verifyAccessToken], ProductController.index)
+router.get('/', [], ProductController.index)
 router.get('/:id', [verifyAccessToken], ProductController.view)
 router.post('/', [verifyAccessToken], ProductController.create)
 router.put('/:product_id', [verifyAccessToken], ProductController.update)
 router.delete('/:product_id', [verifyAccessToken], ProductController.delete)
 router.put('/:product_id/update_description', [verifyAccessToken], ProductController.updateDescription)
+
+router.get('/by_category/:slug', [], ProductController.productsByCategory)
 
 router.put('/:product_id/save_images', [verifyAccessToken], ProductController.saveImages)
 router.put('/:product_id/image/:image_id/set_featured_image', [verifyAccessToken], ProductController.setFeaturedImage)

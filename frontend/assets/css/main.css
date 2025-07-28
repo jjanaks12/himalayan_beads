@@ -143,7 +143,7 @@
 }
 
 form [role=alert] {
-  @apply text-destructive text-sm;
+  @apply text-destructive text-xs;
 }
 
 @keyframes shimmer {
@@ -154,4 +154,8 @@ form [role=alert] {
   100% {
     transform: translateX(200%) skewX(-12deg);
   }
+}
+
+.container {
+  @apply mx-auto;
 }
