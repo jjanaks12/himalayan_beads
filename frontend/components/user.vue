@@ -24,7 +24,8 @@
                 <NuxtLink :to="`/dashboard/users/${user.id}`">{{ fullName || appName }}</NuxtLink>
             </strong>
             <em class="not-italic block">{{ user.email }}</em>
-            <Badge variant="secondary">{{ user.role.name || 'user' }}</Badge>
+            <Badge variant="secondary" v-if="user.role">{{ user.role.name || 'user' }}</Badge>
+            <slot />
         </div>
     </div>
 </template>

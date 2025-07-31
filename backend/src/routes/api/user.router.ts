@@ -5,8 +5,8 @@ import { verifyAccessToken } from "@/app/http/middleware/verify_access_token.mid
 const router = Router()
 
 router.get('/', [verifyAccessToken], UserController.index)
+router.get('/orders', [verifyAccessToken], UserController.userOrder)
 router.get('/:id', [verifyAccessToken], UserController.view)
 router.post('/checkout', [verifyAccessToken], UserController.checkout)
-router.get('/orders', [verifyAccessToken], UserController.userOrder)
 
 export default router

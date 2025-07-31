@@ -11,7 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
   const { cartItems, clearCart } = useCartStore()
 
   const token = ref<Token | null>(null)
-  const isLoading = ref(false)
+  const isLoading = ref(true)
   const user = ref<User | null>()
 
   const isLoggedin = computed(() => token.value != null)

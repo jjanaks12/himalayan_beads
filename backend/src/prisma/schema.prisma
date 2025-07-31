@@ -224,13 +224,15 @@ enum OrderStatus {
   NEW
   PENDING
   CANCELLED
-  PRCESSING
+  PROCESSING
   COMPLETED
+  DELETED
 }
 
 enum OrderType {
   CASH_ON_DELIVERY
   ONLINE
+  PAID
 }
 
 enum AddressType {

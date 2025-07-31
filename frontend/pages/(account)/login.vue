@@ -14,11 +14,15 @@
     })
 
     const route = useRoute()
-    const { isLoading, isLoggedin } = storeToRefs(useAuthStore())
+    const { isLoggedin } = storeToRefs(useAuthStore())
     const { login } = useAuthStore()
 
+    const isLoading = ref(false)
+
     const signIn = async (formData: any) => {
+        isLoading.value = true
         await login(formData, route.query.redirect_from as string)
+        isLoading.value = false
     }
 
     onMounted(() => {

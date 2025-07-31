@@ -111,13 +111,51 @@ export class UserController {
         }
     }
 
-    public static async userOrder(request: Request, response: Response, next: NextFunction) {
+    public static async userOrder(request: Request<{}, {}, { auth_user: User }, APIQuery>, response: Response, next: NextFunction) {
         try {
-            response.send(await prisma.order.findMany({
-                where: {
-                    userId: request.body.auth_user.id
-                }
-            }))
+            const { per_page = 10, current = 1, s = '', sort } = request.query
+            const skip = (current - 1) * per_page
+            const userId = request.body.auth_user.id
+
+            response.send({
+                per_page: Number(per_page),
+                current: Number(current),
+                sort,
+                total: await prisma.order.count(),
+                data: await prisma.order.findMany({
+                    where: {
+                        userId,
+                        NOT: {
+                            status: 'DELETED'
+                        }
+                    },
+                    skip,
+                    take: parseInt(per_page.toString()),
+                    orderBy: [{ createdAt: 'desc' }],
+                    include: {
+                        user: {
+                            omit: {
+                                password: true
+                            }
+                        },
+                        prices: {
+                            where: {
+                                deletedAt: null
+                            }
+                        },
+                        billingAddress: {
+                            include: {
+                                country: true
+                            }
+                        },
+                        shippingAddress: {
+                            include: {
+                                country: true
+                            }
+                        }
+                    }
+                })
+            })
         } catch (error) {
             next(error)
         }

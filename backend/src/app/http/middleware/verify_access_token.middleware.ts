@@ -22,7 +22,6 @@ export const verifyAccessToken = (request: Request, response: Response, next: Ne
                     password: true
                 }
             })
-
             request.body = { ...request.body, auth_user: user }
         }
         next()

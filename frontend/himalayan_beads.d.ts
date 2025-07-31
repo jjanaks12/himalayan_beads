@@ -1,22 +1,10 @@
 import * as Icons from "lucide-vue-next"
 
-enum OrderStatus {
-  NEW,
-  PENDING,
-  CANCELLED,
-  PRCESSING,
-  COMPLETED
-}
+export type OrderStatus = 'NEW' | 'PENDING' | 'CANCELLED' | 'PROCESSING' | 'COMPLETED' | 'DELETED'
 
-enum OrderType {
-  CASH_ON_DELIVERY,
-  ONLINE
-}
+type OrderType = 'CASH_ON_DELIVERY' | 'ONLINE' | 'PAID'
 
-enum AddressType {
-  BILLING,
-  SHIPPING
-}
+type AddressType = 'BILLING' | 'SHIPPING'
 
 type APISuccess<T> = {
   status: "success"
@@ -106,7 +94,7 @@ type Address = {
   state: string
   zipCode: string
   countryId: string
-  Country: Country
+  country: Country
   type: AddressType
   orders: Order[]
 }
@@ -152,19 +140,27 @@ type User = {
   orders: Order[]
 }
 
+type CartItem = {
+  price_id: string
+  product_id: string
+  quantity: number
+}
+
 type Order = {
   id: string
   status: OrderStatus
   type: OrderType
   userId: string
-  detail: Json
+  detail: CartItem[]
   billingAddressId: string
   shippingAddressId: string
   createdAt: string
   updatedAt: string
   user: User
   shippingAddress: Address
+  billingAddress: Address
   products: Product[]
+  prices: Price[]
 }
 
 type Image = {
@@ -244,7 +240,7 @@ interface Category {
 }
 
 // Defines the shape of a banner item from your grid
-export interface Banner {
+interface Banner {
   id: number
   type: "banner"
   title: string
@@ -257,7 +253,7 @@ interface CartItem<T> {
   quantity: number
 }
 
-export interface BlogPost {
+interface BlogPost {
   id: number
   image: string
   category: string

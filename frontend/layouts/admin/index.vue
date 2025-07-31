@@ -35,7 +35,7 @@
             </div>
         </main>
     </SidebarProvider>
-    <div class="h-screen flex w-full gap-4 p-4" v-else>
+    <div class="bg-white h-screen flex w-full gap-4 p-4" v-else>
         <div class="h-full w-[250px]">
             <div class="flex gap-4">
                 <Skeleton class="w-[50px] h-[50px] rounded-full" />

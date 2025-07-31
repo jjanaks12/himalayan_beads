@@ -9,6 +9,7 @@ import permissionRouter from '@/routes/api/permission.router'
 import newsletterRouter from '@/routes/api/newsletter.router'
 import mediaRouter from '@/routes/api/media.router'
 import miscellanousRouter from '@/routes/api/miscellanous.router'
+import orderRouter from '@/routes/api/order.router'
 
 const router = Router()
 
@@ -21,5 +22,6 @@ router.use('/permissions', permissionRouter)
 router.use('/newsletters', newsletterRouter)
 router.use('/images', mediaRouter)
 router.use('/', miscellanousRouter)
+router.use('/orders', orderRouter)
 
 export default router

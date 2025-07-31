@@ -2,7 +2,7 @@
     import { useCartStore } from '~/store/cartStore'
 
     import CartItem from '@/layouts/default/_cart/item.vue'
-    import { BaggageClaimIcon } from 'lucide-vue-next'
+    import { BaggageClaimIcon, TriangleAlertIcon } from 'lucide-vue-next'
 
     useHead({
         title: 'Cart summary'
