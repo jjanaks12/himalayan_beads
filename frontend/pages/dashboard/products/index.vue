@@ -137,8 +137,6 @@
         isProductDeleteOpened = state
         productId = null
     }">
-        <DialogTrigger as-child>
-        </DialogTrigger>
         <DialogContent class="bg-white">
             <DialogHeader>
                 <DialogTitle>Are you sure?</DialogTitle>

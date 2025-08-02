@@ -2,20 +2,23 @@
   import { useAuthStore } from '~/store/auth'
   import Jobs from '~/lib/jobs'
   import { useAppStore } from './store/app'
+  import { usePermissionStore } from './store/permission'
 
   const { isLoggedin } = storeToRefs(useAuthStore())
   const { fetch } = useAuthStore()
   const { fetchCountry } = useAppStore()
+  const { fetch: fetchPermission } = usePermissionStore()
 
   const isLoading = ref(true)
   const job = new Jobs()
 
   const initPage = async () => {
+    const taskList = []
     if (!isLoggedin.value)
       return
 
-    job.add([fetch, fetchCountry])
 
+    job.add([fetch, fetchCountry, fetchPermission])
     await job.run()
       .finally(() => {
         isLoading.value = false

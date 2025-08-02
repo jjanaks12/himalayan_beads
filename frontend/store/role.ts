@@ -3,7 +3,7 @@ import { useAxios } from "~/services/axios"
 
 export const useRoleStore = defineStore('role', () => {
     const { isLoading } = useModalMeta()
-    const roles = ref<Role[]>()
+    const roles = ref<Role[]>([])
 
     const { axios } = useAxios()
 
@@ -22,11 +22,16 @@ export const useRoleStore = defineStore('role', () => {
 
         await axios[method](url, formData)
         isLoading.value = false
+        fetch()
+    }
+
+    const destory = async (id: string) => {
+        await axios.delete(`/roles/${id}`)
     }
 
     return {
         roles,
         isLoading,
-        fetch, save
+        fetch, save, destory
     }
 })

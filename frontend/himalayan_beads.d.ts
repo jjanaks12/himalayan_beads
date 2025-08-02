@@ -119,6 +119,7 @@ type Permission = {
 type Role = {
   id: string
   name: string
+  description: string
   permissions: Permission[]
 }
 

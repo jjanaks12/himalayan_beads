@@ -124,10 +124,7 @@ export class UserController {
                 total: await prisma.order.count(),
                 data: await prisma.order.findMany({
                     where: {
-                        userId,
-                        NOT: {
-                            status: 'DELETED'
-                        }
+                        userId
                     },
                     skip,
                     take: parseInt(per_page.toString()),
@@ -136,6 +133,9 @@ export class UserController {
                         user: {
                             omit: {
                                 password: true
+                            },
+                            include: {
+                                image: true
                             }
                         },
                         prices: {

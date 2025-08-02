@@ -34,6 +34,9 @@ export class OrderController {
                         user: {
                             omit: {
                                 password: true
+                            },
+                            include: {
+                                image: true
                             }
                         },
                         products: true,

@@ -10,7 +10,7 @@
     definePageMeta({
         layout: 'admin',
         middleware: 'auth',
-        authorization: ['update_order', 'view_order']
+        authorization: ['manage_order']
     })
 
     const { fetch } = useOrderStore()

@@ -73,7 +73,7 @@ const menuList: Menu[] = [{
         name: 'products_orders',
         path: '/dashboard/products/orders/',
         icon: 'BaggageClaim',
-        permission: ['view_order', 'update_order'],
+        permission: ['manage_order'],
         // parent_id: 2
     },]
 }, {

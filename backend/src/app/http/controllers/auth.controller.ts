@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { Order, PrismaClient } from '@prisma/client'
 import { NextFunction, Request, Response } from 'express-serve-static-core'
 import createHttpError from 'http-errors'
 import Bcrypt from 'bcrypt'
@@ -116,7 +116,9 @@ export class AuthController {
 
     public static async profile(request: Request, response: Response, next: NextFunction) {
         try {
-            response.send(await prisma.user.findFirstOrThrow({
+            let userOrder: Order | null = null
+
+            const { orders, ...user } = await prisma.user.findFirstOrThrow({
                 where: {
                     id: request.body.auth_user.id
                 },
@@ -129,9 +131,24 @@ export class AuthController {
                         include: {
                             permissions: true
                         }
-                    }
+                    },
+                    orders: true
                 }
-            }))
+            })
+
+            if (orders.length > 0)
+                userOrder = await prisma.order.findFirst({
+                    where: {
+                        userId: request.body.auth_user.id
+                    },
+                    include: {
+                        shippingAddress: true,
+                        billingAddress: true
+                    }
+                })
+
+            // @ts-expect-error
+            response.send({ ...user, lastUsedAddress: userOrder ? userOrder.billingAddress : null })
         } catch (error) {
             next(error)
         }
