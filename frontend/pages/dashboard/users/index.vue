@@ -1,8 +1,10 @@
 <script lang="ts" setup>
-    import { EllipsisVerticalIcon, EyeIcon, PencilIcon, SlidersVerticalIcon, TrashIcon } from 'lucide-vue-next'
+    import { EllipsisVerticalIcon, EyeIcon, PencilIcon, ShieldCheckIcon, SlidersVerticalIcon, TrashIcon } from 'lucide-vue-next'
+    import type { User } from '~/himalayan_beads'
 
     import { useUserStore } from '~/store/user'
 
+    import ChangeRoleForm from '@/components/pages/dashboard/user/roleForm.vue'
     useHead({
         title: 'User'
     })
@@ -16,6 +18,9 @@
     const { can } = useAuthorization()
     const { users, params } = storeToRefs(useUserStore())
     const { fetch } = useUserStore()
+
+    const isUserRoleChangeDialogOpen = ref(false)
+    const tempUser = ref<User | null>(null)
 
     onMounted(() => {
         fetch()
@@ -38,6 +43,7 @@
             <TableRow>
                 <TableHead>SN</TableHead>
                 <TableHead>Name</TableHead>
+                <TableHead>Verified</TableHead>
                 <TableHead class="text-right">Actions</TableHead>
             </TableRow>
         </TableHeader>
@@ -47,21 +53,34 @@
                 <TableCell>
                     <User :user="user" />
                 </TableCell>
+                <TableCell>
+                    <Badge variant="completed" v-if="user.emailVerified">
+                        <ShieldCheckIcon />
+                        verified
+                    </Badge>
+                </TableCell>
                 <TableCell class="text-right">
                     <DropdownMenu v-if="user?.role?.name !== 'Admin'">
                         <DropdownMenuTrigger>
                             <EllipsisVerticalIcon />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
-                            <DropdownMenuItem v-if="can('update_product')">
+                            <!-- <DropdownMenuItem v-if="can('update_user')">
                                 <PencilIcon />
                                 Edit
                             </DropdownMenuItem>
-                            <DropdownMenuItem v-if="can('view_product')">
+                            <DropdownMenuItem v-if="can('view_user')">
                                 <EyeIcon />
                                 View
+                            </DropdownMenuItem> -->
+                            <DropdownMenuItem v-if="can('update_user')" @click="() => {
+                                isUserRoleChangeDialogOpen = true
+                                tempUser = user
+                            }">
+                                <TrashIcon />
+                                Change role
                             </DropdownMenuItem>
-                            <DropdownMenuItem v-if="can('delete_product')">
+                            <DropdownMenuItem v-if="can('delete_user')">
                                 <TrashIcon />
                                 Delete
                             </DropdownMenuItem>
@@ -92,4 +111,18 @@
             </Pagination>
         </div>
     </div>
+    <Dialog :open="isUserRoleChangeDialogOpen" @update:open="() => {
+        isUserRoleChangeDialogOpen = false
+        tempUser = null
+    }">
+        <DialogContent class="bg-white">
+            <DialogTitle>Update {{ tempUser?.first_name }}'s' role</DialogTitle>
+            <DialogDescription>Change role of users</DialogDescription>
+            <ChangeRoleForm :user="tempUser" @update="() => {
+                isUserRoleChangeDialogOpen = false
+                tempUser = null
+                fetch()
+            }" />
+        </DialogContent>
+    </Dialog>
 </template>

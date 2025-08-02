@@ -147,8 +147,13 @@ export class AuthController {
                     }
                 })
 
-            // @ts-expect-error
-            response.send({ ...user, lastUsedAddress: userOrder ? userOrder.billingAddress : null })
+            response.send({
+                ...user,
+                // @ts-expect-error
+                billingAddress: userOrder ? userOrder.billingAddress : null,
+                // @ts-expect-error
+                shippingAddress: userOrder ? userOrder.shippingAddress : null
+            })
         } catch (error) {
             next(error)
         }

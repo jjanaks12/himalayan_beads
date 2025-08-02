@@ -1,3 +1,4 @@
+import { assignRoleSchema } from "@/app/lib/schema/role.schema"
 import { userCheckoutSchema } from "@/app/lib/schema/user.schema"
 import { APIQuery } from "@/lib/type"
 import { PrismaClient, User } from "@prisma/client"
@@ -156,6 +157,23 @@ export class UserController {
                     }
                 })
             })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public static async assignRole(request: Request, response: Response, next: NextFunction) {
+        try {
+            const validationData = await assignRoleSchema.validate(request.body, { abortEarly: false })
+
+            response.send(await prisma.user.update({
+                where: {
+                    id: validationData.user_id
+                },
+                data: {
+                    role_id: validationData.role_id
+                }
+            }))
         } catch (error) {
             next(error)
         }

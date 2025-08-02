@@ -137,6 +137,8 @@ type User = {
 
   role: Role
   image?: Image
+  billingAddress?: Address
+  shippingAddress?: Address
   accounts: Account[]
   orders: Order[]
 }

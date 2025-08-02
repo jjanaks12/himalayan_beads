@@ -72,6 +72,28 @@
         }
     })
 
+    watchEffect(() => {
+        if (user.value?.shippingAddress) {
+            form.value?.setFieldValue('shipping_address.address', user.value.shippingAddress?.address)
+            form.value?.setFieldValue('shipping_address.street', user.value.shippingAddress?.street)
+            form.value?.setFieldValue('shipping_address.city', user.value.shippingAddress?.city)
+            form.value?.setFieldValue('shipping_address.state', user.value.shippingAddress?.state)
+            form.value?.setFieldValue('shipping_address.zipCode', user.value.shippingAddress?.zipCode)
+            form.value?.setFieldValue('shipping_address.countryId', user.value.shippingAddress?.countryId)
+        }
+        if (user.value?.billingAddress) {
+            form.value?.setFieldValue('billing_address.address', user.value.billingAddress?.address)
+            form.value?.setFieldValue('billing_address.street', user.value.billingAddress?.street)
+            form.value?.setFieldValue('billing_address.city', user.value.billingAddress?.city)
+            form.value?.setFieldValue('billing_address.state', user.value.billingAddress?.state)
+            form.value?.setFieldValue('billing_address.zipCode', user.value.billingAddress?.zipCode)
+            form.value?.setFieldValue('billing_address.countryId', user.value.billingAddress?.countryId)
+        }
+
+        if (user.value?.billingAddress?.id === user.value?.shippingAddress?.id)
+            form.value?.setFieldValue('same_as_billing', true)
+    })
+
     onMounted(() => {
         if (form.value)
             form.value.setFieldValue('cartItems', cartItems.value.map(item => ({

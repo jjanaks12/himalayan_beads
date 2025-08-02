@@ -1,4 +1,7 @@
+import * as Y from 'yup'
+
 import type { Role } from "~/himalayan_beads"
+import { assignRoleSchema } from '~/lib/schemas/role.schema'
 import { useAxios } from "~/services/axios"
 
 export const useRoleStore = defineStore('role', () => {
@@ -29,9 +32,15 @@ export const useRoleStore = defineStore('role', () => {
         await axios.delete(`/roles/${id}`)
     }
 
+    const assignUserRole = async (formData: Y.InferType<typeof assignRoleSchema>) => {
+        console.log(formData);
+        
+        await axios.put(`/users/assignRole/`, formData)
+    }
+
     return {
         roles,
         isLoading,
-        fetch, save, destory
+        fetch, save, destory, assignUserRole
     }
 })

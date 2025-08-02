@@ -21,20 +21,17 @@
                     Welcome to Himalayan Beads
                 </strong>
                 <ul class="flex gap-2 text-sm text-[#B37557] underline uppercase mb-4">
-                    <template v-if="!isLoggedin">
-                        <li>
-                            <NuxtLink :to="{ name: 'login' }">Signin</NuxtLink>
-                        </li>
-                        <li>
-                            <NuxtLink :to="{ name: 'register' }">Signup</NuxtLink>
-                        </li>
-                    </template>
-                    <li v-else>
-                        <NuxtLink :to="{ name: 'dashboard' }">Dashboard</NuxtLink>
+                    <li>
+                        <NuxtLink :to="{ name: 'login' }">Signin</NuxtLink>
+                    </li>
+                    <li>
+                        <NuxtLink :to="{ name: 'register' }">Signup</NuxtLink>
                     </li>
                 </ul>
             </template>
-            <AuthUser v-else />
+            <AuthUser v-else>
+                <NuxtLink :to="{ name: 'dashboard' }" class="text-xs inline-block text-secondary mt-4">Dashboard</NuxtLink>
+            </AuthUser>
         </SidebarHeader>
         <SidebarContent class="gap-0">
             <SidebarGroup>

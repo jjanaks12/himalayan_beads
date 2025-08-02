@@ -21,7 +21,8 @@
         </Avatar>
         <div class="flex-grow">
             <strong class="block">
-                <NuxtLink :to="`/dashboard/users/${user.id}`">{{ fullName || appName }}</NuxtLink>
+                {{ fullName || appName }}
+                <!-- <NuxtLink :to="`/dashboard/users/${user.id}`">{{ fullName || appName }}</NuxtLink> -->
             </strong>
             <em class="not-italic block">{{ user.email }}</em>
             <Badge variant="secondary" v-if="user.role">{{ user.role.name || 'user' }}</Badge>

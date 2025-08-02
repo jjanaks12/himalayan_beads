@@ -8,5 +8,6 @@ router.get('/', [verifyAccessToken], UserController.index)
 router.get('/orders', [verifyAccessToken], UserController.userOrder)
 router.get('/:id', [verifyAccessToken], UserController.view)
 router.post('/checkout', [verifyAccessToken], UserController.checkout)
+router.put('/assignRole', [verifyAccessToken], UserController.assignRole)
 
 export default router

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { IdCard, Loader, Mail, Phone } from 'lucide-vue-next'
+    import { IdCard, Loader, Mail, Phone, TriangleAlertIcon } from 'lucide-vue-next'
     import { Form, Field, ErrorMessage, type FormContext } from 'vee-validate'
     import { abbr, showImage } from '~/lib/filters'
 
@@ -59,6 +59,13 @@
         <h1 class="text-black text-xl">Personal details</h1>
         <p>Enter your personal details below to update your account information.</p>
     </div>
+    <Alert v-if="!user?.emailVerified" variant="warn" class="mb-12">
+        <TriangleAlertIcon />
+        <AlertTitle>Your email has not been verified!</AlertTitle>
+        <AlertDescription>
+            Please verify your email to complete registration and secure your account.
+        </AlertDescription>
+    </Alert>
     <!-- @vue-expect-error -->
     <Form :validation-schema="userDetailSchema" method="post" @submit="updateDetail"
         class="max-w-[820px] flex flex-col space-y-4" ref=form v-slot="{ values, errors }">

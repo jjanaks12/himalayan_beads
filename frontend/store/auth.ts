@@ -21,6 +21,7 @@ export const useAuthStore = defineStore('auth', () => {
   ))
   const fullName = computed(() => [user.value?.first_name, user.value?.last_name].join(' ').trim())
   const role = computed(() => user.value?.role?.name)
+  const disableUser = computed(() => user.value?.emailVerified === null)
 
   const fetch = async () => {
     isLoading.value = true
@@ -106,7 +107,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     user, token, isLoading,
-    isLoggedin, permissions, role, fullName,
+    isLoggedin, permissions, role, fullName, disableUser,
     fetch, login, logout, register, refreshToken, updateDetail, changePassword, checkout
   }
 }, {

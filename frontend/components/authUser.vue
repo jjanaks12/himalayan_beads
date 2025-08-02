@@ -17,9 +17,11 @@
         </Avatar>
         <div class="flex-grow">
             <strong class="block">
-                <NuxtLink :to="{ name: 'dashboard' }">{{ fullName || appName }}</NuxtLink>
+                <NuxtLink :to="{ name: 'dashboard-settings-user_detail' }">{{ fullName || appName }}</NuxtLink>
             </strong>
             <Badge variant="secondary">{{ role || 'user' }}</Badge>
+            <br>
+            <slot />
         </div>
     </div>
 </template>
