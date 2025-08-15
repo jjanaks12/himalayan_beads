@@ -1,13 +1,13 @@
-import type { APIParam, APIQuery } from "~/himalayan_beads"
+import type { APIParam } from "~/himalayan_beads"
 
-export const useModalMeta = () => {
+export const useModalMeta = (p: APIParam = {
+    current: 1,
+    per_page: 10,
+    total: 0,
+    total_page: 0
+}) => {
     const isLoading = ref(false)
-    const params = ref<APIParam>({
-        current: 1,
-        per_page: 10,
-        total: 0,
-        total_page: 0
-    })
+    const params = ref<APIParam>(p)
 
     const nextPage = () => {
         if ((params.value.current + 1) <= params.value.total_page)

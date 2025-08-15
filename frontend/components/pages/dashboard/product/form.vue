@@ -15,7 +15,7 @@
 
     const props = defineProps<ProductFormProps>()
     const emit = defineEmits(['update'])
-    const { categories } = storeToRefs(useCatgoryStore())
+    const { productCategories: categories } = storeToRefs(useCatgoryStore())
     const { fetch } = useCatgoryStore()
     const { save, getProduct } = useProductStore()
 

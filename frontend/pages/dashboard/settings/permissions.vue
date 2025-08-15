@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-    import { EllipsisVerticalIcon, EyeIcon, PencilIcon, SlidersVerticalIcon, TrashIcon } from 'lucide-vue-next'
+    import { SlidersVerticalIcon } from 'lucide-vue-next'
+    import { humanize } from '~/lib/filters'
     import { usePermissionStore } from '~/store/permission'
 
     useHead({
@@ -35,14 +36,14 @@
             <TableRow>
                 <TableHead>SN</TableHead>
                 <TableHead>Name</TableHead>
-                <TableHead class="text-right">Actions</TableHead>
+                <!-- <TableHead class="text-right">Actions</TableHead> -->
             </TableRow>
         </TableHeader>
         <TableBody>
-            <TableRow v-for="(role, index) of permissions">
+            <TableRow v-for="(permission, index) of permissions">
                 <TableCell>{{ index + 1 }}</TableCell>
-                <TableCell>{{ role.name }}</TableCell>
-                <TableCell class="text-right">
+                <TableCell>{{ humanize(permission.name) }}</TableCell>
+                <!-- <TableCell class="text-right">
                     <DropdownMenu>
                         <DropdownMenuTrigger>
                             <EllipsisVerticalIcon />
@@ -62,7 +63,7 @@
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
-                </TableCell>
+                </TableCell> -->
             </TableRow>
         </TableBody>
     </Table>

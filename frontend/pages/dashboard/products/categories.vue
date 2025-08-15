@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { EllipsisVerticalIcon, EyeIcon, PencilIcon, PlusIcon, TrashIcon } from 'lucide-vue-next'
+    import { EllipsisVerticalIcon, PencilIcon, PlusIcon, TrashIcon } from 'lucide-vue-next'
 
     import CategoryCreateForm from '@/components/pages/dashboard/product/categoryForm.vue'
     import { useCatgoryStore } from '~/store/category'
@@ -11,7 +11,7 @@
     definePageMeta({
         layout: 'admin',
         middleware: 'auth',
-        authorization: 'manage_category'
+        authorization: ['add_category', 'delete_category', 'view_category', 'edit_category']
     })
 
     const { can } = useAuthorization()
@@ -33,7 +33,7 @@
 
 <template>
     <div class="text-right mb-4">
-        <Button @click="isOpened = true">
+        <Button @click="isOpened = true" permissions="create_category">
             <PlusIcon />
             Add category
         </Button>
@@ -42,6 +42,7 @@
         <TableHeader>
             <TableRow>
                 <TableHead>Name</TableHead>
+                <TableHead>Type</TableHead>
                 <TableHead class="text-right">Actions</TableHead>
             </TableRow>
         </TableHeader>
@@ -50,6 +51,9 @@
                 <TableCell>
                     <em class="not-italic block text-gray-400">{{ category.id }}</em>
                     <strong class="text-lg">{{ category.name }}</strong>
+                </TableCell>
+                <TableCell>
+                    {{ category.type }}
                 </TableCell>
                 <TableCell class="text-right">
                     <DropdownMenu>

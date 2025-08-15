@@ -7,6 +7,7 @@
 
     const { toggleSidebar } = useSidebar()
     const { isLoggedin } = storeToRefs(useAuthStore())
+    const { logout } = useAuthStore()
 </script>
 
 <template>
@@ -30,7 +31,9 @@
                 </ul>
             </template>
             <AuthUser v-else>
-                <NuxtLink :to="{ name: 'dashboard' }" class="text-xs inline-block text-secondary mt-4">Dashboard</NuxtLink>
+                <NuxtLink :to="{ name: 'dashboard' }" class="text-xs inline-block text-secondary mt-4">
+                    Dashboard
+                </NuxtLink>
             </AuthUser>
         </SidebarHeader>
         <SidebarContent class="gap-0">
@@ -69,6 +72,8 @@
                 </SidebarMenu>
             </SidebarGroup>
         </SidebarContent>
-        <SidebarFooter />
+        <SidebarFooter>
+            <Button @click="logout">logout</Button>
+        </SidebarFooter>
     </Sidebar>
 </template>

@@ -1,6 +1,5 @@
 import bcript from 'bcrypt'
 import type { PrismaClient } from "@prisma/client"
-import { faker } from '@faker-js/faker'
 
 export const roleSeed = async (prisma: PrismaClient) => {
     const create_user = await prisma.permission.create({
@@ -123,6 +122,46 @@ export const roleSeed = async (prisma: PrismaClient) => {
             name: 'delete_order'
         }
     })
+    const create_blog = await prisma.permission.create({
+        data: {
+            name: 'create_blog'
+        }
+    })
+    const update_blog = await prisma.permission.create({
+        data: {
+            name: 'update_blog'
+        }
+    })
+    const view_blog = await prisma.permission.create({
+        data: {
+            name: 'view_blog'
+        }
+    })
+    const delete_blog = await prisma.permission.create({
+        data: {
+            name: 'delete_blog'
+        }
+    })
+    const create_media = await prisma.permission.create({
+        data: {
+            name: 'create_media'
+        }
+    })
+    const update_media = await prisma.permission.create({
+        data: {
+            name: 'update_media'
+        }
+    })
+    const view_media = await prisma.permission.create({
+        data: {
+            name: 'view_media'
+        }
+    })
+    const delete_media = await prisma.permission.create({
+        data: {
+            name: 'delete_media'
+        }
+    })
 
     /* User role */
     const userRole = await prisma.role.create({
@@ -202,16 +241,4 @@ export const roleSeed = async (prisma: PrismaClient) => {
             role_id: adminRole.id
         }
     })
-
-    for (let i = 0; i < 20; i++) {
-        await prisma.user.create({
-            data: {
-                first_name: faker.person.firstName(),
-                last_name: faker.person.lastName(),
-                password,
-                email: faker.internet.email(),
-                role_id: userRole.id
-            }
-        })
-    }
 }

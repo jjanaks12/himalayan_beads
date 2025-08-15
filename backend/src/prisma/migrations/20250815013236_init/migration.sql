@@ -1,4 +1,31 @@
 -- CreateTable
+CREATE TABLE `blogs` (
+    `id` VARCHAR(191) NOT NULL,
+    `title` VARCHAR(191) NOT NULL,
+    `slug` VARCHAR(191) NOT NULL,
+    `excerpt` VARCHAR(255) NOT NULL,
+    `body` TEXT NULL,
+    `publishedAt` DATETIME(3) NULL,
+    `deletedAt` DATETIME(3) NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NULL,
+    `category_id` VARCHAR(191) NULL,
+    `user_id` VARCHAR(191) NOT NULL,
+    `image_id` VARCHAR(191) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `tags` (
+    `id` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `tags_name_key`(`name`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `images` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
@@ -22,6 +49,7 @@ CREATE TABLE `categories` (
     `deletedAt` DATETIME(3) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
+    `type` ENUM('BLOG', 'PRODUCT') NOT NULL DEFAULT 'PRODUCT',
 
     UNIQUE INDEX `categories_slug_key`(`slug`),
     UNIQUE INDEX `categories_image_id_key`(`image_id`),
@@ -193,8 +221,8 @@ CREATE TABLE `addresses` (
 -- CreateTable
 CREATE TABLE `orders` (
     `id` VARCHAR(191) NOT NULL,
-    `status` ENUM('NEW', 'PENDING', 'CANCELLED', 'PRCESSING', 'COMPLETED') NOT NULL,
-    `type` ENUM('CASH_ON_DELIVERY', 'ONLINE') NOT NULL,
+    `status` ENUM('NEW', 'PENDING', 'CANCELLED', 'PROCESSING', 'COMPLETED', 'DELETED') NOT NULL,
+    `type` ENUM('CASH_ON_DELIVERY', 'ONLINE', 'PAID') NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
     `detail` JSON NOT NULL,
     `billingAddressId` VARCHAR(191) NOT NULL,
@@ -231,6 +259,24 @@ CREATE TABLE `newsletters` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `wishlists` (
+    `id` VARCHAR(191) NOT NULL,
+    `user_id` VARCHAR(191) NOT NULL,
+    `details` JSON NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `_BlogToTag` (
+    `A` VARCHAR(191) NOT NULL,
+    `B` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `_BlogToTag_AB_unique`(`A`, `B`),
+    INDEX `_BlogToTag_B_index`(`B`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `_PriceToProduct` (
     `A` VARCHAR(191) NOT NULL,
     `B` VARCHAR(191) NOT NULL,
@@ -256,6 +302,24 @@ CREATE TABLE `_OrderToProduct` (
     UNIQUE INDEX `_OrderToProduct_AB_unique`(`A`, `B`),
     INDEX `_OrderToProduct_B_index`(`B`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `_OrderToPrice` (
+    `A` VARCHAR(191) NOT NULL,
+    `B` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `_OrderToPrice_AB_unique`(`A`, `B`),
+    INDEX `_OrderToPrice_B_index`(`B`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `blogs` ADD CONSTRAINT `blogs_category_id_fkey` FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `blogs` ADD CONSTRAINT `blogs_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `blogs` ADD CONSTRAINT `blogs_image_id_fkey` FOREIGN KEY (`image_id`) REFERENCES `images`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `categories` ADD CONSTRAINT `categories_image_id_fkey` FOREIGN KEY (`image_id`) REFERENCES `images`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
@@ -306,7 +370,19 @@ ALTER TABLE `orders` ADD CONSTRAINT `orders_userId_fkey` FOREIGN KEY (`userId`) 
 ALTER TABLE `orders` ADD CONSTRAINT `orders_shippingAddressId_fkey` FOREIGN KEY (`shippingAddressId`) REFERENCES `addresses`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE `orders` ADD CONSTRAINT `orders_billingAddressId_fkey` FOREIGN KEY (`billingAddressId`) REFERENCES `addresses`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `newsletters` ADD CONSTRAINT `newsletters_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `wishlists` ADD CONSTRAINT `wishlists_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `_BlogToTag` ADD CONSTRAINT `_BlogToTag_A_fkey` FOREIGN KEY (`A`) REFERENCES `blogs`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `_BlogToTag` ADD CONSTRAINT `_BlogToTag_B_fkey` FOREIGN KEY (`B`) REFERENCES `tags`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `_PriceToProduct` ADD CONSTRAINT `_PriceToProduct_A_fkey` FOREIGN KEY (`A`) REFERENCES `prices`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -325,3 +401,9 @@ ALTER TABLE `_OrderToProduct` ADD CONSTRAINT `_OrderToProduct_A_fkey` FOREIGN KE
 
 -- AddForeignKey
 ALTER TABLE `_OrderToProduct` ADD CONSTRAINT `_OrderToProduct_B_fkey` FOREIGN KEY (`B`) REFERENCES `products`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `_OrderToPrice` ADD CONSTRAINT `_OrderToPrice_A_fkey` FOREIGN KEY (`A`) REFERENCES `orders`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `_OrderToPrice` ADD CONSTRAINT `_OrderToPrice_B_fkey` FOREIGN KEY (`B`) REFERENCES `prices`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

@@ -3,12 +3,14 @@ import * as Y from 'yup'
 import type { Role } from "~/himalayan_beads"
 import { assignRoleSchema } from '~/lib/schemas/role.schema'
 import { useAxios } from "~/services/axios"
+import { useAuthStore } from './auth'
 
 export const useRoleStore = defineStore('role', () => {
     const { isLoading } = useModalMeta()
     const roles = ref<Role[]>([])
 
     const { axios } = useAxios()
+    const { fetch: fetchProfile } = useAuthStore()
 
     const fetch = async () => {
         isLoading.value = true
@@ -26,6 +28,7 @@ export const useRoleStore = defineStore('role', () => {
         await axios[method](url, formData)
         isLoading.value = false
         fetch()
+        fetchProfile()
     }
 
     const destory = async (id: string) => {
@@ -34,7 +37,7 @@ export const useRoleStore = defineStore('role', () => {
 
     const assignUserRole = async (formData: Y.InferType<typeof assignRoleSchema>) => {
         console.log(formData);
-        
+
         await axios.put(`/users/assignRole/`, formData)
     }
 

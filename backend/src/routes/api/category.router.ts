@@ -5,7 +5,9 @@ import { CategoryController } from '@/app/http/controllers/category.controller'
 
 const router = Router()
 
-router.get('/', [verifyAccessToken], CategoryController.index)
+router.get('/', [], CategoryController.index)
+router.get('/:category_id', [], CategoryController.view)
+router.get('/by_slug/:slug', [], CategoryController.viewBySlug)
 router.post('/', [verifyAccessToken], CategoryController.create)
 router.put('/:category_id', [verifyAccessToken], CategoryController.update)
 router.delete('/:category_id', [verifyAccessToken], CategoryController.delete)

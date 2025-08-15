@@ -40,11 +40,7 @@ export class OrderController {
                             }
                         },
                         products: true,
-                        prices: {
-                            where: {
-                                deletedAt: null
-                            }
-                        },
+                        prices: true,
                         billingAddress: {
                             include: {
                                 country: true

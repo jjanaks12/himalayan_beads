@@ -1,5 +1,6 @@
 import * as Icons from "lucide-vue-next"
 
+export type CategoryType = 'BLOG' | 'PRODUCT'
 export type OrderStatus = 'NEW' | 'PENDING' | 'CANCELLED' | 'PROCESSING' | 'COMPLETED' | 'DELETED'
 
 type OrderType = 'CASH_ON_DELIVERY' | 'ONLINE' | 'PAID'
@@ -31,6 +32,7 @@ type APISort<T> = {
 type APIQuery<T> = {
   s: string
   sort?: APISort<T>
+  filter?: Record<string, boolean>
 }
 
 type APIParam = {
@@ -234,12 +236,15 @@ interface Category {
   image_id?: string
   description?: string
   deletedAt?: string
+  type: CategoryType
   createdAt: string
   updatedAt: string
   image?: Image
   successor?: Category
   predecessor: Category[]
   products: Product[]
+  blogs: Blog[]
+  _count: Record<string, number>
 }
 
 // Defines the shape of a banner item from your grid
@@ -256,12 +261,27 @@ interface CartItem<T> {
   quantity: number
 }
 
-interface BlogPost {
-  id: number
-  image: string
-  category: string
-  timeAgo: string
+type Blog = {
+  id: string
   title: string
-  description: string
-  slug: string // The unique identifier for the URL
+  slug: string
+  excerpt: string
+  body: string
+  publishedAt?: string
+  deletededAt?: string
+  createdAt: string
+  updatedAt: string
+  user_id: string
+  category_id: string
+  user: User
+  image_id?: string
+  image?: Image
+  tags: Tag[]
+  category: Category
+}
+
+type Tag = {
+  id: string
+  name: string
+  blog: Blog[]
 }

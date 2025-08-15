@@ -1,5 +1,8 @@
 <script lang="ts" setup>
   import { StarIcon, TruckIcon, RefreshCwIcon, ShieldCheckIcon } from "lucide-vue-next"
+  import { useAuthStore } from "~/store/auth"
+
+  const { isLoggedin } = storeToRefs(useAuthStore())
 </script>
 
 <template>
@@ -12,10 +15,22 @@
           <!-- <Language /> -->
           <!-- This wrapper allows badges to wrap to a new line if the screen is very narrow -->
           <div class="flex flex-wrap justify-center items-center gap-2 ml-auto">
-            <div class="bg-[#eab308] text-black flex items-center gap-0.5 px-3 py-2.5 rounded-sm text-xs font-medium transition-all hover:bg-[#d97706] hover:-translate-y-0.5"><StarIcon :size="12" /><span>Premium Quality</span></div>
-            <div class="bg-[#eab308] text-black flex items-center gap-0.5 px-3 py-2.5 rounded-sm text-xs font-medium transition-all hover:bg-[#d97706] hover:-translate-y-0.5"><TruckIcon :size="12" /><span>Fast Delivery</span></div>
-            <div class="bg-[#eab308] text-black flex items-center gap-0.5 px-3 py-2.5 rounded-sm text-xs font-medium transition-all hover:bg-[#d97706] hover:-translate-y-0.5"><RefreshCwIcon :size="12" /><span>Easy Exchange</span></div>
-            <div class="bg-[#eab308] text-black flex items-center gap-0.5 px-3 py-2.5 rounded-sm text-xs font-medium transition-all hover:bg-[#d97706] hover:-translate-y-0.5"><ShieldCheckIcon :size="12" /><span>Secure Payment</span></div>
+            <div
+              class="bg-[#eab308] text-black flex items-center gap-0.5 px-3 py-2.5 rounded-sm text-xs font-medium transition-all hover:bg-[#d97706] hover:-translate-y-0.5">
+              <StarIcon :size="12" /><span>Premium Quality</span>
+            </div>
+            <div
+              class="bg-[#eab308] text-black flex items-center gap-0.5 px-3 py-2.5 rounded-sm text-xs font-medium transition-all hover:bg-[#d97706] hover:-translate-y-0.5">
+              <TruckIcon :size="12" /><span>Fast Delivery</span>
+            </div>
+            <div
+              class="bg-[#eab308] text-black flex items-center gap-0.5 px-3 py-2.5 rounded-sm text-xs font-medium transition-all hover:bg-[#d97706] hover:-translate-y-0.5">
+              <RefreshCwIcon :size="12" /><span>Easy Exchange</span>
+            </div>
+            <div
+              class="bg-[#eab308] text-black flex items-center gap-0.5 px-3 py-2.5 rounded-sm text-xs font-medium transition-all hover:bg-[#d97706] hover:-translate-y-0.5">
+              <ShieldCheckIcon :size="12" /><span>Secure Payment</span>
+            </div>
           </div>
         </div>
       </div>
@@ -31,17 +46,27 @@
           - Desktop (lg:): 4 columns
         -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
-          
+
           <!-- Column 1: Logo & Company Links -->
           <div class="footer__column">
             <Brand class="mb-8" />
             <nav class="footer__nav" aria-label="Company Information">
               <ul class="space-y-4">
-                <li><NuxtLink to="/about">About Us</NuxtLink></li>
-                <li><NuxtLink to="/testimonials">Testimonials</NuxtLink></li>
-                <li><NuxtLink to="/blog">Our Blogs</NuxtLink></li>
-                <li><NuxtLink to="/careers">Careers</NuxtLink></li>
-                <li><NuxtLink to="/contact">Contact Us</NuxtLink></li>
+                <li>
+                  <NuxtLink to="/about">About Us</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/testimonials">Testimonials</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/blog">Our Blogs</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/careers">Careers</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/contact">Contact Us</NuxtLink>
+                </li>
               </ul>
             </nav>
           </div>
@@ -51,13 +76,27 @@
             <h3 class="font-semibold mb-6 uppercase tracking-wide text-sm">Support</h3>
             <nav class="footer__nav mt-6" aria-label="Customer Support">
               <ul class="space-y-4">
-                <li><NuxtLink to="/exchange-return">Exchange/Return</NuxtLink></li>
-                <li><NuxtLink to="/track-order">Track Order</NuxtLink></li>
-                <li><NuxtLink to="/support">Customer Support</NuxtLink></li>
-                <li><NuxtLink to="/dashboard">Your Account</NuxtLink></li>
-                <li><NuxtLink to="/faq">FAQ's</NuxtLink></li>
-                <li><NuxtLink to="/consult">Free Consult</NuxtLink></li>
-                <li><NuxtLink to="/custom_order">Custom Order</NuxtLink></li>
+                <li>
+                  <NuxtLink to="/exchange-return">Exchange/Return</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/track-order">Track Order</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/support">Customer Support</NuxtLink>
+                </li>
+                <li v-if="isLoggedin">
+                  <NuxtLink to="/dashboard">Your Account</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/faq">FAQ's</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/consult">Free Consult</NuxtLink>
+                </li>
+                <!-- <li>
+                  <NuxtLink to="/custom_order">Custom Order</NuxtLink>
+                </li> -->
               </ul>
             </nav>
           </div>
@@ -67,7 +106,7 @@
             <h3 class="font-semibold mb-6 uppercase tracking-wide text-sm">Newsletter</h3>
             <div class="newsletter__content mt-6">
               <p class="text-gray-300 text-sm leading-relaxed">
-                <span class="text-orange-400 font-medium">Sign up</span> for
+                <NuxtLink class="text-orange-400 font-medium" to="/register">Sign up</NuxtLink> for
                 getting the latest news from Himalayan Beads, including
                 exclusive online pre-launches and new collections.
               </p>
@@ -79,11 +118,11 @@
             <h3 class="font-semibold mb-6 uppercase tracking-wide text-sm">Contact Information</h3>
             <!-- MODIFIED: Using the semantically correct <address> tag -->
             <address class="contact__info space-y-3 mt-6 not-italic">
-                <p class="text-gray-300 text-sm leading-relaxed">
-                  123 Himalayan Street, Kathmandu, Nepal
-                </p>
-                <p><a href="mailto:info@himalayanbeads.com">info@himalayanbeads.com</a></p>
-                <p><a href="tel:+977123456789" class="text-gray-300">+977-123456789</a></p>
+              <p class="text-gray-300 text-sm leading-relaxed">
+                123 Himalayan Street, Kathmandu, Nepal
+              </p>
+              <p><a href="mailto:info@himalayanbeads.com">info@himalayanbeads.com</a></p>
+              <p><a href="tel:+977123456789" class="text-gray-300">+977-123456789</a></p>
             </address>
           </div>
         </div>
@@ -98,7 +137,8 @@
           <p class="text-gray-400 text-xs sm:text-sm">©2024 Himalayan Beads Pvt. Ltd.</p>
           <div class="flex items-center gap-6">
             <div class="payment__methods flex items-center gap-3"></div>
-            <p class="text-gray-400 text-xs sm:text-sm">Created by <a href="http://janakstha.com.np" target="_blank" class="hover:text-white">janakstha</a></p>
+            <p class="text-gray-400 text-xs sm:text-sm">Created by <a href="http://janakstha.com.np" target="_blank"
+                class="hover:text-white">janakstha</a></p>
           </div>
         </div>
       </div>
@@ -112,15 +152,18 @@
   }
 
   .footer__nav a {
-    color: #d1d5db; /* text-gray-300 */
-    font-size: 0.875rem; /* text-sm */
+    color: #d1d5db;
+    /* text-gray-300 */
+    font-size: 0.875rem;
+    /* text-sm */
     transition: color 0.2s ease-in-out;
   }
 
   .footer__nav a:hover {
-    color: #fb923c; /* text-orange-400 */
+    color: #fb923c;
+    /* text-orange-400 */
   }
-  
+
   .contact__info a {
     color: #fb923c;
     font-size: 0.875rem;

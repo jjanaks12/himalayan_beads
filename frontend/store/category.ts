@@ -10,6 +10,10 @@ export const useCatgoryStore = defineStore('category', () => {
 
     const { axios } = useAxios()
 
+    const productCategories = computed(() => categories.value.filter(category => category.type == 'PRODUCT'))
+    const blogCategories = computed(() => categories.value.filter(category => category.type == 'BLOG'))
+    const categoryWithProduct = computed(() => productCategories.value.filter(category => category._count.products > 0))
+
     const fetch = async () => {
         isLoading.value = true
 
@@ -29,10 +33,11 @@ export const useCatgoryStore = defineStore('category', () => {
         isLoading.value = false
     }
 
-    const getCategory = (id: string) => categories.value.find(c => c.id === id)
+    const getCategory = (id: string): Category => categories.value.find(c => c.id === id) as Category
 
     return {
         categories, isLoading,
+        blogCategories, productCategories, categoryWithProduct,
         fetch, save, getCategory
     }
 })

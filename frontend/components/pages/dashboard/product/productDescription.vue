@@ -13,24 +13,22 @@
     const emit = defineEmits(['update'])
     const route = useRoute()
     const { saveDescription } = useProductStore()
+    const { can } = useAuthorization()
 
     const productDescription = ref('')
     const isLoading = ref(false)
     const isSaved = ref(false)
 
-    watch(productDescription, (newDescription) => {
-        debounce(async () => {
-            const hasChanged = newDescription !== props.product?.description
+    watch(productDescription, async (newDescription) => {
+        const hasChanged = newDescription !== props.product?.description
 
-            if (hasChanged) {
-                isLoading.value = true
-
-                await saveDescription(route.params.id as string, productDescription.value)
-                emit('update')
-                isLoading.value = false
-                isSaved.value = true
-            }
-        })
+        if (hasChanged) {
+            isLoading.value = true
+            await saveDescription(route.params.id as string, productDescription.value)
+            emit('update')
+            isLoading.value = false
+            isSaved.value = true
+        }
     })
 
     watch(() => props.product, () => {
@@ -40,7 +38,7 @@
 
     watch(isSaved, () => {
         if (isSaved.value)
-            debounce(() => { isSaved.value = false }, 2000)
+            setTimeout(() => { isSaved.value = false }, 2000)
     })
 
     onMounted(() => {
@@ -61,6 +59,6 @@
                 </span>
             </div>
         </div>
-        <TiptapEditor v-model="productDescription" :disabled="isLoading" />
+        <TiptapEditor v-model="productDescription" :disabled="isLoading || can('update_product')" />
     </div>
 </template>

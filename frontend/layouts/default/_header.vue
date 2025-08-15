@@ -8,16 +8,24 @@
   import Cart from './_cart/index.vue'
   import Wishlist from "./_wishlist/index.vue"
   import { useAuthStore } from "~/store/auth"
+  import { useCatgoryStore } from "~/store/category"
 
   const { toggleSidebar } = useSidebar()
   const { can } = useAuthorization()
   const { isLoggedin } = storeToRefs(useAuthStore())
+  const { categoryWithProduct } = storeToRefs(useCatgoryStore())
 
-  const navItems: NavItem[] = [
-    { name: "Rudrakshaya", to: { name: "category", query: { slug: "rudrakhshya" } } },
-    { name: "Custom Order", to: { name: "custom_order" } },
-    { name: "Blog", to: { name: "blog" } },
-  ]
+  const randomCategory = computed(() => categoryWithProduct.value[Math.floor(Math.random() * categoryWithProduct.value.length)])
+
+  const navItems = ref<NavItem[]>([
+    // { name: "Custom Order", to: { name: "custom_order" } },
+    { name: "Blogs", to: { name: "blog" } },
+  ])
+
+  watchEffect(() => {
+    if (randomCategory.value)
+      navItems.value.unshift({ name: randomCategory.value?.name, to: { name: "category", query: { slug: randomCategory.value?.slug } } },)
+  })
 </script>
 
 <template>
@@ -50,9 +58,9 @@
           <!-- <div class="hidden md:block">
             <Language />
           </div> -->
-          <div class="relative flex-1 max-w-xs hidden sm:block">
+          <!-- <div class="relative flex-1 max-w-xs hidden sm:block">
             <AppSearch />
-          </div>
+          </div> -->
 
           <!-- MODIFIED: Favorites Icon with Dropdown -->
           <Wishlist v-if="!isLoggedin || can('', 'User')" />

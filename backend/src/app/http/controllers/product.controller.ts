@@ -320,20 +320,4 @@ export class ProductController {
             next(error)
         }
     }
-
-    public static async productsByCategory(request: Request, response: Response, next: NextFunction) {
-        try {
-            const slug = request.params.slug
-            response.send(await prisma.category.findFirst({
-                where: {
-                    slug
-                },
-                include: {
-                    products: true
-                }
-            }))
-        } catch (error) {
-            next(error)
-        }
-    }
 }

@@ -1,6 +1,6 @@
 export { abbr } from './abbr'
 export { debounce } from './debounce'
-export { humanize , humanizeOrderAddress} from './humanize'
+export { humanize, humanizeOrderAddress } from './humanize'
 export { isObjEq } from './isObjectEqual'
 export { showImage } from './show_image'
-export { formatDate} from './format'
+export { formatDate, timeAgo } from './format'

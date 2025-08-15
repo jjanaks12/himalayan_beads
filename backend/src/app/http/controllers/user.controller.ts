@@ -139,11 +139,7 @@ export class UserController {
                                 image: true
                             }
                         },
-                        prices: {
-                            where: {
-                                deletedAt: null
-                            }
-                        },
+                        prices: true,
                         billingAddress: {
                             include: {
                                 country: true

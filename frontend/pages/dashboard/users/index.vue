@@ -29,7 +29,9 @@
 
 <template>
     <div class="flex gap-4 mb-20">
-        <Button @click="fetch">fetch</Button>
+        <Button @click="fetch">
+            fetch
+        </Button>
         <div class="flex-grow">
             <div class="flex gap-2 mb-4">
                 <SlidersVerticalIcon />

@@ -13,6 +13,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum CategoryType {
+  BLOG
+  PRODUCT
+}
+
+model Blog {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String
+  excerpt     String    @db.VarChar(255)
+  body        String?   @db.Text
+  publishedAt DateTime?
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  category_id String?
+  category    Category? @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  user_id     String
+  user        User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  image_id    String?
+  image       Image?    @relation(fields: [image_id], references: [id], onDelete: Cascade)
+  tags        Tag[]
+
+  @@map("blogs")
+}
+
+model Tag {
+  id   String @id @default(cuid())
+  name String @unique
+
+  blogs Blog[]
+
+  @@map("tags")
+}
+
 model Image {
   id          String   @id @default(cuid())
   name        String
@@ -25,25 +61,28 @@ model Image {
   category Category?
   products ImageOnProduct[]
   users    User[]
+  blog     Blog[]
 
   @@map("images")
 }
 
 model Category {
-  id          String    @id @default(cuid())
+  id          String       @id @default(cuid())
   name        String
-  slug        String    @unique
+  slug        String       @unique
   parent_id   String?
-  image_id    String?   @unique
+  image_id    String?      @unique
   description String?
   deletedAt   DateTime?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  type        CategoryType @default(PRODUCT)
 
   image       Image?     @relation(fields: [image_id], references: [id])
   successor   Category?  @relation("parentCategory", fields: [parent_id], references: [id])
   predecessor Category[] @relation("parentCategory")
   products    Product[]
+  blogs       Blog[]
 
   @@map("categories")
 }
@@ -124,6 +163,7 @@ model User {
   Session       Session[]
   newsletters   Newsletter[]
   wishlists     Wishlist[]
+  blogs         Blog[]
 
   @@map("users")
 }

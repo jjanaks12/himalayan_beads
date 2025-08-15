@@ -1,6 +1,7 @@
 <script lang="ts" setup>
     import { LoaderIcon } from 'lucide-vue-next'
     import { Form, Field, ErrorMessage, type FormContext } from 'vee-validate'
+import type { Category } from '~/himalayan_beads'
 
     import { categoryCreateSchema } from '~/lib/schemas/product.schema'
     import { useCatgoryStore } from '~/store/category'
@@ -10,10 +11,10 @@
     }
 
     const isLoading = ref(false)
+    const category = ref<Category|null>(null)
     const form = useTemplateRef<FormContext>('form')
 
     const props = defineProps<CategoryFormProps>()
-    const { categories } = storeToRefs(useCatgoryStore())
     const { save, getCategory } = useCatgoryStore()
     const emit = defineEmits(['update'])
 
@@ -26,14 +27,15 @@
 
     const init = () => {
         if (props.id) {
-            const category = getCategory(props.id)
+            category.value = getCategory(props.id)
 
-            if (category && form.value) {
+            if (category.value && form.value) {
                 form.value.setValues({
-                    name: category.name,
-                    slug: category.slug,
-                    description: category.description,
-                    parent_id: category.parent_id
+                    name: category.value.name,
+                    slug: category.value.slug,
+                    description: category.value.description,
+                    parent_id: category.value.parent_id,
+                    type: category.value.type
                 })
             }
         }
@@ -68,6 +70,24 @@
                 <div class="flex-grow">
                     <Input type="text" v-bind="field" placeholder="Slug" id="cf__slug" />
                     <ErrorMessage name="slug" />
+                </div>
+            </div>
+        </Field>
+        <Field name="type" v-slot="{ value, handleChange }">
+            <Label for="cf__type">Category type</Label>
+            <div class="flex gap-2">
+                <div class="flex-grow">
+                    <Select type="text" placeholder="Type" id="cf__type" @update:model-value="handleChange"
+                        :default-value="category?.type">
+                        <SelectTrigger>
+                            <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="BLOG">Blog</SelectItem>
+                            <SelectItem value="PRODUCT">Product</SelectItem>
+                        </SelectContent>
+                    </Select>
+                    <ErrorMessage name="type" />
                 </div>
             </div>
         </Field>

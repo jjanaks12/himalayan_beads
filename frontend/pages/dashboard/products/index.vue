@@ -12,7 +12,7 @@
 
     definePageMeta({
         layout: 'admin',
-        authorization: 'manage_product'
+        authorization: ['add_product', 'update_product', 'view_product', 'delete_product']
     })
 
     const { can } = useAuthorization()
@@ -43,7 +43,7 @@
         </div>
         <div class="flex gap-2 items-center">
             <Search @update:search="(val) => { query = { ...query, s: val } }" />
-            <Button @click="isProductFormOpened = true">
+            <Button @click="isProductFormOpened = true" permissions="create_product">
                 <PlusIcon />
                 Add product
             </Button>

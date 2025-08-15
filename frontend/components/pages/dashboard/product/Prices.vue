@@ -27,7 +27,7 @@
                 isDialogOpen = true
                 if (priceList.length > 0)
                     editPrice = priceList[priceList.length - 1]
-            }">
+            }" permissions="update_product">
                 {{ priceList.length == 0 ? 'Add price' : 'update price' }}
             </Button>
         </div>
@@ -40,7 +40,7 @@
                 <Button size="sm" variant="destructive" @click="async () => {
                     await deletePrice(price.id)
                     emit('update')
-                }">
+                }" permissions="update_product">
                     <TrashIcon />
                     Delete
                 </Button>

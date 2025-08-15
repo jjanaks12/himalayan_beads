@@ -19,8 +19,8 @@
     onUpdate: ({ editor }) => {
       debounce(() => {
         emit('update:modelValue', editor.getHTML())
-      }, 5000)
-    }
+      }, 10000)
+    },
   })
 
   onBeforeUnmount(() => {
@@ -30,18 +30,21 @@
 
   watch(() => props.modelValue, () => {
     editor.value?.commands.setContent(props.modelValue)
+    editor.value?.setEditable(props.disabled)
   })
 
   onMounted(() => {
-    if (props.modelValue)
+    if (props.modelValue) {
       editor.value?.commands.setContent(props.modelValue)
+      editor.value?.setEditable(props.disabled)
+    }
   })
 </script>
 
 <template>
-  <div :class="{ 'editor': true, 'editor--disabled': disabled }">
-    <div class="flex bg-gray-200 gap-1 p-1 rounded-sm mb-2" v-if="editor">
-      <div class="bg-gray-300 p-1">
+  <div class="editor">
+    <div class="flex gap-0.5 rounded-sm mb-2" v-if="editor">
+      <div class="bg-gray-300 p-0.5 rounded">
         <Button size="sm" variant="ghost" @click="editor.chain().focus().toggleBold().run()"
           :disabled="!editor.can().chain().focus().toggleBold().run()"
           :class="{ 'is-active': editor.isActive('bold') }">
@@ -67,7 +70,7 @@
         :disabled="!editor.can().chain().focus().toggleCode().run()" :class="{ 'is-active': editor.isActive('code') }">
         <MdiIcon icon="mdiCodeBraces" />
       </Button> -->
-      <div class="bg-gray-300 p-1">
+      <div class="bg-gray-300 p-0.5 rounded">
         <Button size="sm" variant="ghost" @click="editor.chain().focus().unsetAllMarks().run()">
           <XIcon />
         </Button>
@@ -79,7 +82,7 @@
           <WrapTextIcon />
         </Button>
       </div>
-      <div class="bg-gray-300 p-1">
+      <div class="bg-gray-300 p-0.5 rounded">
         <Button size="sm" variant="ghost" @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
           :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }">
           <Heading1Icon />
@@ -105,7 +108,7 @@
           <Heading6Icon />
         </Button>
       </div>
-      <div class="bg-gray-300 p-1">
+      <div class="bg-gray-300 p-0.5 rounded">
         <Button size="sm" variant="ghost" @click="editor.chain().focus().toggleBulletList().run()"
           :class="{ 'is-active': editor.isActive('bulletList') }">
           <ListIcon />
@@ -119,7 +122,7 @@
         :class="{ 'is-active': editor.isActive('codeBlock') }">
         <MdiIcon icon="mdiCodeArray" />
       </Button> -->
-      <div class="bg-gray-300 p-1">
+      <div class="bg-gray-300 p-0.5 rounded">
         <Button size="sm" variant="ghost" @click="editor.chain().focus().toggleBlockquote().run()"
           :class="{ 'is-active': editor.isActive('blockquote') }">
           <QuoteIcon />
@@ -131,7 +134,7 @@
         hard break
       </Button> -->
       </div>
-      <div class="bg-gray-300 p-1">
+      <div class="bg-gray-300 p-0.5 rounded">
         <Button size="sm" variant="ghost" @click="editor.chain().focus().undo().run()"
           :disabled="!editor.can().chain().focus().undo().run()">
           <UndoIcon />
@@ -142,8 +145,7 @@
         </Button>
       </div>
     </div>
-    <TiptapEditorContent class="content_editor p-3 bg-gray-100 rounded-sm focus:outline-0"
-      :editor="editor" />
+    <TiptapEditorContent class="content_editor p-3 bg-gray-100 rounded-sm focus:outline-0" :editor="editor" />
   </div>
 </template>
 
@@ -151,5 +153,9 @@
   .ProseMirror {
     min-height: 200px;
     outline: none;
+  }
+
+  .content_editor {
+    min-height: 200px;
   }
 </style>

@@ -20,11 +20,6 @@
   );
 
   const { products, params } = storeToRefs(useProductStore())
-  const { fetch } = useProductStore()
-
-  onBeforeMount(() => {
-    fetch()
-  })
 </script>
 
 <template>

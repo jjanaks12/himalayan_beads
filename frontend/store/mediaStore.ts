@@ -1,10 +1,15 @@
 import type { APIQuery, APIRequest, Image } from "~/himalayan_beads"
-import { debounce, isObjEq } from "~/lib/filters"
+import { isObjEq } from "~/lib/filters"
 import { useAxios } from "~/services/axios"
 
 export const useMediaStore = defineStore('media', () => {
     const { axios } = useAxios()
-    const { isLoading, params } = useModalMeta()
+    const { isLoading, params } = useModalMeta({
+        per_page: 20,
+        current: 1,
+        total: 0,
+        total_page: 0
+    })
 
     const images = ref<Image[]>([])
     const query = ref<APIQuery<Image>>({

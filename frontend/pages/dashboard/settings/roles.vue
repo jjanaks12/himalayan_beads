@@ -38,7 +38,7 @@
                 Filters
             </div>
         </div>
-        <Button @click="openEditRoleDialog = true">
+        <Button @click="openEditRoleDialog = true" permissions="create_role">
             <PlusIcon />
             Add a role
         </Button>

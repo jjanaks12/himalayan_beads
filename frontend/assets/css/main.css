@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @import "tw-animate-css";
 
+@import 'swiper/css';
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -42,20 +44,24 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
+
   @keyframes accordion-down {
-  from {
-    height: 0;
+    from {
+      height: 0;
     }
-  to {
-    height: var(--reka-accordion-content-height);
+
+    to {
+      height: var(--reka-accordion-content-height);
     }
   }
+
   @keyframes accordion-up {
-  from {
-    height: var(--reka-accordion-content-height);
+    from {
+      height: var(--reka-accordion-content-height);
     }
-  to {
-    height: 0;
+
+    to {
+      height: 0;
     }
   }
 }
@@ -158,4 +164,47 @@ form [role=alert] {
 
 .container {
   @apply mx-auto;
+}
+
+.content_editor,
+.text__holder {
+  h1 {
+    @apply text-2xl font-semibold my-2;
+  }
+
+  h2 {
+    @apply text-xl font-semibold my-2;
+  }
+
+  h3 {
+    @apply text-lg font-semibold my-2;
+  }
+
+  h4 {
+    @apply text-base font-semibold my-2;
+  }
+
+  h5 {
+    @apply text-sm font-semibold my-2;
+  }
+
+  h6 {
+    @apply text-xs font-semibold my-2;
+  }
+
+  p {
+    @apply mb-2;
+  }
+
+  blockquote {
+    @apply text-xs italic pl-4 border-l-4 border-solid;
+  }
+
+  ul {
+    @apply list-disc pl-4;
+
+    p {
+      @apply mb-0;
+    }
+  }
 }

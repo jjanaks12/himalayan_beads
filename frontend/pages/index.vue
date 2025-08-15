@@ -23,7 +23,7 @@
   import faqReview from '~/components/pages/home/faqReview.vue'
   import callToActionVideo from '~/components/pages/home/callToActionVideo.vue'
   import infoBanner from '~/components/pages/home/infoBanner.vue'
-  import blogSection from '~/components/pages/home/blogSection.vue'
+  import blogSection from '~/components/pages/home/blogSection/index.vue'
 </script>
 
 <template>

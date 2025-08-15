@@ -13,8 +13,14 @@ const menuList: Menu[] = [{
     title: 'Media',
     name: 'medias',
     icon: 'ShoppingBag',
-    permission: 'manage_media',
+    permission: ['add_media', 'delete_media', 'view_media', 'edit_media'],
     path: '/dashboard/medias'
+}, {
+    title: 'Blog',
+    name: 'blogs',
+    icon: 'Rss',
+    permission: ['add_blog', 'delete_blog', 'view_blog', 'edit_blog'],
+    path: '/dashboard/blogs'
 }, {
     title: 'My Order',
     name: 'myOrders',
@@ -56,7 +62,7 @@ const menuList: Menu[] = [{
             name: 'products_list_id',
             path: '/dashboard/products/:id',
             icon: 'ListTree',
-            permission: 'manage_product',
+            permission: ['add_product', 'delete_product', 'view_product', 'edit_product'],
             // parent_id: 3,
         }]
     }, {
@@ -65,7 +71,7 @@ const menuList: Menu[] = [{
         name: 'products_categories',
         path: '/dashboard/products/categories/',
         icon: 'Shapes',
-        permission: 'manage_category',
+        permission: ['add_category', 'delete_category', 'view_category', 'edit_category'],
         // parent_id: 2
     }, {
         // id: 4,
