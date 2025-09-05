@@ -8,7 +8,7 @@
 </script>
 
 <template>
-  <section ref="sectionRef" class="blog__posts__section py-16 lg:py-20">
+  <section ref="sectionRef" class="blog__posts__section py-16 lg:py-20" v-if="blogs.length > 0">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12 transition-all duration-800 ease-out"
         :class="{ 'opacity-100 translate-y-0': isVisible, 'opacity-0 translate-y-6': !isVisible }">

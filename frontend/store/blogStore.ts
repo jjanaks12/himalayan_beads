@@ -5,7 +5,7 @@ import { blogCreateSchema } from '~/lib/schemas/blog.schema'
 import { useAxios } from "~/services/axios"
 
 export const useBlogStore = defineStore('blog', () => {
-    const blogs = ref<Blog[]>()
+    const blogs = ref<Blog[]>([])
     const { isLoading, params } = useModalMeta()
     const query = ref<APIQuery<Blog>>({
         s: '',

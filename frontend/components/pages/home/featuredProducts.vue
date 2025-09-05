@@ -1,29 +1,15 @@
 <script lang="ts" setup>
-  import { ref } from "vue";
-  import { useIntersectionObserver } from "@vueuse/core"
-
   import { useProductStore } from "~/store/product"
   import ProductItem from "./productItem.vue"
 
-  // --- Animation Logic (Unchanged) ---
   const sectionRef = ref<HTMLElement | null>(null)
-  const isVisible = ref(false)
-
-  useIntersectionObserver(
-    sectionRef,
-    ([{ isIntersecting }]) => {
-      if (isIntersecting) {
-        isVisible.value = true
-      }
-    },
-    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-  );
+  const { isVisible } = useViewport(sectionRef)
 
   const { products, params } = storeToRefs(useProductStore())
 </script>
 
 <template>
-  <section ref="sectionRef" class="featured__products py-4 lg:py-4">
+  <section ref="sectionRef" class="relative py-4 lg:py-4" v-if="products.length > 0">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12 transition-all duration-800 ease-out" :class="{
         'opacity-100 translate-y-0': isVisible,
@@ -34,31 +20,21 @@
         </h2>
       </div>
 
-      <div class="products__grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 w-full">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 w-full">
         <ProductItem v-for="(item, index) in products" :key="item.id" :product="item" :index="index"
           :show="isVisible" />
       </div>
       <div class="text-right">
         <NuxtLink
-          :to="{ name: 'products', query: { page: params.total > params.per_page ? params.current + 1 : null } }">view
-          more</NuxtLink>
+          :to="{ name: 'products', query: { page: params.total > params.per_page ? params.current + 1 : null } }">
+          view more
+        </NuxtLink>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-
-  /* No changes to your styles are needed */
-  .featured__products {
-    position: relative;
-  }
-
-  .products__grid {
-    width: 100%;
-    max-width: none;
-  }
-
   .product__card {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     max-width: 100%;

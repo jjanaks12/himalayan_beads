@@ -36,15 +36,7 @@
     <!-- Main Footer Content -->
     <div class="footer__main py-12 lg:py-16">
       <div class="container mx-auto px-4">
-        <!-- 
-          MODIFIED: Responsive grid using Tailwind classes.
-          - Mobile (default): 1 column
-          - Tablet (md:): 2 columns
-          - Desktop (lg:): 4 columns
-        -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
-
-          <!-- Column 1: Logo & Company Links -->
           <div class="footer__column">
             <Brand class="mb-8" />
             <nav class="footer__nav" aria-label="Company Information">
@@ -52,15 +44,15 @@
                 <li>
                   <NuxtLink to="/about">About Us</NuxtLink>
                 </li>
-                <li>
+                <!-- <li>
                   <NuxtLink to="/testimonials">Testimonials</NuxtLink>
-                </li>
+                </li> -->
                 <li>
                   <NuxtLink to="/blog">Our Blogs</NuxtLink>
                 </li>
-                <li>
+                <!-- <li>
                   <NuxtLink to="/careers">Careers</NuxtLink>
-                </li>
+                </li> -->
                 <li>
                   <NuxtLink to="/contact">Contact Us</NuxtLink>
                 </li>
@@ -73,15 +65,15 @@
             <h3 class="font-semibold mb-6 uppercase tracking-wide text-sm">Support</h3>
             <nav class="footer__nav mt-6" aria-label="Customer Support">
               <ul class="space-y-4">
-                <li>
+                <!-- <li>
                   <NuxtLink to="/exchange-return">Exchange/Return</NuxtLink>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                   <NuxtLink to="/track-order">Track Order</NuxtLink>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                   <NuxtLink to="/support">Customer Support</NuxtLink>
-                </li>
+                </li> -->
                 <li v-if="isLoggedin">
                   <NuxtLink to="/dashboard">Your Account</NuxtLink>
                 </li>
@@ -89,7 +81,7 @@
                   <NuxtLink to="/faq">FAQ's</NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/consult">Free Consult</NuxtLink>
+                  <NuxtLink to="/consultation">Free Consult</NuxtLink>
                 </li>
                 <!-- <li>
                   <NuxtLink to="/custom_order">Custom Order</NuxtLink>

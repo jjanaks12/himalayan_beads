@@ -15,8 +15,8 @@
     id: "rudraksha",
     type: "image-only", // This type will render only the image, filling the card
     title: "The Sacred Rudraksha", // Alt text for the image
-    image: "/images/product06.png", // The image of the Rudraksha on green background
-    link: "/images/product06.png", // The image of the Rudraksha on green background
+    image: "/images/custom-order.png", // The image of the Rudraksha on green background
+    link: "/custom_order", // The image of the Rudraksha on green background
     linkText: ""
   }]
 </script>
@@ -57,16 +57,15 @@
 
           <!-- Template #2: Full Image Banner (Rudraksha) -->
           <!-- MODIFIED: Added 'group' -->
-          <div v-else-if="banner.type === 'image-only'"
+          <NuxtLink :to="banner.link" v-else-if="banner.type === 'image-only'"
             class="banner-card group relative overflow-hidden border border-[#E5E9EA] transition-all duration-700 ease-out"
             :class="{
               'opacity-100 translate-y-0': isVisible,
               'opacity-0 translate-y-8': !isVisible,
             }" :style="{ transitionDelay: `${index * 100}ms` }">
-            <!-- MODIFIED: Added transition and group-hover classes -->
             <img :src="banner.image" :alt="banner.title"
               class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105" />
-          </div>
+          </NuxtLink>
         </template>
       </div>
     </div>
