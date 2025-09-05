@@ -5,7 +5,7 @@ import { CompanyController } from '@/app/http/controllers/company.controller'
 
 const router = Router()
 
-router.get('/', [verifyAccessToken], CompanyController.get)
+router.get('/', [], CompanyController.get)
 router.post('/', [verifyAccessToken], CompanyController.store)
 router.put('/:company_id', [verifyAccessToken], CompanyController.update)
 // router.post('/', [verifyAccessToken], MediaController.create)
