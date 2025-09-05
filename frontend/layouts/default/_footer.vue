@@ -1,7 +1,10 @@
 <script lang="ts" setup>
   import { StarIcon, TruckIcon, RefreshCwIcon, ShieldCheckIcon } from "lucide-vue-next"
+  import { humanizeOrderAddress } from "~/lib/filters"
+  import { useAppStore } from "~/store/app"
   import { useAuthStore } from "~/store/auth"
 
+  const { company } = storeToRefs(useAppStore())
   const { isLoggedin } = storeToRefs(useAuthStore())
 </script>
 
@@ -107,11 +110,11 @@
             <h3 class="font-semibold mb-6 uppercase tracking-wide text-sm">Contact Information</h3>
             <!-- MODIFIED: Using the semantically correct <address> tag -->
             <address class="contact__info space-y-3 mt-6 not-italic">
-              <p class="text-gray-300 text-sm leading-relaxed">
-                123 Himalayan Street, Kathmandu, Nepal
+              <p v-if="company?.address" class="text-gray-300 text-sm leading-relaxed">
+                {{ humanizeOrderAddress(company?.address ?? {}) }}
               </p>
-              <p><a href="mailto:info@himalayanbeads.com">info@himalayanbeads.com</a></p>
-              <p><a href="tel:+977123456789" class="text-gray-300">+977-123456789</a></p>
+              <p><a :href="`mailto:${company?.email}`">{{ company?.email }}</a></p>
+              <p><a :href="`tel:${company?.phone}`" class="text-gray-300">{{ company?.phone }}</a></p>
             </address>
           </div>
         </div>
@@ -123,7 +126,9 @@
       <div class="container mx-auto px-4">
         <!-- MODIFIED: Stacks vertically on mobile, becomes a row on tablets and up -->
         <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
-          <p class="text-gray-400 text-xs sm:text-sm">©2024 Himalayan Beads Pvt. Ltd.</p>
+          <p class="text-gray-400 text-xs sm:text-sm">
+            &copy;{{ (new Date()).getFullYear() }} {{ company?.name }}
+          </p>
           <div class="flex items-center gap-6">
             <div class="payment__methods flex items-center gap-3"></div>
             <p class="text-gray-400 text-xs sm:text-sm">Created by <a href="http://janakstha.com.np" target="_blank"

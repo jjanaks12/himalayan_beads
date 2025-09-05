@@ -1,4 +1,4 @@
-import type { Country, Menu } from "~/himalayan_beads"
+import type { Company, Country, Menu } from "~/himalayan_beads"
 import { useAuthStore } from "./auth"
 import { useAxios } from "~/services/axios"
 
@@ -128,6 +128,15 @@ const menuList: Menu[] = [{
         icon: 'KeyRoundIcon',
         permission: '',
         // parent_id: 6
+    }, {
+        // id: 8,
+        title: 'Company details',
+        name: 'dashboard-settings-company',
+        path: '/dashboard/settings/company/',
+        icon: 'BuildingIcon',
+        role: 'Admin',
+        permission: ''
+        // parent_id: 6
     }]
 }, {
     // id: 9,
@@ -146,7 +155,9 @@ export const useAppStore = defineStore('app', () => {
     const { axios } = useAxios()
     const { isLoggedin } = storeToRefs(useAuthStore())
     const { can } = useAuthorization()
+
     const defaultLocale = ref('en')
+    const company = ref<Company | null>(null)
 
     const menus = computed(() => {
         const newMenus: Menu[] = []
@@ -180,9 +191,21 @@ export const useAppStore = defineStore('app', () => {
         countries.value = data
     }
 
+    const fetchCompany = async () => {
+        const { data } = await axios.get<Company>('/companies')
+        company.value = data
+    }
+
+    const saveCompany = async (formData: any) => {
+        const method = formData.id ? 'put' : 'post'
+        const url = formData.id ? `/companies/${formData.id}` : '/companies'
+        await axios[method](url, formData)
+        await fetchCompany()
+    }
+
     return {
-        countries, menus, defaultLocale,
+        countries, menus, defaultLocale, company,
         currentMenuIndex, subMenuIndex,
-        fetchCountry
+        fetchCountry, fetchCompany, saveCompany
     }
 })

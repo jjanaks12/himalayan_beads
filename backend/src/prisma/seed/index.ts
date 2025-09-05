@@ -5,8 +5,8 @@ import { countrySeed } from "./country.seed"
 
 const prisma = new PrismaClient()
 const main = () => new Promise(async (resolve) => {
-    await roleSeed(prisma)
     await countrySeed(prisma)
+    await roleSeed(prisma)
     resolve(true)
 })
 

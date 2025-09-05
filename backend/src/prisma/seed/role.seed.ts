@@ -2,6 +2,16 @@ import bcript from 'bcrypt'
 import type { PrismaClient } from "@prisma/client"
 
 export const roleSeed = async (prisma: PrismaClient) => {
+    const company = await prisma.company.create({
+        data: {
+            name: 'Himalayan Beads',
+            email: 'info@himalayanbeads.com',
+            phone: '23456',
+            vat_registered: false,
+            pan_no: '1234'
+        }
+    })
+
     const create_user = await prisma.permission.create({
         data: {
             name: 'create_user'
@@ -238,7 +248,8 @@ export const roleSeed = async (prisma: PrismaClient) => {
         data: {
             email: 'admin@himalayanbeads.com',
             password,
-            role_id: adminRole.id
+            role_id: adminRole.id,
+            company_id: company.id
         }
     })
 }

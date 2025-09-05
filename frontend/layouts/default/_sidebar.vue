@@ -4,8 +4,10 @@
     import { useSidebar } from '~/components/ui/sidebar'
     import { useAuthStore } from '~/store/auth'
     import AppSearch from './_search.vue'
+    import { useAppStore } from '~/store/app'
 
     const { toggleSidebar } = useSidebar()
+    const { company } = storeToRefs(useAppStore())
     const { isLoggedin } = storeToRefs(useAuthStore())
     const { logout } = useAuthStore()
 </script>
@@ -19,7 +21,7 @@
             <template v-if="!isLoggedin">
                 <strong class="greetings font-light block mb-4">
                     <span class="text-4xl block font-bold">Heya!</span>
-                    Welcome to Himalayan Beads
+                    Welcome to {{ company?.name }}
                 </strong>
                 <ul class="flex gap-2 text-sm text-[#B37557] underline uppercase mb-4">
                     <li>

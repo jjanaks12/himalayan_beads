@@ -5,7 +5,7 @@ export type OrderStatus = 'NEW' | 'PENDING' | 'CANCELLED' | 'PROCESSING' | 'COMP
 
 type OrderType = 'CASH_ON_DELIVERY' | 'ONLINE' | 'PAID'
 
-type AddressType = 'BILLING' | 'SHIPPING'
+type AddressType = 'BILLING' | 'SHIPPING' | 'PERMANENT_ADDRESS'
 
 type APISuccess<T> = {
   status: "success"
@@ -284,4 +284,18 @@ type Tag = {
   id: string
   name: string
   blog: Blog[]
+}
+
+type Company = {
+  id: string
+  name: string
+  address: Address
+  email: string
+  image_id: string
+  logo: Image
+  phone: string
+  vat_registered: boolean
+  pan_no: string
+  vat_no: string
+  users: User[]
 }

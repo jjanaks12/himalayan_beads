@@ -40,6 +40,24 @@ model Blog {
   @@map("blogs")
 }
 
+model Company {
+  id             String  @id @default(cuid())
+  name           String
+  email          String
+  address_id     String?
+  address        Address? @relation(fields: [address_id], references: [id], onDelete: Cascade)
+  phone          String
+  vat_registered Boolean
+  pan_no         String?
+  vat_no         String?
+  image_id       String?
+  logo           Image?  @relation(fields: [image_id], references: [id], onDelete: Cascade)
+
+  users User[]
+
+  @@map("companies")
+}
+
 model Tag {
   id   String @id @default(cuid())
   name String @unique
@@ -58,10 +76,11 @@ model Image {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  category Category?
-  products ImageOnProduct[]
-  users    User[]
-  blog     Blog[]
+  category  Category?
+  products  ImageOnProduct[]
+  users     User[]
+  blog      Blog[]
+  companies Company[]
 
   @@map("images")
 }
@@ -154,8 +173,10 @@ model User {
   deletedAt     DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  company_id    String?
 
   Authenticator Authenticator[]
+  company       Company?        @relation(fields: [company_id], references: [id])
   role          Role            @relation(fields: [role_id], references: [id])
   image         Image?          @relation(fields: [image_id], references: [id])
   accounts      Account[]
@@ -278,6 +299,7 @@ enum OrderType {
 enum AddressType {
   BILLING
   SHIPPING
+  PERMANENT_ADDRESS
 }
 
 model Address {
@@ -292,8 +314,9 @@ model Address {
   country   Country     @relation(fields: [countryId], references: [id], onDelete: Cascade)
   type      AddressType
 
-  shippingOrders Order[] @relation("shippingOrder")
-  billingOrders  Order[] @relation("billingOrder")
+  shippingOrders Order[]   @relation("shippingOrder")
+  billingOrders  Order[]   @relation("billingOrder")
+  companies      Company[]
 
   @@map("addresses")
 }

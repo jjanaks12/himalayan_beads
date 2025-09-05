@@ -11,6 +11,7 @@ import mediaRouter from '@/routes/api/media.router'
 import miscellanousRouter from '@/routes/api/miscellanous.router'
 import orderRouter from '@/routes/api/order.router'
 import blogRouter from '@/routes/api/blog.router'
+import CompanyRouter from '@/routes/api/company.router'
 
 const router = Router()
 
@@ -25,5 +26,6 @@ router.use('/images', mediaRouter)
 router.use('/', miscellanousRouter)
 router.use('/orders', orderRouter)
 router.use('/blogs', blogRouter)
+router.use('/companies', CompanyRouter)
 
 export default router
