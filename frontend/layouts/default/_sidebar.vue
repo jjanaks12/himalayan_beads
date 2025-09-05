@@ -67,7 +67,9 @@
                         <SidebarMenuButton class="h-10" variant="light">Advertise on HB</SidebarMenuButton>
                     </SidebarMenuItem>
                     <SidebarMenuItem>
-                        <SidebarMenuButton class="h-10" variant="light">Terms</SidebarMenuButton>
+                        <SidebarMenuButton class="h-10" variant="light" as-child>
+                            <NuxtLink to="/terms-and-conditions">Terms</NuxtLink>
+                        </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarGroup>

@@ -12,9 +12,11 @@
         layout: 'simple'
     })
     const { register } = useAuthStore()
-    const { isLoggedin, isLoading } = storeToRefs(useAuthStore())
+    const { isLoggedin } = storeToRefs(useAuthStore())
+    const isLoading = ref(false)
 
     const signup = async (formData: any) => {
+        isLoading.value = true
         await register(formData)
         navigateTo('/dashboard')
     }

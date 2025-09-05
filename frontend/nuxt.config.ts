@@ -19,6 +19,9 @@ export default defineNuxtConfig({
     plugins: [
       tailwindcss(),
     ],
+    server: {
+      allowedHosts: ['hb.janak.click']
+    }
   },
 
   shadcn: {

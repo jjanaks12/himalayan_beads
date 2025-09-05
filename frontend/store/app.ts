@@ -146,6 +146,7 @@ export const useAppStore = defineStore('app', () => {
     const { axios } = useAxios()
     const { isLoggedin } = storeToRefs(useAuthStore())
     const { can } = useAuthorization()
+    const defaultLocale = ref('en')
 
     const menus = computed(() => {
         const newMenus: Menu[] = []
@@ -180,7 +181,7 @@ export const useAppStore = defineStore('app', () => {
     }
 
     return {
-        countries, menus,
+        countries, menus, defaultLocale,
         currentMenuIndex, subMenuIndex,
         fetchCountry
     }

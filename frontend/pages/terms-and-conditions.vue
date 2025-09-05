@@ -1,0 +1,24 @@
+<script lang="ts" setup>
+    useHead({
+        title: 'Terms and conditions'
+    })
+
+    definePageMeta({
+        layout: 'default',
+        auth: false
+    })
+
+    const sectionRef = ref<HTMLElement | null>(null)
+    const { isVisible } = useViewport(sectionRef)
+    const text = `<p>Welcome to HimalayanBeads.com, the official e-commerce platform of Himalayan Beads Pvt. Ltd. (Company Registration No.359076/81/82), proudly offering premium, original Rudraksha beads sourced from the Himalayan region of Nepal. By accessing, browsing, registering, or purchasing on this website, you agree to comply with and be bound by the following terms and conditions ("User Agreement"). If you do not agree with these terms, please do not use this website.</p><h2>1. Company Ownership and Intellectual Property</h2><p>All content on this website, including product descriptions, logos, photographs, trademarks, design elements, and written content, is the exclusive intellectual property of Himalayan Beads Pvt. Ltd. Unauthorized copying, posting, downloading, redistribution, republication, or commercial use of our content is strictly prohibited without written permission.</p><p>We reserve all rights over our digital content and are not responsible for the content or practices of any third-party websites linked from our platform.</p><h2>2. Product Information Disclaimer</h2><p>Our products, especially Rudraksha beads, are described using information derived from Vedic scriptures, Shiva Purana, Shrimat Devi Bhagwat, and insights from spiritual scholars and experts. However, we do not guarantee the effectiveness or metaphysical outcomes of any spiritual product (such as Rudraksha, Mantras, Yantras, etc.). Users are advised to make their selections with personal discretion and assume full responsibility for their use.</p><h2>3. Accuracy and Corrections</h2><p>While we make every effort to ensure accuracy on our website, we cannot guarantee that all content, images, or product listings are error-free. If you notice any incorrect or misleading information, please contact us at info@himalayanbeads.com, and we will address the matter promptly.</p><h2>4. Registration and User Responsibility</h2><p>To place orders or access certain features, users may be required to register an account. When registering:</p><p>You agree to provide accurate, complete, and updated information.</p><p>You are responsible for keeping your login credentials secure.</p><p>You must notify us immediately at info@himalayanbeads.com if you believe your password has been compromised or unauthorized access has occurred.</p><p>We reserve the right to suspend or terminate any account found to be in violation of these terms.</p><h2>5. Shipping and Delivery</h2><p>We offer worldwide shipping, and all products are securely packaged and tracked. Shipping costs and delivery times vary by location. Himalayan Beads is not liable for delays caused by customs, natural disasters, or courier issues beyond our control.</p><h2>6. Payment and Security</h2><p>We accept various secure payment methods, including major credit cards, debit cards, digital wallets, and local options. All transactions are encrypted and processed through trusted payment gateways. Your personal and financial data is handled with the utmost care and confidentiality.</p><h2>7. Limitation of Liability</h2><p>Himalayan Beads Pvt. Ltd. shall not be held liable for any direct, indirect, incidental, or consequential damages arising from the use of our website, products, or services, including but not limited to spiritual expectations or mystic effects.</p><h2>8. Changes to Terms</h2><p>We reserve the right to update or modify these Terms and Conditions at any time without prior notice. Continued use of the website after such changes will constitute your acceptance of the revised terms.</p><h2>9. Governing Law</h2><p>These Terms and Conditions shall be governed and interpreted in accordance with the laws of Nepal. Any disputes shall be subject to the jurisdiction of the courts located in Nepal.</p><p>For any questions or concerns, please reach out to us at:</p><ul><li>📧 info@himalayanbeads.com</li><li>📍 Himalayan Beads Pvt. Ltd., Sankhuwasabha, Nepal</li></ul>`
+</script>
+
+<template>
+    <div class="bg-secondary text-white text-center transition-all duration-800 ease-out py-4 lg:py-14"
+        :class="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'">
+        <h1 class="text-2xl lg:text-3xl font-bold">Terms and conditions</h1>
+    </div>
+    <div ref="sectionRef" class="container">
+        <div class="text__holder py-12" v-html="text" />
+    </div>
+</template>

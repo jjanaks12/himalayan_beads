@@ -7,13 +7,10 @@
 
 <template>
   <footer id="footer" class="relative bg-[#100804] text-white">
-    <!-- Top Section - Language & Trust Badges -->
     <div class="footer__top py-4 border-b border-[#30190d]">
       <div class="container mx-auto px-4">
-        <!-- MODIFIED: This now stacks on mobile and becomes a row on tablets (md:) and up -->
         <div class="flex flex-col md:flex-row md:justify-between items-center gap-y-4 md:gap-x-6">
           <!-- <Language /> -->
-          <!-- This wrapper allows badges to wrap to a new line if the screen is very narrow -->
           <div class="flex flex-wrap justify-center items-center gap-2 ml-auto">
             <div
               class="bg-[#eab308] text-black flex items-center gap-0.5 px-3 py-2.5 rounded-sm text-xs font-medium transition-all hover:bg-[#d97706] hover:-translate-y-0.5">
