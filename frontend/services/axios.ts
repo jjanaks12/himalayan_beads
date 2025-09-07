@@ -23,7 +23,7 @@ export const useAxios = () => {
     instance.interceptors.response.use(response => response, async error => {
         const { status } = error.response || {}
         const { token } = storeToRefs(useAuthStore())
-        const { refreshToken, logout } = useAuthStore()
+        const { refreshToken } = useAuthStore()
         const currentRoute = null
 
         if ([401, 403].indexOf(status) !== -1) {

@@ -15,7 +15,9 @@
   const { isLoggedin } = storeToRefs(useAuthStore())
   const { categoryWithProduct } = storeToRefs(useCatgoryStore())
 
-  const randomCategory = computed(() => categoryWithProduct.value[Math.floor(Math.random() * categoryWithProduct.value.length)])
+  const randomCategory = computed(() => categoryWithProduct.value?.length > 0
+    ? categoryWithProduct.value[Math.floor(Math.random() * categoryWithProduct.value.length)]
+    : 0)
 
   const navItems = ref<NavItem[]>([
     // { name: "Custom Order", to: { name: "custom_order" } },

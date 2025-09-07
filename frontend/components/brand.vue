@@ -17,7 +17,7 @@
 <template>
   <div class="logo w-[160px]">
     <nuxt-link :to="{ name: homeURL }">
-      <img :src="showImage(company?.logo.name as string)" :alt="company?.name" class="w-full h-auto">
+      <img :src="showImage(company?.logo?.name as string)" :alt="company?.name" class="w-full h-auto">
     </nuxt-link>
   </div>
 </template>

@@ -22,11 +22,14 @@ export const useProductStore = defineStore('product', () => {
         debounce(async () => {
             isLoading.value = true
 
-            const { data: { data, ...p } } = await axios.get<APIRequest<Product[]>>('/products', { params: { ...params.value, ...query.value } })
+            const { data } = await axios.get<APIRequest<Product[]>>('/products', { params: { ...params.value, ...query.value } })
 
-            products.value = data
-            params.value = p
-            isLoading.value = false
+            if (data) {
+                const { data: d, ...p } = data
+                products.value = d
+                params.value = p
+                isLoading.value = false
+            }
         }, 500)
     }
 

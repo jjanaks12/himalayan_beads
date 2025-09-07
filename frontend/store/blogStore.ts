@@ -23,11 +23,14 @@ export const useBlogStore = defineStore('blog', () => {
     const fetch = async () => {
         isLoading.value = true
 
-        const { data: { data, ...p } } = await axios.get<APIRequest<Blog[]>>('/blogs', { params: { ...params.value, ...query.value } })
+        const { data } = await axios.get<APIRequest<Blog[]>>('/blogs', { params: { ...params.value, ...query.value } })
 
-        blogs.value = data
-        params.value = p
-        isLoading.value = false
+        if (data) {
+            const { data: d, ...p } = data
+            blogs.value = d
+            params.value = p
+            isLoading.value = false
+        }
     }
 
     const save = async (formData: Y.InferType<typeof blogCreateSchema>) => {

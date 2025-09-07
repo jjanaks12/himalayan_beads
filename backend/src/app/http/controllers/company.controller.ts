@@ -73,19 +73,34 @@ export class CompanyController {
                 body.image_id = image.id
             }
 
-            await prisma.address.update({
-                where: {
-                    id: company.address_id
-                },
-                data: {
-                    address: validationData.address.address,
-                    street: validationData.address.street,
-                    state: validationData.address.state,
-                    city: validationData.address.city,
-                    zipCode: validationData.address.zipCode,
-                    countryId: validationData.address.countryId,
-                }
-            })
+            if (company.address_id)
+                await prisma.address.update({
+                    where: {
+                        id: company.address_id
+                    },
+                    data: {
+                        address: validationData.address.address,
+                        street: validationData.address.street,
+                        state: validationData.address.state,
+                        city: validationData.address.city,
+                        zipCode: validationData.address.zipCode,
+                        countryId: validationData.address.countryId,
+                    }
+                })
+            else {
+                const address = await prisma.address.create({
+                    data: {
+                        address: validationData.address.address,
+                        street: validationData.address.street,
+                        state: validationData.address.state,
+                        city: validationData.address.city,
+                        zipCode: validationData.address.zipCode,
+                        countryId: validationData.address.countryId,
+                        type: 'PERMANENT_ADDRESS'
+                    }
+                })
+                body.address_id = address.id
+            }
 
             response.send(await prisma.company.update({
                 where: {
