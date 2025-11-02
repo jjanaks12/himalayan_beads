@@ -20,7 +20,6 @@
     : 0)
 
   const navItems = ref<NavItem[]>([
-    // { name: "Custom Order", to: { name: "custom_order" } },
     { name: "Blogs", to: { name: "blog" } },
   ])
 

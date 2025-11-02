@@ -44,13 +44,8 @@ export const useProductStore = defineStore('product', () => {
     }
 
     const getProduct = async (id: string) => {
-        let product = products.value.find(p => p.id === id)
-
-        if (!product) {
-            const { data } = await axios.get<Product>('/products/' + id)
-            product = data
-        }
-        return product
+        const { data } = await axios.get<Product>('/products/' + id)
+        return data
     }
 
     const deleteProduct = async (id: string) => {

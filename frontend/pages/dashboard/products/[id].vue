@@ -21,16 +21,15 @@
     const route = useRoute()
     const { getProduct } = useProductStore()
 
-    const product = ref<Product>()
+    const product = ref<Product | null>(null)
     const isStockDialogOpen = ref(false)
 
     const fetchProductDetail = async () => {
         const p = await getProduct(route.params.id as string)
-
         product.value = p
     }
 
-    onBeforeMount(() => {
+    onMounted(() => {
         fetchProductDetail()
     })
 </script>
@@ -42,6 +41,7 @@
                 <h1 class="text-2xl">{{ product?.name }}</h1>
             </div>
             <div class="flex gap-2 items-center">
+                <Button variant="secondary" @click="fetchProductDetail">refresh</Button>
                 <Button @click="navigateTo({ name: 'dashboard-products' })">
                     <MoveLeftIcon />
                     Back
@@ -50,8 +50,10 @@
         </div>
         <div class="flex flex-gap mb-8">
             <div class="w-2/3">
-                <ProductImage :product-id="(product?.id as string)" :images="product?.images"
-                    @update="fetchProductDetail" />
+                <ProductImage :product-id="(product?.id as string)" :images="product?.images" @update="async () => {
+                    await fetchProductDetail()
+                    console.log('updated');
+                }" />
                 <Prices :price-list="product?.prices || []" :product-id="(product?.id as string)"
                     @update="fetchProductDetail" />
             </div>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { LoaderIcon } from 'lucide-vue-next'
     import { Form, Field, ErrorMessage, type FormContext } from 'vee-validate'
-import type { Category } from '~/himalayan_beads'
+    import type { Category } from '~/himalayan_beads'
 
     import { categoryCreateSchema } from '~/lib/schemas/product.schema'
     import { useCatgoryStore } from '~/store/category'
@@ -11,7 +11,7 @@ import type { Category } from '~/himalayan_beads'
     }
 
     const isLoading = ref(false)
-    const category = ref<Category|null>(null)
+    const category = ref<Category | null>(null)
     const form = useTemplateRef<FormContext>('form')
 
     const props = defineProps<CategoryFormProps>()

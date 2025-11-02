@@ -9,6 +9,7 @@ export const productCreateSchema = Y.object({
 export const categoryCreateSchema = Y.object({
     id: Y.string().label("Category ID"),
     name: Y.string().required().label('Category name'),
+    slug: Y.string().required().label('Category slug'),
     type: Y.string().oneOf(['BLOG', 'PRODUCT']).required().label('Category type'),
     descripiton: Y.string().label("Product description")
 })
